@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="greencamp.camp">
+
+	<select id="getAllCampList"
+		parameterType="greencamp.camp.model.CampVO"
+		resultType="greencamp.camp.model.CampVO">
+		select * from
+		(select rownum as rnum,a.* from
+		(select * from tb_camp order by camp_no desc)a)b
+		where rnum<![CDATA[>]]>=#{start}
+		and rnum<![CDATA[<]]>=#{end}
+	</select>
+	<select id="getCampNm" parameterType="int" resultType="String">
+		select camp_nm from tb_camp where camp_no = #{camp_no}
+	</select>
+	<select id="getCampList"
+		parameterType="greencamp.camp.model.CampVO"
+		resultType="greencamp.camp.model.CampVO">
+		select * from (select rownum as rnum,a.* from (select * from tb_camp
+		where camp_nm like '%' || #{camp_nm} || '%' order by camp_no desc)a)b
+		where rnum<![CDATA[>]]>=#{start}
+		and rnum<![CDATA[<]]>=#{end}
+	</select>
+	<select id="getSiteList" parameterType="greencamp.camp.model.SiteVO"
+		resultType="greencamp.camp.model.SiteVO">
+		select * from tb_campsite where camp_no=${camp_no} and sitenm not in(select distinct sitenm from tb_resve where camp_no = ${camp_no} and bgnde in (${values})) order by site_no
+	</select>
+	<select id="getAllCampListCnt" resultType="int">
+		select count(*) from tb_camp
+	</select>
+	<select id="getCampListCnt" parameterType="String"
+		resultType="int">
+		select count(*) from tb_camp where camp_nm like '%' || #{camp_nm} || '%'
+	</select>
+	<select id="getCampDetail" parameterType="int"
+		resultType="greencamp.camp.model.CampVO">
+		select * from tb_camp where camp_no = #{camp_no}
+	</select>
+	<select id="getCampDc" resultType="String">
+		select distinct camp_dc from tb_camp
+	</select>
+	<insert id="completeOrderCamp"
+		parameterType="greencamp.camp.model.SiteVO">
+		INSERT INTO TB_RESVE (camp_no,NMPR,ID,BGNDE,TOTALDE,SITENM,PC,STTUS,RM) ${values}
+	</insert>
+	<select id="getCampSitePc" parameterType="int" resultType="greencamp.camp.model.SiteVO">
+		SELECT sitenm, pc, siteimg from tb_campsite where camp_no = #{camp_no}
+	</select>
+	<select id="searchTheme" parameterType="greencamp.camp.model.SiteVO" resultType="greencamp.camp.model.SiteVO">
+		select * from
+		(select rownum as rnum,a.* from
+		(select * from tb_camp WHERE (${query}) order by camp_no desc)a)b
+		where rnum<![CDATA[>]]>=#{start}
+		and rnum<![CDATA[<]]>=#{end}
+	</select>
+	<select id="searchThemeCount" parameterType="greencamp.camp.model.SiteVO" resultType="int">
+		select count(*) from (SELECT * FROM tb_camp WHERE (${query}))
+	</select>
+</mapper>

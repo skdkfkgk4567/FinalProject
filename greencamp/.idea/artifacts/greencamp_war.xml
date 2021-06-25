@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="greencamp:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>greencamp</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="greencamp-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="greencamp:war exploded" />
+    </root>
+  </artifact>
+</component>

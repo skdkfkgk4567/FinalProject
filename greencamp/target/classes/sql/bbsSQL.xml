@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nsh.bbs">
+	<insert id="bbsWrite" parameterType="nsh.bbs.model.BbsDTO">
+		insert into
+			jsp_bbs
+			values (
+				jsp_bbs_idx.nextval,
+				#{writer},
+				#{pwd},
+				#{subject},
+				#{content},
+				sysdate,
+				0,
+				#{ref},
+				0,
+				0
+			)
+	</insert>
+	<select id="getMaxRef" resultType="int">
+		select max(ref) from jsp_bbs
+	</select>
+	<select id="bbsList" resultType="nsh.bbs.model.BbsVO" parameterType="nsh.bbs.model.BbsVO">
+		select * from 
+					(select rownum as rnum,a.* from
+					(select * from jsp_bbs order by ref desc,sunbun asc)a)b
+					where rnum<![CDATA[>]]>=#{start} and rnum<![CDATA[<]]>=#{end}
+	</select>
+	<select id="countContent" resultType="int">
+		select count(*) from jsp_bbs
+	</select>
+	<select id="bbsContent" resultType="nsh.bbs.model.BbsDTO" parameterType="int">
+		select * from jsp_bbs where idx=#{idx}
+	</select>
+	<update id="upReadNum" parameterType="int">
+		update jsp_bbs set readnum=readnum+1 where idx=#{idx}
+	</update>
+	<select id="bbsReadNum" parameterType="int" resultType="int">
+		select readnum from jsp_bbs where idx=#{idx}
+	</select>
+	<update id="bbsUpdate" parameterType="nsh.bbs.model.BbsVO">
+		update jsp_bbs set subject=#{subject}, content=#{content}, pwd=#{pwd}, writer=#{writer} where idx=#{idx}
+	</update>
+	<delete id="bbsDelete" parameterType="nsh.bbs.model.BbsVO">
+		delete from jsp_bbs where idx=#{idx} and pwd=#{pwd}
+	</delete>
+	<insert id="bbsRewrite" parameterType="nsh.bbs.model.BbsDTO">
+		insert into jsp_bbs values(jsp_bbs_idx.nextval,#{writer},#{pwd},#{subject},#{content},sysdate,0,#{ref},#{lev}+1,#{sunbun}+1)
+	</insert>
+	<update id="sunbunUpdate" parameterType="nsh.bbs.model.BbsDTO">
+		update jsp_bbs set sunbun=sunbun+1 where ref=#{ref} and sunbun>=#{sunbun}
+	</update>
+</mapper>

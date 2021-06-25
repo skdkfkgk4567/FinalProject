@@ -1,0 +1,166 @@
+@charset "UTF-8";
+
+#button2
+{
+	background: #1AAB8A;
+	color: #fff;
+	border: none;
+	position: relative;
+	height: 60px;
+	font-size: 1.6em;
+	padding: 0 2em;
+	cursor: pointer;
+	transition: 800ms ease all;
+	outline: none;
+}
+
+#button2:hover
+{
+	background: #fff;
+	color: #1AAB8A;
+}
+
+#button2:before, #button2:after
+{
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 2px;
+	width: 0;
+	background: #1AAB8A;
+	transition: 400ms ease all;
+}
+
+#button2:after
+{
+	right: inherit;
+	top: inherit;
+	left: 0;
+	bottom: 0;
+}
+
+#button2:hover:before, #button2:hover:after
+{
+	width: 100%;
+	transition: 800ms ease all;
+}
+
+.maincontent
+{
+	width: 100vw;
+	height: 800px;
+	float: inherit;
+	background-color: #c8c8c8;
+	margin-top: 100px;
+	opacity: 1;
+	padding-left: 100px;
+	padding-top: 20px;
+}
+
+#leftContent
+{
+	
+}
+
+#rightContent
+{
+	display: inline-block;
+}
+
+#campList
+{
+	width: 600px;
+	padding-left: 100px;
+}
+
+#resveCampList
+{
+	text-align: center;
+}
+
+#siteInfo
+{
+	padding-top: 10px;
+	width: 325.23px;
+	height: 150px;
+	background-color: white;
+	border: 1px solid black;
+	width: 325.23px;
+}
+
+.list0
+{
+	background-color: #FFFFFF;
+}
+
+#resveCampTable
+{
+	width: 100%;
+	cellpadding: 0;
+	cellspacing: 1;
+}
+
+#resveCampListTR
+{
+	cursor: pointer;
+}
+
+#resveCampSpan
+{
+	font-size: 15px;
+	color: #330000;
+}
+
+#resveSubmit
+{
+	width: 200px;
+	height: 100px;
+	background-size: 200px 100px;
+}
+#button
+{
+	background: #1AAB8A;
+	color: #fff;
+	border: none;
+	position: relative;
+	height: 60px;
+	font-size: 1.6em;
+	padding: 0 2em;
+	cursor: pointer;
+	transition: 800ms ease all;
+	outline: none;
+	margin: auto;
+}
+
+#button:hover
+{
+	background: #fff;
+	color: #1AAB8A;
+}
+
+#button:before, #button:after
+{
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 2px;
+	width: 0;
+	background: #1AAB8A;
+	transition: 400ms ease all;
+}
+
+#button:after
+{
+	right: inherit;
+	top: inherit;
+	left: 0;
+	bottom: 0;
+}
+
+#button:hover:before, button:hover:after
+{
+	width: 100%;
+	transition: 800ms ease all;
+}

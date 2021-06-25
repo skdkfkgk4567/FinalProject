@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+.searchbox
+{
+	padding: 0;
+	border-bottom: 1px #bbb solid;
+	border-top: 1px #999 solid;
+	background: #f0f0f0;
+	min-width: 500px;
+	width: 100%;
+	position: relative;
+}
+
+.searchbox:after
+{
+	content: "";
+	display: block;
+	float: none;
+	clear: both;
+}
+
+.searchform
+{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box
+}
+
+.searchform .searchSelect
+{
+	width: 128px;
+	border-top: none;
+	border-bottom: none;
+	border-left: none;
+	float: left
+}
+
+.searchform .searchSelect:hover, .searchform .searchSelect:active,
+	.searchform .searchSelect:focus
+	{
+	border-color: #b0b0b0;
+	color: #000
+}
+
+.searchform .inputsearch
+{
+	vertical-align: top;
+	border-top: none;
+	border-bottom: none;
+	height: 36px;
+	line-height: 36px
+}
+ .searchform .btnsubmit
+{
+	vertical-align: top;
+	border-top: none;
+	border-bottom: none;
+	background: #fff
+}
+
+ .search_result
+{
+	width: 100%;
+	line-height: 36px;
+	font-size: 16px;
+	text-align: center;
+	font-weight: 700;
+	background-color: white;
+}
+
+ .btnmenu
+{
+	margin-left: 10px
+}
+.facilities {border:1px #dedede solid;background:#f6f6f6;margin:0;text-align:center;border-right:none;border-left:none}
+.facilities .facilities_all {padding:17px 20px 17px 10px}
+.facilities .facilities_all .facilities_list {display:inline-block;width:76px;text-align:center;vertical-align:top;margin:15px 0 10px 0;}
+.facilities .facilities_all .facilities_list .f_ico {display:inline-block;width:44px;height:44px;position:relative}
+.facilities .facilities_all .facilities_list .not {position:absolute;top:0;left:0;width:24px;height:24px;left:50%;top:50%;margin:-12px 0 0 -12px}
+.facilities .facilities_all .facilities_list .f_ico .svg_ico.no {opacity:.6}
+.facilities .facilities_all .facilities_list .f_name {padding:7px 5px 0px 5px;line-height:1.2;word-break: keep-all !important;color:#000}
+.facilities .facilities_all .facilities_list .f_name.no {color:#888}

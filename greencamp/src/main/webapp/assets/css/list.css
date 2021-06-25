@@ -1,0 +1,54 @@
+@charset "UTF-8";
+.row {margin:0;border-bottom:1px #dedede solid;padding:22px 12px;position:relative; background-color: rgb(255, 255, 255)}
+.row:hover .photo .tm {-webkit-transform: scale(1.2);transform: scale(1.2);}
+.row:after{content:""; display:block;float:none;clear:both;} 
+
+.row .btn_ctl {position:absolute;bottom:3px;right:26px;}
+.row .btn_ctl a {color:#b0b0b0;display:inline-block;margin:0 3px}
+.row .popupwindow {position:absolute;right:30px;top:20px;display:inline-block;z-index:100}
+.row .leftphoto {float:left; margin-left: 70px;}
+.row .leftphoto .photo{margin:0;position:relative;width:160px;height:90px;overflow:hidden;background:#ccc url(./image/nothumb.svg) no-repeat center center;background-size:30%;border-radius:8px;overflow:hidden}
+.row .leftphoto .photo .fa-ban {position:absolute;right:5px;top:5px;color:red;font-size:19px;z-index:1}
+.row .leftphoto .photo img.tm {display:block;transition: .3s ease-in-out;position:absolute;top:0;left:0;right:0;bottom:0;z-index:0}
+.row .leftphoto .photo .new {position:absolute;top:0px;left:0px;z-index:1}
+
+.row .contright{position:relative;margin-left:130px}
+.row .contright .subject {font-size:18px;letter-spacing:-0.03em;margin-bottom:5px;font-weight:600;}
+.row .contright .subject a {color:#333}
+.row .contright .subject a:hover {color:#000}
+.row .contright .subject a span.comment {font-family:roboto;font-weight:200;color:#ff6000;font-size:12px;display:inline-block;margin:0 3px }
+.row .contright .subject a span.sbjcat {display:inline-block;font-size:12px;padding:0 9px;height:20px;line-height:21px;color:#fff;vertical-align:top;margin:4px 5px 0 0}
+.row .contright .subject a span.sbjcat1 {background:#ff6000}
+.row .contright .subject a span.sbjcat2 {background:#0e8d0e}
+.row .contright .subject a span.sbjcat3 {background:#3789de}
+
+.row .contright .cont {font-size:12px;letter-spacing:-0.01em;margin-bottom:5px;color:#666;line-height:1.5;font-weight:400}
+.row .contright .cont .location, .row .contright .cont .location a {color:#3EA9CD}
+.row .contright .cont .location a:hover {color:#000}
+.row .contright .cont .location i.fa {color:#bbb;margin:0 5px}
+.row .contright .cont .location span {font-weight:600 !important}
+.row .contright .cont .location span.distance {display:inline-block;font-family:roboto;font-weight:500;font-size:12px;color:#ff6000}
+.row .contright .cont ul {margin:7px 0 0 0px;padding:0;font-weight:400}
+.row .contright .cont ul li {height:18px;line-height:18px;list-style:none;margin:0;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.row .contright .cont ul li.star {margin-top:10px}
+.row .contright .cont ul li.star .ogstar {}
+.row .contright .cont ul li.star .ogstar span {display:inline-block;height:15px;vertical-align:top}
+.row .contright .cont ul li.star .ogstar .small_star {position: relative;width:80px;background: url(./image/star1.png) 0 -32px no-repeat;text-align:left;margin-top:1px}
+.row .contright .cont ul li.star .ogstar .small_star .starval {position:absolute;display:inline-block;background: url(./image/star1.png) 0 -46px no-repeat;}
+.row .contright .cont ul li.tele {margin-top:4px}
+.row .contright a.btn_booking {margin-right:10px; display:inline-block;height:60px;width:60px;text-align:center;line-height:38px;border:1px #c0c0c0 solid;border-radius:50%;font-weight:700;font-size:16px;letter-spacing:-1.1px;position:absolute;background:#fff;right:-8vh;top:50%;margin-top:-19px;border-color:#00c73c;background:#fff;color:#00c73c;}
+_:-ms-fullscreen, :root  .row .contright a.btn_booking {right:100px}
+@media screen and (min-width:0\0) {
+.row .contright a.btn_booking {right:100px}
+}
+.row .contright a.btn_booking:hover {background:#fff;border-color:#3aabff;color:#3aabff}
+.row .contright a.btn_booking:active {background:#f0f0f0;border-color:#bbb;color:#888}
+.row .contright .namedate {margin:20px 0 0 0;font-size:12px;color:#808080;position:absolute;bottom:0;width:100%}
+.row .contright .namedate:after {content:""; display:block;float:none;clear:both;} 
+.row .contright .namedate .name {float:left;display:inline-block;background:#f0f0f0;border:1px #ddd solid;padding:0 18px;height:24px;line-height:24px;border-radius:20px;margin-right:10px;}
+.row .contright .namedate .date {float:left;display:inline-block;height:26px;line-height:26px;}
+.row .contright .namedate .shc {float:right;color:#666;margin-top:5px;font-size:13px;margin-right:50%}
+.row .contright .namedate .shc i {color:#b0b0b0}
+.row .osico {width:160px;text-align:center;position:absolute;right:0;top:40px;}
+.row.listactive {background:#f6f6f6}
+.row.listactive .contright .subject a{color:#188cd0}
