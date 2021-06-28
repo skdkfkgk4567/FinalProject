@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="greencamp.report">
+	<!-- 신고하기 -->
+	<insert id="Report" parameterType="greencamp.report.model.ReportDTO">
+		insert into tb_report values(
+			tb_report_no.nextval,
+			#{ctgry},
+			1,
+			sysdate,
+			#{ctgry_no}
+		)
+	</insert>
+	<select id="listReport" resultType="greencamp.report.model.ReportDTO" parameterType="greencamp.report.model.ReportDTO">
+		select * from tb_report
+	</select>
+</mapper>

@@ -125,7 +125,7 @@
 </style>
 </head>
 <body>
-	<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="../header.jsp"></jsp:include>
 	<div id="listSection">
 		<div class="searchbox">
 			<div class="searchform">
@@ -197,5 +197,6 @@
 			<div id="map"></div>
 		</div>
 	</div>
+	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

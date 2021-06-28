@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="greencamp.member">
+	<select id="getListMemberBsnmSQL" parameterType="String"
+		resultType="greencamp.member.model.MemberDTO">
+		select * from tb_account where id=#{id}
+	</select>
+
+	<update id="updateMemberBsnmSQL"
+		parameterType="greencamp.member.model.MemberDTO">
+		update tb_account set nm=#{nm},email=#{email},ncnm=#{ncnm},telno=#{telno}
+	</update>
+
+	<select id="findusercheck" parameterType="String"
+		resultType="int">
+		select count(id) from tb_account where id=#{id}
+	</select>
+	<insert id="joinBsnmmemberSQL"
+		parameterType="greencamp.member.model.MemberDTO">
+		insert into tb_account
+		values(seq_member_no.nextval,#{id},#{nm},#{password},#{email},#{ncnm},#{telno},#{grade},#{bizrno})
+	</insert>
+
+	<insert id="joinUsermemberSQL"
+		parameterType="greencamp.member.model.MemberDTO">
+		insert into tb_account
+		values(seq_member_no.nextval,#{id},#{nm},#{password},#{email},#{ncnm},#{telno},#{grade},default)
+	</insert>
+	<select id="checkId" parameterType="String" resultType="int">
+		select count(*) from tb_account where id=#{id}
+	</select>
+
+	<select id="loginSQL"
+		parameterType="greencamp.member.model.MemberDTO" resultType="int">
+		select count(*) from tb_account where id=#{id} and password=#{password}
+	</select>
+
+	<select id="checkusergrade" parameterType="String"
+		resultType="int">
+		select grade from tb_account where id=#{id}
+	</select>
+</mapper>

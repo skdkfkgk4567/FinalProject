@@ -1,6 +1,6 @@
 package greencamp.page;
 
-public class Pagination
+public class PageModule
 {
 	public static String makePage(String pagename, int totalCnt, int listSize, int pageSize, int cp, String camp_nm)
 	{

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="greencamp.comment">
+	<!-- 중고거래 댓글 등록 -->
+	<insert id="addGoodsComment" parameterType="greencamp.comment.model.CommentDTO">
+		insert into tb_cm values(
+			tb_cm_no.nextval,
+			#{ctgry},
+			'comk',
+			#{cn},
+			0,
+			0,
+			0,
+			#{ctgry_no}
+			)
+	</insert>
+	<!-- 댓글 리스트 -->
+	<select id="listComment" resultType="greencamp.comment.model.CommentDTO" parameterType="greencamp.comment.model.CommentDTO">
+		select * from tb_cm where ctgry=#{ctgry} and ctgry_no=#{ctgry_no}
+	</select>
+	<!-- 게시글 삭제시 댓글 삭제 -->
+	<delete id="delGoodsComment" parameterType="greencamp.comment.model.CommentDTO">
+		delete from tb_cm where ctgry=#{ctgry} and ctgry_no=#{ctgry_no}
+	</delete>
+	<!-- 댓글 삭제 -->
+	<delete id="delComment" parameterType="greencamp.comment.model.CommentDTO">
+		delete from tb_cm where cm_no=#{cm_no}
+	</delete>
+	<!-- 댓글 수 -->
+	<select id="countComment" resultType="int" parameterType="greencamp.comment.model.CommentDTO">
+		select count(*) from tb_cm where ctgry=#{ctgry} and ctgry_no=#{ctgry_no}
+	</select>
+</mapper>

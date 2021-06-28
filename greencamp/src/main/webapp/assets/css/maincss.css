@@ -1,0 +1,333 @@
+@charset "UTF-8";
+/*사이트메뉴 css!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300);
+
+/*사업자 페이지 메인 관련*/
+.underheaderbsnmidcampname{
+	background-color:gray;
+	text-align:center;
+	
+}
+
+.registtitle{
+text-align:center;
+
+margin-top:100px;
+position:relative;
+width:100%;
+display:block;
+margin-left:-130px;
+color:white;
+font-size:30px;
+margin-left:-300px;
+}
+.bsnmmaincontent{
+	float:left;
+	background-color: #d8d8d8;
+	width : 1000px;
+  	height: 500px;
+	border: 1px solid black;
+}
+.maincontent{
+	width:1340px;
+	height:650px;
+	float:left;
+	background-color:#c8c8c8;
+	margin-top:10px;
+	opacity: 1;
+	border-radius: 40px 40px;
+	overflow:auto;
+	
+}
+.maincontentregist{
+	width:1340px;
+	height:650px;
+	float:left;
+	background-color:#c8c8c8;
+	margin-top:10px;
+	opacity: 1;
+	border-radius: 40px 40px;
+	overflow:auto;
+	margin-top:-20px;
+	
+}
+.maincontentupdate{
+	width:1340px;
+	height:650px;
+	float:left;
+	background-color:#c8c8c8;
+	margin-top:10px;
+	opacity: 1;
+	border-radius: 40px 40px;
+	overflow:auto;
+	margin-top:-20px;
+}
+.maincontentselling{
+	width:1340px;
+	height:650px;
+	float:left;
+	background-color:#c8c8c8;
+	margin-top:10px;
+	opacity: 1;
+	border-radius: 40px 40px;
+	overflow:auto;
+	margin-top:10px;
+}
+.maincontentlistmember{
+	width:1340px;
+	height:650px;
+	float:left;
+	background-color:#c8c8c8;
+	
+	opacity: 1;
+	border-radius: 40px 40px;
+	overflow:auto;
+	margin-top:-30px;
+	
+}
+.maincontentupdatemember{
+	width:1340px;
+	height:650px;
+	float:left;
+	background-color:#c8c8c8;
+	margin-top:10px;
+	opacity: 1;
+	border-radius: 40px 40px;
+	overflow:auto;
+	margin-top:-30px;
+	
+}
+
+
+
+/*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$bsnmcamplist 캠핑장관리테이블$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$*/
+.bsnmcamplist thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: center;
+    
+}
+.bsnmcamplist table{
+	margin-top:20px;
+	width:1340px;
+	height:650px;
+	opacity: 1;
+}
+
+.bsnmcamplist th,
+.bsnmcamplist td {
+    padding: 12px 15px;
+    text-align: center;
+    opacity: 1;
+	border-radius: 10px;
+}
+.bsnmcamplist tbody tr {
+	height: 100px;
+    border-bottom: 1px solid #dddddd;
+    text-align: center;
+    opacity: 1;
+}
+
+.bsnmcamplist tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+    text-align: center;
+    opacity: 1;
+}
+
+.bsnmcamplist tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+    text-align: center;
+    opacity: 1;
+}
+.bsnmcamplist tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+    text-align: center;
+    opacity: 1;
+}
+/*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$listsellingtable  매출현황테이블$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$*/
+.listsellingtable table{
+	width:1340px;
+	height:650px;
+}
+.listsellingtable th,
+.listsellingtable td {
+    padding: 12px 15px;
+    text-align: center;
+   
+}
+.listsellingtable tbody tr {
+	height: 100px;
+    border-bottom: 1px solid #dddddd;
+    text-align: center;
+}
+
+.listsellingtable tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+    text-align: center;
+}
+
+.listsellingtable tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+    text-align: center;
+}
+.listsellingtable tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+    text-align: center;
+}
+
+/*$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$listsellingtable  매출현황테이블$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$*/
+
+.listreview thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: center;
+}
+.listreview table{
+	width:1340px;
+	height:650px;
+}
+.listreview th,
+.listreview td {
+    padding: 12px 15px;
+    text-align: center;
+}
+.listreview tbody tr {
+	height: 100px;
+    border-bottom: 1px solid #dddddd;
+    text-align: center;
+}
+
+.listreview tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+    text-align: center;
+}
+
+.listreview tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+    text-align: center;
+}
+.listreview tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+    text-align: center;
+}
+.bsnmreviewdate{
+	
+	width:250;
+	margin-top:0px;
+	margin-left:0px;
+	float:left;
+}
+.goodandbadbutton{
+	float:left;
+	width:100px;
+	margin-left:1000px;
+	margin-top:-40px;
+	
+}
+.goodandbadbuttonimg{
+	width:25px;
+	height:25px;
+	margin-left:5px;
+}
+.goodandbadcotent{
+	margin-top:40px;
+	margin-left:200px;
+	text-align:left;
+	margin-left:0px;
+	
+}
+.bsnmreviewselectbox{
+	margin-left:80px;
+	
+}
+/*////////////////////////////////////////////sendmsg 발신함 편지보내기버튼*/
+.sendmsgbutton{
+	margin-left:100px;
+	
+}
+
+.writemsg {
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top:-100px;
+  background:#d8d8d8;
+}
+.writemsg2{
+  width: 800px;
+  height:500px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top:-100px;
+  
+  
+}
+
+.writemsgpaper {
+	background:#c8c8c8;
+	padding:25px;
+	margin-top: 100px;
+  	margin-bottom: 50px;
+  	
+}
+
+.writemsgpaper > h3 {
+	color: #F96;
+	display: block;
+	font-size: 30px;
+	font-weight: 400;
+	text-align: center;
+	background:#d8d8d8;
+}
+.writemsgpaper .row {
+  margin-bottom: 15px;
+	width: 100%;
+}
+.writemsgpaper .row1 {
+  margin-bottom: 15px;
+	width: 100%;
+	
+}
+
+.writemsgpaper input,
+.writemsgpaper textarea {
+  width: 100%;
+  padding: 10px;
+}
+
+.writemsgpaper textarea {
+	height:350px;
+	max-width:100%;
+  
+}
+
+.writemsgpaper #writemsgbutton {
+	cursor:pointer;
+	width:100%;
+	border:none;
+	background:#0CF;
+	color:#FFF;
+	margin:0 0 5px;
+	padding:10px;
+	font-size:15px;
+}
+.eventwirtepaper {
+	
+	padding:25px;
+	background-color:#c8c8c8;
+
+}
+.eventwirtepaper #eventwritemsgbutton {
+	cursor:pointer;
+	width:100%;
+	border:none;
+	background:#0CF;
+	color:#FFF;
+	margin:0 0 5px;
+	padding:10px;
+	font-size:15px;
+}
+

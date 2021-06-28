@@ -33,4 +33,52 @@
 			<ref bean="sqlSessionTemplate" />
 		</constructor-arg>
 	</bean>
+	<bean id="reviewDao" class="greencamp.review.model.ReviewDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"></ref>
+		</constructor-arg>
+	</bean>
+
+	<bean id="sellingDao"
+		class="greencamp.selling.model.SellingDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"></ref>
+		</constructor-arg>
+	</bean>
+
+	<bean id="eventDao" class="greencamp.event.model.EventDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"></ref>
+		</constructor-arg>
+	</bean>
+
+	<bean id="messageDao"
+		class="greencamp.message.model.MessageDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"></ref>
+		</constructor-arg>
+	</bean>
+
+	<bean id="memberDao" class="greencamp.member.model.MemberDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"></ref>
+		</constructor-arg>
+	</bean>
+
+	<bean id="likeDao" class="greencamp.like.model.LikeDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"></ref>
+		</constructor-arg>
+	</bean>
+	<!-- service -->
+	<bean id="goodsService"
+		class="greencamp.goods.service.GoodsServiceImple"></bean>
+	<bean id="commentService"
+		class="greencamp.comment.service.CommentServiceImple"></bean>
+	<bean id="reportService"
+		class="greencamp.report.service.ReportServiceImple"></bean>
+	<bean id="campinfoService"
+		class="greencamp.campinfo.service.CampInfoServiceImple"></bean>
+	<bean id="bbsService"
+		class="greencamp.bbs.service.BbsServiceImple"></bean>
 </beans>

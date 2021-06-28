@@ -5,8 +5,8 @@
 <mapper namespace="greencamp.camp">
 
 	<select id="getAllCampList"
-		parameterType="greencamp.camp.model.CampVO"
-		resultType="greencamp.camp.model.CampVO">
+		parameterType="greencamp.camp.model.SiteVO"
+		resultType="greencamp.camp.model.SiteVO">
 		select * from
 		(select rownum as rnum,a.* from
 		(select * from tb_camp order by camp_no desc)a)b
@@ -17,8 +17,8 @@
 		select camp_nm from tb_camp where camp_no = #{camp_no}
 	</select>
 	<select id="getCampList"
-		parameterType="greencamp.camp.model.CampVO"
-		resultType="greencamp.camp.model.CampVO">
+		parameterType="greencamp.camp.model.SiteVO"
+		resultType="greencamp.camp.model.SiteVO">
 		select * from (select rownum as rnum,a.* from (select * from tb_camp
 		where camp_nm like '%' || #{camp_nm} || '%' order by camp_no desc)a)b
 		where rnum<![CDATA[>]]>=#{start}
@@ -36,7 +36,7 @@
 		select count(*) from tb_camp where camp_nm like '%' || #{camp_nm} || '%'
 	</select>
 	<select id="getCampDetail" parameterType="int"
-		resultType="greencamp.camp.model.CampVO">
+		resultType="greencamp.camp.model.SiteVO">
 		select * from tb_camp where camp_no = #{camp_no}
 	</select>
 	<select id="getCampDc" resultType="String">
@@ -58,5 +58,39 @@
 	</select>
 	<select id="searchThemeCount" parameterType="greencamp.camp.model.SiteVO" resultType="int">
 		select count(*) from (SELECT * FROM tb_camp WHERE (${query}))
+	</select>
+	<select id="getListCampBsnmSQL" parameterType="String"
+		resultType="greencamp.camp.model.CampDTO">
+		select * from tb_camp where id=#{id}
+	</select>
+
+	<insert id="addRegistCampBsnmSQL"
+		parameterType="greencamp.camp.model.CampDTO">
+		insert into tb_camp
+		values(seq_camp_no.nextval,#{camp_nm},#{addr},#{camp_telno},#{camp_type},'37.215165','36.135121',#{cvntl},#{sffc},'lws5760',#{camp_theme},#{camp_surround},#{checkin},#{checkout},default,#{camp_ground},#{bizrno},#{camp_intro})
+	</insert>
+	
+	<select id="updateCampBsnmSQL" parameterType="String" resultType="greencamp.camp.model.CampDTO">
+	select * from tb_camp where id=#{id}
+	</select>
+	
+	<update id="updateInsertBsnmSQL" parameterType="greencamp.camp.model.CampDTO">
+	update tb_camp set camp_nm=#{camp_nm},addr=#{addr},camp_telno=#{camp_telno},camp_type=#{camp_type},lat='37.215165',longti='36.135121',cvntl=#{cvntl},sffc=#{sffc},camp_theme=#{camp_theme},camp_surround=#{camp_surround},checkin=#{checkin},checkout=#{checkout},camp_dc=default,camp_ground=#{camp_ground},bizrno=#{bizrno},camp_intro=#{camp_intro} where id=#{id}
+	</update>
+	
+	<delete id="deletecampBsnmSQL" parameterType="int">
+	delete from tb_camp where camp_no = #{camp_no}
+	</delete>
+	
+	<insert id="writeReviewCamp" parameterType="greencamp.camp.model.SiteVO">
+		INSERT INTO tb_review VALUES(seq_review_no.nextval,#{camp_no},#{cn},#{ncnm},sysdate)
+	</insert>
+	
+	<delete id="deleteReviewCamp" parameterType="greencamp.camp.model.SiteVO">
+		delete from tb_review where camp_no = #{camp_no} and review_no = #{review_no}
+	</delete>
+	
+	<select id="getRewiewCamp" parameterType="int" resultType="greencamp.camp.model.SiteVO">
+		select * from tb_review where camp_no = #{camp_no} order by review_no
 	</select>
 </mapper>

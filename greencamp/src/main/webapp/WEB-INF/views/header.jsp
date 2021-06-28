@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,8 +50,22 @@ body {
 		<div class="container d-flex">
 			<div class="contact-info mr-auto"></div>
 			<div class="social-links">
-				<a href="#" class="home">HOME</a> <a href="#" class="notice">공지사항</a>
-				<a href="#" class="join">회원가입</a> <a href="#" class="login">로그인</a>
+				<a href="index.pi" class="home">HOME</a> <a href="notice.pi?ctgry=공지사항" class="notice">공지사항</a>
+				<c:set var="user_ncnm" value="${sessionScope.user_ncnm}"></c:set>
+				<c:choose>
+					<c:when test="${empty user_ncnm}">
+				<a href="joinSelect.pi" class="joinMember">회원가입</a> 
+				<a href="login.pi" class="login">로그인</a>
+					</c:when>
+					<c:otherwise>
+					<a>${user_ncnm }님 환영합니다.</a>
+					<a href="logout.pi">로그아웃</a>
+					
+					</c:otherwise>
+				</c:choose>
+				
+				
+				
 				<a href="#" class="contact">고객센터</a>
 			</div>
 		</div>
@@ -68,9 +83,9 @@ body {
 					<li><a data-fancybox data-src="#hidden-content-2"
 						href="javascript:;" class="btn">테마검색</a></li>
 					<li><a href="searchCamp.pi?k=all">전체검색</a></li>
-					<li><a href="#">중고거래</a></li>
-					<li><a href="#">캠핑정보</a></li>
-					<li><a href="#">캠핑톡</a></li>
+					<li><a href="goods.pi">중고거래</a></li>
+          					<li><a href="listCampInfo.pi?ctgry=캠핑팁">캠핑정보</a></li>
+          					<li><a href="camptalk.pi?ctgry=가입인사">캠핑톡</a></li>
 				</ul>
 			</nav>
 		</div>

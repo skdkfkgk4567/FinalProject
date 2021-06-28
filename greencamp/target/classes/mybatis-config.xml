@@ -5,5 +5,16 @@
 <configuration>
 	<mappers>
 		<mapper resource="sql/campSQL.xml"/>
+		<mapper resource="sql/memberSQL.xml"/>
+		<mapper resource="sql/goodsSQL.xml"/>
+		<mapper resource="sql/commentSQL.xml"/>
+		<mapper resource="sql/reportSQL.xml"/>
+		<mapper resource="sql/campinfoSQL.xml"/>
+		<mapper resource="sql/bbsSQL.xml"/>
+<mapper resource="sql/reviewSQL.xml"></mapper>
+<mapper resource="sql/sellingSQL.xml"></mapper>
+<mapper resource="sql/eventSQL.xml"></mapper>
+<mapper resource="sql/messageSQL.xml"></mapper>
+<mapper resource="sql/likeSQL.xml"></mapper>
 	</mappers>
 </configuration>

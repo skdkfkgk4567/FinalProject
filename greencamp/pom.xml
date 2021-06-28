@@ -21,6 +21,11 @@
 		<!-- fileuploads -->
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
 		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>2.2</version>
+		</dependency>
+		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.4</version>

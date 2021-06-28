@@ -30,4 +30,32 @@
 			ref="sqlSessionFactoryBean"></constructor-arg>
 	</bean>
 
+	<!-- DAO -->
+	<bean id="goodsDao" class="greencamp.goods.model.GoodsDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate" />
+		</constructor-arg>
+	</bean>
+	<bean id="commentDao"
+		class="greencamp.comment.model.CommentDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate" />
+		</constructor-arg>
+	</bean>
+	<bean id="reportDao" class="greencamp.report.model.ReportDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate" />
+		</constructor-arg>
+	</bean>
+	<bean id="campinfoDao"
+		class="greencamp.campinfo.model.CampInfoDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate" />
+		</constructor-arg>
+	</bean>
+	<bean id="bbsDao" class="greencamp.bbs.model.BbsDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate" />
+		</constructor-arg>
+	</bean>
 </beans>

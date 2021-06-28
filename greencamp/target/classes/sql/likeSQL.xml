@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="greencamp.like">
+  
+<insert id="inputlikeSQL" parameterType="greencamp.like.model.LikeDTO">
+insert into tb_like values(#{like_no},#{like_id})
+</insert>
+
+<delete id="deletelikeSQL" parameterType="int">
+delete from tb_like where like_no=#{like_no}
+</delete>
+  </mapper>

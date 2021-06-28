@@ -182,7 +182,7 @@ label {
 </style>
 </head>
 <body>
-	<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="../header.jsp"></jsp:include>
 	<div class="maincontent">
 		<div class="leftContent">
 			<div class="siteImg">
@@ -199,6 +199,6 @@ label {
 			<div class="buttonHome"><input type="button" id="button" value="홈으로" onclick="location.href='index.pi'"></div>
 		</div>
 	</div>
-	<jsp:include page="footer.jsp"></jsp:include>
+	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

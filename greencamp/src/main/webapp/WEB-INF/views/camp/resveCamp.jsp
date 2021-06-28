@@ -22,13 +22,13 @@
 <link rel="stylesheet" href="assets/css/resveCamp.css">
 </head>
 <body>
-	<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="../header.jsp"></jsp:include>
 	
 	<div class="maincontent">
 		<h1>${camp_name }</h1>
 		<div class="listwrap">
 				<div id="leftContent">
-					<jsp:include page="picker/picker.jsp"></jsp:include>
+					<jsp:include page="../picker/picker.jsp"></jsp:include>
 				</div>
 				<div id="rightContent">
 					<div id="campList">
@@ -38,6 +38,6 @@
 				</div>
 		</div>
 	</div>
-	<jsp:include page="footer.jsp"></jsp:include>
+	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

@@ -38,6 +38,10 @@ public class SiteVO
 	private String camp_ground;
 	private String bizrno;
 	private String camp_intro;
+	private int review_no;
+	private String cn;
+	private String ncnm;
+	private String rvwde;
 	
 	public SiteVO()
 	{
@@ -48,7 +52,8 @@ public class SiteVO
 			String camp_dc, int nmpr, String id, String bgnde, String totalde, String rm, String sttus, String endde,
 			String values, String query, String camp_nm, String addr, String camp_telno, String camp_type, String lat,
 			String longti, String cvntl, String sffc, String camp_theme, String camp_surround, int start, int end,
-			int cp, int ls, String checkin, String checkout, String camp_ground, String bizrno, String camp_intro) {
+			int cp, int ls, String checkin, String checkout, String camp_ground, String bizrno, String camp_intro,
+			int review_no, String cn, String ncnm, String rvwde) {
 		super();
 		this.camp_no = camp_no;
 		this.site_no = site_no;
@@ -86,6 +91,41 @@ public class SiteVO
 		this.camp_ground = camp_ground;
 		this.bizrno = bizrno;
 		this.camp_intro = camp_intro;
+		this.review_no = review_no;
+		this.cn = cn;
+		this.ncnm = ncnm;
+		this.rvwde = rvwde;
+	}
+	public int getReview_no() {
+		return review_no;
+	}
+
+	public void setReview_no(int review_no) {
+		this.review_no = review_no;
+	}
+
+	public String getCn() {
+		return cn;
+	}
+
+	public void setCn(String cn) {
+		this.cn = cn;
+	}
+
+	public String getNcnm() {
+		return ncnm;
+	}
+
+	public void setNcnm(String ncnm) {
+		this.ncnm = ncnm;
+	}
+
+	public String getRvwde() {
+		return rvwde;
+	}
+
+	public void setRvwde(String rvwde) {
+		this.rvwde = rvwde;
 	}
 
 	public int getCamp_no() {

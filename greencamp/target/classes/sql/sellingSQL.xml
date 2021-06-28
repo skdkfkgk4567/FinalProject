@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="final.camp">
+  <select id="getListSellingBsnmSQL" parameterType="String" resultType="greencamp.selling.model.SellingDTO">
+  select * from tb_resve where id=#{id}
+  </select>
+  <select id="totalpc" parameterType="String" resultType="int">
+  select sum(pc) from tb_resve where id=#{id}
+  
+  </select>
+  </mapper>
