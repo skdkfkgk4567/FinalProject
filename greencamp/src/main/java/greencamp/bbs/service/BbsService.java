@@ -12,5 +12,5 @@ public interface BbsService {
 	public int registBbs(BbsDTO dto);//공지 등록
 	public int goodsUp(BbsDTO dto);//공지 게시글 수정하기
 	public int goodsDel(BbsDTO dto);//공지 게시글 삭제
-	
+	public List getlistbbs(String id);
 }

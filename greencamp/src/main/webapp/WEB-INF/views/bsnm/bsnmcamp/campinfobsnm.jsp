@@ -13,6 +13,10 @@
 <script type="text/javascript" src="assets/js/common.js"></script>
 <script src="assets/js/httpRequest.js"></script>
 <style>
+.footer
+{
+	margin-top: 658px !important;
+}
 .registtitle{
 text-align:center;
 
@@ -221,6 +225,7 @@ text-align:center;
 	</header>
 	<!------------------------------------------ 해더아래 아이디 캠핑장이름 -------------------------------------------------------------->
 <jsp:include page="../../bsnmsidebar.jsp"></jsp:include>
+<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 	<!------------------------------------------ 사이드 메뉴 -------------------------------------------------------------->
 
 
@@ -299,8 +304,8 @@ ${dto.checkout}
 </div>
 </form>
 </div>
-<footer>
 <jsp:include page="../../footer.jsp"></jsp:include>
-</footer>
+
 </body>
+
 </html>

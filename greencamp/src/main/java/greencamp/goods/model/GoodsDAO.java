@@ -14,4 +14,8 @@ public interface GoodsDAO {
 	public int goodsUp(GoodsDTO dto);//중고거래 게시글 수정하기
 	public int goodsDel(GoodsDTO dto);//중고거래 게시글 삭제
 	public int getTotalCnt();
+	public List<GoodsDTO> listGoodsPost(int cp, int ls); /*중고거래 게시글 목록*/
+	public int deleteGoodsPost(int delng_no); /*중고거래 게시글 삭제*/
+	public int goodsPostTotalCnt(); /*중고거래 게시글 총 갯수*/
+	public int goodssttus(GoodsDTO dto);//거래완료
 }

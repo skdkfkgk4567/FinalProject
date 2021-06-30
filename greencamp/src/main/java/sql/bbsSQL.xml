@@ -3,18 +3,18 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="greencamp.bbs">
-	
-	<!-- 공지 리스트 출력 -->
+
+	<!-- 게시글,공지 리스트 출력 -->
 	<select id="listBbs" resultType="greencamp.bbs.model.BbsDTO" parameterType="greencamp.bbs.model.BbsDTO">
-		select * from tb_bbs where ctgry=#{ctgry} prder by bbs_no desc
+		select * from tb_bbs where ctgry=#{ctgry} order by bbs_no desc
 	</select>
 	<!-- 공지 타입 상세정보 -->
 	<select id="bbsTypeIndex" parameterType="greencamp.bbs.model.BbsDTO" resultType="greencamp.bbs.model.BbsDTO">
-		select * from tb_bbs where delng_no=(select max(delng_no) from tb_delng where delngtp=#{delngtp})
+		select * from tb_bbs where bbs_no=(select max(bbs_no) from tb_bbs where ctgry=#{ctgry})
 	</select>
 	<!-- 공지 클릭 상세정보 -->
 	<select id="bbsAjax" parameterType="greencamp.bbs.model.BbsDTO" resultType="greencamp.bbs.model.BbsDTO">
-		select * from tb_bbs where delng_no=#{delng_no}
+		select * from tb_bbs where bbs_no=#{bbs_no}
 	</select>
 	
 	<!-- 캠핑톡 글쓰기 -->
@@ -34,4 +34,55 @@
 	<delete id="delBbs" parameterType="greencamp.bbs.model.BbsDTO">
 		delete from tb_bbs where bbs_no=#{bbs_no}
 	</delete>
+
+	<!-- 캠핑톡 게시글 목록 -->
+	<select id="listCampTalkPost" parameterType="Map"
+		resultType="greencamp.bbs.model.BbsDTO">
+		select * from
+		(select rownum as rnum, a.* from
+		(select * from tb_bbs
+		where ctgry='자유게시판' or ctgry='가입인사' or ctgry='리뷰' order by bbs_no
+		desc)a)b
+		where rnum <![CDATA[>]]>=#{start}
+		and rnum <![CDATA[<]]>=#{end}
+	</select>
+	<!-- 캠핑톡 게시글 삭제 -->
+	<delete id="deleteCampTalkPost" parameterType="int">
+		delete from tb_bbs
+		where bbs_no=#{bbs_no}
+	</delete>
+	<!-- 캠핑톡 게시글 총 갯수 -->
+	<select id="campTalkPostTotalCnt" resultType="int">
+		select count(*)
+		from tb_bbs where ctgry='자유게시판' or ctgry='가입인사' or ctgry='리뷰'
+	</select>
+
+	<!-- 공지사항 게시글 목록 -->
+	<select id="listNoticePost" parameterType="Map"
+		resultType="greencamp.bbs.model.BbsDTO">
+		select * from
+		(select rownum as rnum, a.* from
+		(select * from tb_bbs
+		where ctgry='공지사항' or ctgry='이용안내' or ctgry='자주묻는질문' or ctgry='이벤트' or
+		ctgry='광고' order by bbs_no desc)a)b
+		where rnum <![CDATA[>]]>=#{start}
+		and rnum <![CDATA[<]]>=#{end}
+	</select>
+	<!-- 공지사항 게시글 등록 -->
+	<insert id="writeNoticePost"
+		parameterType="greencamp.bbs.model.BbsDTO">
+		insert into tb_bbs values(tb_bbs_no.nextval, #{sj},
+		#{cn}, 0, #{ctgry}, sysdate, '관리자', #{videosrc}, 0)
+	</insert>
+	<!-- 공지사항 게시글 삭제 -->
+	<delete id="deleteNoticePost" parameterType="int">
+		delete from tb_bbs
+		where bbs_no=#{bbs_no}
+	</delete>
+	<!-- 공지사항 게시글 총 갯수 -->
+	<select id="noticePostTotalCnt" resultType="int">
+		select count(*) from
+		tb_bbs where ctgry='공지사항' or ctgry='이용안내' or ctgry='자주묻는질문' or
+		ctgry='이벤트' or ctgry='광고'
+	</select>
 </mapper>

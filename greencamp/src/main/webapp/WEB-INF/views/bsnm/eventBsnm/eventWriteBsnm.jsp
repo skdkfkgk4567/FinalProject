@@ -13,6 +13,10 @@
 <script type="text/javascript" src="assets/js/common.js"></script>
 <script src="assets/js/httpRequest.js"></script>
 <style>
+.footer
+{
+	margin-top: 658px;
+}
 .registtitle{
 text-align:center;
 margin-top:100px;
@@ -61,7 +65,7 @@ font-size:30px;
 		.right{
 		float:right;
 		height:650px;
-		width:620px;
+		width:600px;
 		}
 		.fixedtr{
 		top: 0px;
@@ -223,7 +227,7 @@ function showResult()
                         <td>내용</td>
                         <td><textarea name = cn id="cn" cols=70 rows=10></textarea></td>
                         </tr>
-                        <input type="hidden" name="id" id="id" value="lws5760">
+                        <input type="hidden" name="id" id="id" value="${sessionScope.user_id}">
  
                       
                         </table>

@@ -13,7 +13,24 @@
 			#{ctgry_no}
 		)
 	</insert>
-	<select id="listReport" resultType="greencamp.report.model.ReportDTO" parameterType="greencamp.report.model.ReportDTO">
-		select * from tb_report
+	<select id="listReport" parameterType="Map" resultType="greencamp.report.model.ReportDTO">
+		select * from
+		(select rownum as rnum, a.* from
+		(select * from tb_report where ctgry='자유게시판' or ctgry='리뷰' or ctgry='가입인사' or
+		ctgry='팝니다' or ctgry='삽니다' or ctgry='공지사항' or ctgry='이용안내' or ctgry='자주묻는질문'
+		or ctgry='캠핑장'	or ctgry='댓글' order by report_no desc)a)b
+		where rnum <![CDATA[>]]>=#{start} and rnum <![CDATA[<]]>=#{end}
+	</select>
+	
+	<!-- 신고 처리 -->
+	<delete id="deleteReport" parameterType="int">
+		delete from tb_report where report_no=#{report_no}
+	</delete>
+	
+	<!-- 신고 목록 수 -->
+	<select id="reportTotalCnt" resultType="int">
+		select count(*) from tb_report where ctgry='자유게시판' or ctgry='리뷰' or ctgry='가입인사' or
+		ctgry='팝니다' or ctgry='삽니다' or ctgry='공지사항' or ctgry='이용안내' or ctgry='자주묻는질문' or ctgry='댓글'
+		or ctgry='캠핑장'
 	</select>
 </mapper>

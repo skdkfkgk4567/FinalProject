@@ -70,6 +70,12 @@
 			<ref bean="sqlSessionTemplate"></ref>
 		</constructor-arg>
 	</bean>
+	
+	<bean id="ResveDao" class="greencamp.resve.model.ResveDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"></ref>
+		</constructor-arg>
+	</bean>
 	<!-- service -->
 	<bean id="goodsService"
 		class="greencamp.goods.service.GoodsServiceImple"></bean>

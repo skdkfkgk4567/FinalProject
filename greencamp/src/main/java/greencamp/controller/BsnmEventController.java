@@ -2,6 +2,9 @@ package greencamp.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +20,15 @@ public class BsnmEventController {
 	private EventDAO EventDao;
 	
 	@RequestMapping("eventWriteBsnm.pi")
-	public ModelAndView eventWriteBsnm() {
-		String id="lws5760";
-		List list = EventDao.geteventList(id);
+	public ModelAndView eventWriteBsnm(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+
+		String user_id = (String) session.getAttribute("user_id");
+		String user_ncnm = (String) session.getAttribute("user_ncnm");
+		String user_nm = (String) session.getAttribute("user_nm");
+		
+		List list = EventDao.geteventList(user_id);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("bsnm/eventBsnm/eventWriteBsnm");
 		mav.addObject("list", list);
@@ -34,21 +43,21 @@ public class BsnmEventController {
 		
 	System.out.println(pc);
 		if(pc==0) {
-			msg="ÇÒÀÎÀ²À» ÀÔ·ÂÇØÁÖ¼¼¿ä";
+			msg="í• ì¸ìœ¨ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”";
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/eventBsnm/eventMsg");
 			mav.addObject("msg", msg);
 			return mav;
 		}
 		if(sj.equals("")) {
-			msg="Á¦¸ñÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä";
+			msg="ì œëª©ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”";
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/eventBsnm/eventMsg");
 			mav.addObject("msg", msg);
 			return mav;
 		}
 		if(cn.equals("")) {
-			msg="Çà»ç/±¤°í³»¿ëÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä";
+			msg="í–‰ì‚¬/ê´‘ê³ ë‚´ìš©ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”";
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/eventBsnm/eventMsg");
 			mav.addObject("msg", msg);
@@ -56,7 +65,7 @@ public class BsnmEventController {
 		}
 		
 		int result = EventDao.eventWrite(EventDto);
-		msg=result>0?"¼º°ø":"½ÇÆÐ";
+		msg=result>0?"ì„±ê³µ":"ì‹¤íŒ¨";
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("bsnm/eventBsnm/eventMsg");
 		mav.addObject("msg", msg);

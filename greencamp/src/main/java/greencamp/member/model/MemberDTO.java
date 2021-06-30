@@ -9,14 +9,14 @@ public class MemberDTO {
 	private String ncnm;
 	private String telno;
 	private int grade;
-	private int bizrno;
+	private String bizrno;
 
 	public MemberDTO() {
 		super();
 	}
 
 	public MemberDTO(int account_no, String id, String nm, String password, String email, String ncnm, String telno,
-			int grade, int bizrno) {
+			int grade, String bizrno) {
 		super();
 		this.account_no = account_no;
 		this.id = id;
@@ -93,11 +93,11 @@ public class MemberDTO {
 		this.grade = grade;
 	}
 
-	public int getBizrno() {
+	public String getBizrno() {
 		return bizrno;
 	}
 
-	public void setBizrno(int bizrno) {
+	public void setBizrno(String bizrno) {
 		this.bizrno = bizrno;
 	}
 

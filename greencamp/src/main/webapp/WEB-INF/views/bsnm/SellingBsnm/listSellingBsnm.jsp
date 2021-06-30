@@ -14,6 +14,10 @@
 <script type="text/javascript" src="assets/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="assets/js/common.js"></script>
 <style>
+.footer
+{
+	margin-top: 658px !important;
+}
 h1{
 text-align:center;
 }
@@ -66,9 +70,10 @@ position:sticky;
 
 	<!------------------------------------------ 본문영역 -------------------------------------------------------------->
 	
-		<fmt:parseNumber var="number" value="${total }" integerOnly="true"></fmt:parseNumber>
-<label class="registtitle" > 총합계 : ${number}원 | 수수료 : ${number*0.05}원 | 순이익 : ${number*0.95}원</label>
-
+		<fmt:parseNumber var="number" value="${total }" integerOnly="true"/>
+		<fmt:parseNumber var="fee" value="${total*0.05 }" integerOnly="true"/>
+		<fmt:parseNumber var="npro" value="${total*0.95 }" integerOnly="true"/>
+<label class="registtitle" > 총합계 : ${number}원 | 수수료 : ${fee}원 | 순이익 : ${npro}원</label>
 
 <div class="maincontentselling" id="sellingscroll">
 
@@ -87,15 +92,17 @@ position:sticky;
     </thead>
     <tbody>
     <c:forEach var="dto" items="${list}">
+    <fmt:parseNumber var="dtofee" value="${dto.pc*0.05 }" integerOnly="true"/>
+    <fmt:parseNumber var="dtonpro" value="${dto.pc*0.95 }" integerOnly="true"/>
         <tr class="listsellingtrsize">
-            <td>${dto.cmap_no}</td>
+            <td>${dto.camp_no}</td>
             <td>그린캠핑장</td>
             <td>${dto.id}</td>
             <td>${dto.nmpr}</td>
             <td>${dto.totalde}</td>
             <td>${dto.pc}</td>
-            <td>${dto.pc * 0.05}</td>
-            <td>${dto.pc * 0.95}</td>
+            <td>${dtofee}</td>
+            <td>${dtonpro}</td>
         </tr>
         </c:forEach>
         <!-- and so on... -->

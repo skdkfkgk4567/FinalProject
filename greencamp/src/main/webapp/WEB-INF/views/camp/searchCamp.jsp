@@ -16,7 +16,8 @@
 <link rel="stylesheet" href="assets/css/list.css">
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1254720cd107949a5e0c2347d3558385&libraries=LIBRARY"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1254720cd107949a5e0c2347d3558385&libraries=services"></script>
 <script type="text/javascript" src="assets/js/splitter.min.js"></script>
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/trackpad-scroll-emulator/1.0.8/jquery.trackpad-scroll-emulator.js"></script>
@@ -34,8 +35,6 @@
 .pagebox01 .selected {background:#25a5f0 ;color:#fff;border:none;border:1px #25a5f0 solid}
 .pagebox01 .notselected {color:#222;}
 .pagebox01 .notselected:hover {background:#ccc;color:#fff;border-color:#ccc}
-
-
 </style>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="assets/css/splitter.css" />
@@ -161,7 +160,7 @@
 	    center: new kakao.maps.LatLng(${lat}, ${lon}), // 지도의 중심좌표
 	    level: 5 // 지도의 확대 레벨
 	};  
-
+	
 	//지도를 생성합니다    
 	var map = new kakao.maps.Map(mapContainer, mapOption); 
 	var markerPosition  = new kakao.maps.LatLng(${lat}, ${lon}); 
@@ -170,11 +169,41 @@
 	//지도에 컨트롤을 추가해야 지도위에 표시됩니다
 	//kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
 	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
-
+	
 	//지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
 	var zoomControl = new kakao.maps.ZoomControl();
 	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 	//마커를 생성합니다
+	var positions = [
+		<c:forEach var="camp" items="${list }">
+		{
+			
+		    title: '${camp.camp_nm}', 
+		    latlng: new kakao.maps.LatLng(${camp.lat}, ${camp.longti}),
+		    content : '<div class="iw_inner" style="text-align:center; border-radius:10px; background-color:skyblue; width:450px"><h3 style="padding-top: 10px;">${camp.camp_nm}</h3><img src="https://vga9354.synology.me:9898/img/1.jpg" width="100%" height="100%" alt="${camp.camp_nm}" style="border-radius:10px;"/></div>'
+		},
+	    </c:forEach>
+	];
+	var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+
+	for (var i = 0; i < positions.length; i ++) {
+
+	    var marker = new kakao.maps.Marker({
+	        map: map,
+	        position: positions[i].latlng
+	    });
+
+	    var infowindow = new kakao.maps.InfoWindow({
+	        content: positions[i].content,
+	        removable : true
+	    });
+
+	    (function(marker, infowindow) {
+	        kakao.maps.event.addListener(marker, 'click', function() {
+	            infowindow.open(map, marker);
+	        });
+	    })(marker, infowindow);
+	}
 	var marker = new kakao.maps.Marker({
 	position: markerPosition
 	});
@@ -369,6 +398,11 @@
 	    el.className = 'on';
 	} 
 	}
+	function panTo(lat,lonti) {
+	    var moveLatLon = new kakao.maps.LatLng(lat, lonti);
+	    
+	    map.panTo(moveLatLon);            
+	}  
 	</script>
 	<jsp:include page="../footer.jsp"></jsp:include>
 </body>

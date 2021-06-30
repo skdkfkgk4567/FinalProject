@@ -14,6 +14,13 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="assets/js/httpRequest.js"></script>
 <style>
+.footer
+{
+	margin-top: 658px !important;
+}
+.cntext{
+float:left;
+}
 .registtitle{
 text-align:center;
 
@@ -80,6 +87,7 @@ background-image: url('assets/img/goodbt.png');
     -webkit-background-clip: padding-box;
 }
 </style>
+
 </head>
 <body>
 	<!------------------------------------------ 헤더 -------------------------------------------------------------->
@@ -155,7 +163,7 @@ function showResult${dto.bbs_no }()
             <td>
             
             <div class="bsnmreviewdate">
-           	<p>작성일 : ${dto.writngde} | 아이디 : ${dto.id}</p>
+           	<p>작성일 : ${dto.writngde} | 닉네임 : ${dto.ncnm}</p>
             </div>
             <div class="goodandbadbutton">
            <input type="checkbox" name="${dto.bbs_no }" value="${dto.bbs_no }" id="box${dto.bbs_no }" onclick="show${dto.bbs_no }()"><label for="box${dto.bbs_no }">좋아요</label>
@@ -163,7 +171,7 @@ function showResult${dto.bbs_no }()
             <!-- <input type="text" id="${dto.bbs_no }holy" name="holy" value="${dto.likes}" readonly> -->
             </div>
             <div class="goodandbadcotent">
-            <p>${dto.cn}</p>
+            <p class="cntext">${dto.cn}</p>
             
             </div>
             

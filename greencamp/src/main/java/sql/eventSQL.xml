@@ -2,13 +2,51 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="final.camp">
-  <insert id="writeEvent" parameterType="greencamp.event.model.EventDTO">
-  insert into tb_evnt values(seq_evnt_no.nextval,#{ctgry},#{sj},#{cn},#{pc},#{id},1)
-  </insert>
-  
-  <select id="getListEventBsnmSQL" resultType="greencamp.event.model.EventDTO">
-  select * from tb_evnt where id=#{id}
-  
-  </select>
-  </mapper>
+<mapper namespace="final.camp">
+	<insert id="writeEvent"
+		parameterType="greencamp.event.model.EventDTO">
+		insert into tb_evnt
+		values(seq_evnt_no.nextval,#{ctgry},#{sj},#{cn},#{pc},#{id},1)
+	</insert>
+
+	<select id="getListEventBsnmSQL"
+		resultType="greencamp.event.model.EventDTO">
+		select * from tb_evnt where id=#{id}
+	</select>
+
+	<select id="eventList"
+		parameterType="greencamp.event.model.EventDTO"
+		resultType="greencamp.event.model.EventDTO">
+		select * from tb_evnt where ctgry=#{ctgry}
+	</select>
+
+	<select id="eventinfo"
+		parameterType="greencamp.event.model.EventDTO"
+		resultType="greencamp.event.model.EventDTO">
+		select * from tb_evnt where evnt_no=(select max(evnt_no) from tb_evnt)
+	</select>
+	<select id="eventajax"
+		parameterType="greencamp.event.model.EventDTO"
+		resultType="greencamp.event.model.EventDTO">
+		select * from tb_evnt where evnt_no=#{evnt_no}
+	</select>
+	<!-- 이벤트&광고 목록 -->
+	<select id="listEvent" parameterType="Map" resultType="greencamp.event.model.EventDTO">
+		select * from
+		(select rownum as rnum, a.* from
+		(select * from tb_evnt where state=1 order by evnt_no desc)a)b
+		where rnum <![CDATA[>]]>=#{start} and rnum <![CDATA[<]]>=#{end}
+	</select>
+	<!-- 이벤트&광고 승인 -->
+	<update id="recogEvent" parameterType="greencamp.event.model.EventDTO">
+		update tb_evnt set state=2 where evnt_no=#{evnt_no}
+	</update>
+	<!-- 이벤트&광고 반려 -->
+	<delete id="compEvent" parameterType="int">
+		delete from tb_evnt where evnt_no=#{evnt_no}
+	</delete>
+	<!-- 이벤트&광고 총 갯수 -->
+	<select id="eventTotalCnt" resultType="int">
+		select count(*) from tb_evnt where state=1
+	</select>
+</mapper>

@@ -30,4 +30,9 @@ public int deletemsg(int msg_no) {
 	int count = sqlMap.delete("deletemsg", msg_no);
 	return count;
 }
+public int addmsg(MessageDTO MessageDto) {
+	int count = sqlMap.insert("addmsg", MessageDto);
+	return count;
+}
+
 }

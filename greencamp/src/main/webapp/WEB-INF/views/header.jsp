@@ -50,7 +50,7 @@ body {
 		<div class="container d-flex">
 			<div class="contact-info mr-auto"></div>
 			<div class="social-links">
-				<a href="index.pi" class="home">HOME</a> <a href="notice.pi?ctgry=공지사항" class="notice">공지사항</a>
+				<a href="index.pi" class="home">HOME</a> <a href="bbs.pi?type=1" class="notice">공지사항</a>
 				<c:set var="user_ncnm" value="${sessionScope.user_ncnm}"></c:set>
 				<c:choose>
 					<c:when test="${empty user_ncnm}">
@@ -63,10 +63,7 @@ body {
 					
 					</c:otherwise>
 				</c:choose>
-				
-				
-				
-				<a href="#" class="contact">고객센터</a>
+				<a href="bbs.pi?type=1" class="contact">고객센터</a>
 			</div>
 		</div>
 	</div>
@@ -86,6 +83,7 @@ body {
 					<li><a href="goods.pi">중고거래</a></li>
           					<li><a href="listCampInfo.pi?ctgry=캠핑팁">캠핑정보</a></li>
           					<li><a href="camptalk.pi?ctgry=가입인사">캠핑톡</a></li>
+          					<li><a href="event.pi?type=1">이벤트 및 광고</a></li>
 				</ul>
 			</nav>
 		</div>

@@ -4,6 +4,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +17,7 @@ import greencamp.camp.model.CampDTO;
 import greencamp.like.model.LikeDAO;
 import greencamp.like.model.LikeDTO;
 import greencamp.review.model.ReviewDAO;
+import greencamp.review.model.ReviewDTO;
 
 @Controller
 public class BsnmReviewController {
@@ -24,11 +28,14 @@ public class BsnmReviewController {
 	private LikeDAO LikeDao;
 	
 	@RequestMapping("listReviewBsnm.pi")
-	public ModelAndView getListReviewBsnm() {
-		String id = "Bresiten";
-		List list = ReviewDao.getListReviewBsnmService(id);
-		List<LikeDTO> listnum = ReviewDao.getlikebbsnumber(id);
-		
+	public ModelAndView getListReviewBsnm(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+
+		String user_id = (String) session.getAttribute("user_id");
+		String user_ncnm = (String) session.getAttribute("user_ncnm");
+		String user_nm = (String) session.getAttribute("user_nm");
+		List<ReviewDTO> list = ReviewDao.getListReviewBsnmService(user_ncnm);
+		List<LikeDTO> listnum = ReviewDao.getlikebbsnumber(user_ncnm);
 		for(int i=0; i<listnum.size();i++) {
 			int like_no=listnum.get(i).getLike_no();
 			System.out.println(like_no);
@@ -43,23 +50,24 @@ public class BsnmReviewController {
 	}
 	
 	@RequestMapping("likeclick.pi")
-	public ModelAndView likesup(String bbs_no,LikeDTO LikeDto) {
-		String id = "Bresiten";
+	public ModelAndView likesup(String bbs_no,LikeDTO LikeDto,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String user_ncnm = (String) session.getAttribute("user_ncnm");
 		int check = Integer.parseInt(bbs_no);
 		int result = ReviewDao.likesup(check);
-		LikeDto.setLike_id(id);
+		LikeDto.setLike_ncnm(user_ncnm);
 		LikeDto.setLike_no(check);
 		int insertliketable = LikeDao.insertlikeuser(LikeDto);
 		int showlikes =ReviewDao.showlikesnumber(check);
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mav= new ModelAndView();
+		
 		mav.setViewName("bsnm/reviewBsnm/reviewMsg");
 		mav.addObject("msg", showlikes);
 		return mav;
 	}
 	
 	@RequestMapping("likenoclick.pi")
-	public ModelAndView likesdown(String bbs_no) {
-		String id = "Bresiten";
+	public ModelAndView likesdown(String bbs_no,HttpServletRequest request) {
 		int check = Integer.parseInt(bbs_no);
 		int result = ReviewDao.likesdown(check);
 		int deleteliketable = LikeDao.deletelikeuser(check);

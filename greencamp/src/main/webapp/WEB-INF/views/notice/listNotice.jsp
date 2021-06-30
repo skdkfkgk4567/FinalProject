@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,9 +12,9 @@
 <link type="text/css" href="assets/css/goods.css" rel="stylesheet">
 <script src="assets/js/httpRequest.js"></script>
 <script>
-function show(delng_no,delngtp){
+function show(bbs_no,ctgry){
 	var params;
-	params = 'bbs_no='+delng_no+'&ctgry='+delngtp;
+	params = 'bbs_no='+bbs_no+'&ctgry='+ctgry;
 	sendXHR('bbsajax.pi',params,showResult,'GET');
 }
 
@@ -34,34 +35,26 @@ function showResult(){   //응답 역할의 함수
 <div class="goodscontent">
 	<div class="goodstype" align="center"><!-- 버튼이 들어가는 자리 -->
 		<ul class="goodsemenu">
-			<li><a href="bbs.pi?ctgry=공지사항"><img src="assets/img/list.png" alt="공지사항" width="40px" height="40px"></a></li>
-			<li><a href="bbs.pi?ctgry=이용안내"><img src="assets/img/구매흰.png" alt="이용안내" width="40px" height="40px"></a></li>
-			<li><a href="bbs.pi?ctgry=질문"><img src="assets/img/판매 색.png" alt="자주묻는 질문" width="40px" height="40px"></a></li>
-			<li><a href="bbs.pi?ctgry=이벤트"><img src="assets/img/판매 색.png" alt="이벤트" width="40px" height="40px"></a></li>
+			<li><a href="bbs.pi?type=1"><img src="assets/img/공지사항.png" alt="공지사항" width="40px" height="40px"></a></li>
+			<li><a href="bbs.pi?type=2"><img src="assets/img/이용안내.png" alt="이용안내" width="40px" height="40px"></a></li>
+			<li><a href="bbs.pi?type=3"><img src="assets/img/QnA.png" alt="자주묻는질문" width="40px" height="40px"></a></li>
+			<li><a href="event.pi"><img src="assets/img/이벤트.png" alt="이벤트" width="40px" height="40px"></a></li>
 		</ul>
 	</div>
 	
 	
-	<div class="goodslist"><!-- 리스트가 들어가는 자리 -->
-		<div class="goodswrite">
-			<span class="sort">등록순</span>
-			<span class="sort">조회순</span>
-			<span class="sort">댓글순</span>
-		</div>
+	<div class="goodslist"><!-- 중고거래 리스트가 들어가는 자리 -->
 		<div class="goodscard" id="goodscard">
 			<div class="row row-cols-1 row-cols-md-2 g-4">
-				<c:forEach var="ndto" items="${list}">
-					<div class="col" onclick="show(${ndto.bbs_no},'${ndto.ctgry}')">
+				<c:forEach var="bdto" items="${list}">
+					<div class="col" onclick="show(${bdto.bbs_no},'${bdto.ctgry}')">
 						<div class="card h-90">
-						<c:url var="contentUrl" value="goods.pi">
-							<c:param name="delng_no">${ndto.bbs_no}</c:param>
-						</c:url>
 							<div class="card-body">
-								<h5 class="card-title">${ndto.sj}</h5>
-								<p class="card-text">${ndto.cn}</p>
+								<h5 class="card-title"style="text-align: left;">${bdto.sj}</h5>
+								<p class="card-text"style="text-align: left;">${bdto.cn}</p>
 							</div>
 							<div class="card-footer">
-								<small class="text-muted">${ndto.writngde}</small>
+								<small class="text-muted"><fmt:formatDate pattern="yy-MM-dd" value="${bdto.writngde}"/></small>
 							</div>
 						</div>
 					</div>
@@ -87,9 +80,7 @@ function showResult(){   //응답 역할의 함수
 									${infodto.ncnm}
 								</label>
 								<div class="msg">
-									<form name="addmsgfm" action="addmsg.pi" method="post">
-										<input type="hidden" name="rcver_id" value="comk">
-										<input type="hidden" name="sender_id" value="${infodto.ncnm}">
+									<form name="addmsgfm" action="bbsmsg.pi" method="post">
 										<div>
 											<h2 align="center">메세지 보내기</h2>
 										</div>
@@ -97,13 +88,23 @@ function showResult(){   //응답 역할의 함수
 										<div>
 											<table class="addmsgtable addmsgtable-sm">
 												<tr>
-													<th>보내는 이 : 닉네임</th>
+													<th>
+														<div class="form-floating">
+														  <input type="text" class="form-control" name="rcver_id" id="floatingPassword" placeholder="보내는 이" value="comk" readonly required>
+														  <label for="floatingPassword">보내는 이</label>
+														</div>
+													</th>
 												</tr>
 												<tr>
-													<th>받는 이 : ${infodto.ncnm}</th>
+													<th>
+														<div class="form-floating">
+														  <input type="text" class="form-control" name="sender_id" id="floatingPassword" placeholder="받는 이" value="${infodto.ncnm}" readonly required>
+														  <label for="floatingPassword">받는 이</label>
+														</div>
+													</th>
 												</tr>
 												<tr>
-													<td colspan="2" align="center"><textarea rows="10" cols="70" name="cn"></textarea></td>
+													<td colspan="2" align="center"><textarea rows="10" cols="70" name="cn" wrap="hard" required></textarea></td>
 												</tr>
 											</table>
 										</div>
@@ -116,33 +117,37 @@ function showResult(){   //응답 역할의 함수
 								<label for="btn_addmsg" class="addmsgbackground"></label>
 							</div>
 						</li>
-						<li>등록일</li>
-						<li>댓글</li>
-						<li>조회수  ${infodto.rdcnt}</li>
+						<li>작성일 : <fmt:formatDate pattern="yy-MM-dd" value="${infodto.writngde}"/></li>
 					</ul>
 					<div class="goodsinfo_update_btn" align="right">
-						<span><a href="Report.pi?ctgry=${infodto.ctgry}&ctgry_no=${infodto.info_no}">신고</a></span>
+						<span>
+						<a href="noticeReport.pi?ctgry=${infodto.ctgry}&ctgry_no=${infodto.bbs_no}">신고</a>
+						</span> 
+						
 					</div>
 				</div>
 				<hr>
 			</div>
+			<c:if test="${null ne infodto.videosrc}">
+				<div align="center">${infodto.videosrc}</div>
+			</c:if>
 			<div class="goodsinfo_content">${infodto.cn}</div>
 				<div class="goodsinfo_comment">
 					<div>댓글쓰기</div>
-					<form name="goods_comment_fm" action="goods_comment.pi?ctgry=${infodto.ctgry}&ctgry_no=${infodto.bbs_no}" method="post">
+					<form name="goods_comment_fm" action="notice_comment.pi?ctgry=${infodto.ctgry}&ctgry_no=${infodto.bbs_no}" method="post">
 						<div align="center">
-							<textarea id="goods_comment" rows="5" cols="100" name="cn" 
-							style="background-color: #ede7f6; width: 100%; display:inline;"></textarea>
-							<input type="submit" class="subcomment" value="등록" style="margin-left: -20px;">
+							<textarea id="goods_comment" rows="5" cols="100" name="cn" wrap="hard"
+							style="background-color: #ede7f6; width: 100%; display:inline;" required></textarea>
+							<input type="submit" class="subcomment" value="등록">
 						</div>
 					</form>
 					<c:forEach var="cdto" items="${clist}">
 					<div class="card border-info" style="width: 100%; background-color: #AFFFEE">
   						<div class="card-body text-primary">
 						    <h6 class="card-subtitle mb-2 text-muted">${cdto.ncnm}</h6>
-								<p class="card-text">&nbsp;&nbsp;${cdto.cn}</p>
-								<a href="delComment.pi?cm_no=${cdto.cm_no}" class="card-link">삭제</a>
-								<a href="Report.pi?ctgry=댓글&ctgry_no=${cdto.cm_no}" class="card-link">신고</a>
+						    <p class="card-text">&nbsp;&nbsp;${cdto.cn}</p>
+						    <a href="noticedelComment.pi?cm_no=${cdto.cm_no}" class="card-link">삭제</a>
+						    <a href="noticeReport.pi?ctgry=댓글&ctgry_no=${cdto.cm_no}" class="card-link">신고</a>
 						</div>
 					</div>
 					</c:forEach>

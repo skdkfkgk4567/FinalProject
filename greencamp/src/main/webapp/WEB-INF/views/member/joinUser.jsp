@@ -118,7 +118,7 @@ body {
 							for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
 					</div>
 					<div class="mb-4"></div>
-					<input type="hidden" value="1" name="grade"> <input
+					<input type="hidden" value="3" name="grade"> <input
 						type="hidden" value="0" name="bizrno">
 					<input type="submit" value="회원가입" class="joinbtn btn-primary btn-lg btn-block">
 				</form>

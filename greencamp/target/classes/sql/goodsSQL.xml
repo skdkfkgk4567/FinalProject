@@ -51,4 +51,27 @@
 	<select id="goodsinfotypeindex" parameterType="greencamp.goods.model.GoodsDTO" resultType="greencamp.goods.model.GoodsDTO">
 		select * from tb_delng where delng_no=(select max(delng_no) from tb_delng where delngtp=#{delngtp})
 	</select>
+	<!-- 조회수 -->
+	<update id="goodsRdcnt" parameterType="greencamp.goods.model.GoodsDTO">
+		update tb_delng set rdcnt=#{rdcnt} where delng_no=#{delng_no}
+	</update>
+	<!-- 판매완료 -->
+	<update id="goodssttus" parameterType="greencamp.goods.model.GoodsDTO">
+		update tb_delng set sttus='판매완료' where delng_no=#{delng_no}
+	</update>
+	<!-- 중고거래 게시글 목록 -->
+	<select id="listGoodsPost" parameterType="Map" resultType="greencamp.goods.model.GoodsDTO">
+		select * from
+		(select rownum as rnum, a.* from
+		(select * from tb_delng where delngtp='팝니다' or delngtp='삽니다' order by delng_no desc)a)b
+		where rnum <![CDATA[>]]>=#{start} and rnum <![CDATA[<]]>=#{end}
+	</select>
+	<!-- 중고거래 게시글 삭제 -->
+	<delete id="deleteGoodsPost" parameterType="int">
+		delete from tb_delng where delng_no=#{delng_no}
+	</delete>
+	<!-- 중고거래 게시글 총 갯수 -->
+	<select id="goodsPostTotalCnt" resultType="int">
+		select count(*) from tb_delng where delngtp='팝니다' or delngtp='삽니다'
+	</select>
 </mapper>

@@ -2,6 +2,9 @@ package greencamp.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,18 +21,30 @@ public class BsnmMyPageController {
 	private MemberDAO MemberDao;
 	
 	@RequestMapping("listMemberBsnm.pi")
-	public ModelAndView getListMemberBsnm() {
-		String id="lws5760";
-		List list = MemberDao.getListMemberBsnm(id);
+	public ModelAndView getListMemberBsnm(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+
+		String user_id = (String) session.getAttribute("user_id");
+		String user_ncnm = (String) session.getAttribute("user_ncnm");
+		String user_nm = (String) session.getAttribute("user_nm");
+	
+		List list = MemberDao.getListMember(user_id);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("bsnm/memberBsnm/listMemberBsnm");
 		mav.addObject("list",list);
 		return mav;
 	}
 	@RequestMapping("updateMemberBsnm.pi")
-	public ModelAndView updateMemberBsnm() {
-		String id="lws5760";
-		List list = MemberDao.getListMemberBsnm(id);
+	public ModelAndView updateMemberBsnm(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+
+		String user_id = (String) session.getAttribute("user_id");
+		String user_ncnm = (String) session.getAttribute("user_ncnm");
+		String user_nm = (String) session.getAttribute("user_nm");
+		
+		List list = MemberDao.getListMember(user_id);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("bsnm/memberBsnm/updateMemberBsnm");
 		mav.addObject("list",list);
@@ -41,18 +56,48 @@ public class BsnmMyPageController {
 			String nm,String email,String ncnm,String telno,String bizrno){
 		String msg="";
 		if(nm.equals("")|| email.equals("") || ncnm.equals("") || telno.equals("") || bizrno.equals("")) {
-			msg="ºó Ä­À» ÀÔ·ÂÇØÁÖ¼¼¿ä.";
+			msg="ë¹ˆ ì¹¸ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.";
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/memberBsnm/memberMsg");
 			mav.addObject("msg", msg);
 			return mav;
 		}
 		int result = MemberDao.updateMemberBsnm(MemberDto);
-		msg = result>0?"¼öÁ¤¼º°ø":"¼öÁ¤½ÇÆĞ";
+		msg = result>0?"ìˆ˜ì •ì„±ê³µ":"ìˆ˜ì •ì‹¤íŒ¨";
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("bsnm/memberBsnm/memberMsg");
 		mav.addObject("msg", msg);
 		return mav;
+	}
+	@RequestMapping("bsnmmypageoutmember.pi")
+	public ModelAndView bsnmmypageoutmember() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("bsnm/memberBsnm/bsnmmemberout");
+		
+		return mav;
+		
+	}
+	
+	@RequestMapping("bsnmmemberout.pi")
+	public ModelAndView bsnmmemberout(HttpServletRequest request,MemberDTO MemberDto,String id,String password) {
+		String msg="";
+		if(id.equals("") || password.equals("")) {
+			msg="ë¹ˆ ì¹¸ì„ í™•ì¸í•´ì£¼ì„¸ìš”";
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("bsnm/memberBsnm/memberMsg");
+			mav.addObject("msg", msg);
+			return mav;
+		}
+		int result = MemberDao.memberout(MemberDto);
+		msg = result>0?"íšŒì›íƒˆí‡´ì„±ê³µ":"íšŒì›íƒˆí‡´ì‹¤íŒ¨";
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("bsnm/memberBsnm/memberMsg");
+		mav.addObject("msg", msg);
+		HttpSession session = request.getSession();
+	      session.invalidate();
+	        	
+		return mav;
+		
 	}
 
 }

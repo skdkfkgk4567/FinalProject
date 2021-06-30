@@ -15,6 +15,7 @@ public interface GoodsService {
 	public List goodsajax(GoodsDTO dto);//중고거래 클릭 상세보기
 	public int goodsUp(GoodsDTO dto);//중고거래 게시글 수정하기
 	public int goodsDel(GoodsDTO dto);//중고거래 게시글 삭제
+	public int goodssttus(GoodsDTO dto);//거래완료
 	public int getTotalCnt();
 	
 }

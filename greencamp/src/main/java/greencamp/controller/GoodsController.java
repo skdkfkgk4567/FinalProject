@@ -117,4 +117,16 @@ public class GoodsController {
 		mav.setViewName("goods/goodsMsg");
 		return mav;
 	}
+	@RequestMapping("goodssttus.pi")
+	public ModelAndView goodssttus(GoodsDTO dto) {
+		int result=goodsService.goodssttus(dto);
+		String msg=result>0?"거래완료":"거래중단";
+		String gopage="goods.pi";
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.addObject("gopage", gopage);
+		mav.setViewName("goods/goodsMsg");
+		return mav;
+	}
 }

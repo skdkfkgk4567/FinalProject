@@ -3,6 +3,9 @@ package greencamp.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,9 +23,16 @@ public class BsnmCampController {
 	private CampDAO CampDao;
 	
 	@RequestMapping("/listCampBsnm.pi")
-	public ModelAndView getListCampBsnm() {
-		String id ="lws5760";
-		List list = CampDao.bsnmcampList(id);
+	public ModelAndView getListCampBsnm(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+
+		String user_id = (String) session.getAttribute("user_id");
+		String user_ncnm = (String) session.getAttribute("user_ncnm");
+		String user_nm = (String) session.getAttribute("user_nm");
+		
+		System.out.println(user_id);
+		List list = CampDao.bsnmcampList(user_id);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("bsnm/bsnmcamp/listCampBsnm");
@@ -37,10 +47,14 @@ public class BsnmCampController {
 		
 	}
 	@RequestMapping("updateCampBsnm.pi")
-	public ModelAndView updateCampBsnm() {
-		String id="lws5760";
+	public ModelAndView updateCampBsnm(HttpServletRequest request) {
 		
-		List<CampDTO> list = CampDao.campupdateinfo(id);
+		
+		HttpSession session = request.getSession();
+
+		String user_id = (String) session.getAttribute("user_id");
+		
+		List<CampDTO> list = CampDao.campupdateinfo(user_id);
 		String cvntl[] = list.get(0).getCvntl().split("\\+");
 		String camp_type[] = list.get(0).getCamp_type().split("\\+");
 		String sffc[] = list.get(0).getSffc().split("\\+");
@@ -62,7 +76,7 @@ public class BsnmCampController {
 		
 	}
 	@RequestMapping("addregistCampBsnm.pi")
-	public ModelAndView registCampBsnm(CampDTO CampDto,String camp_nm,
+	public ModelAndView registCampBsnm(HttpServletRequest request,CampDTO CampDto,String camp_nm,
 			String addr,String camp_telno,String bizrno,
 			String camp_type,String camp_surround,String camp_theme,
 			String camp_ground,String sffc,String cvntl,String checkin,String checkout) {
@@ -71,84 +85,84 @@ public class BsnmCampController {
 		if(camp_nm.equals("")) {
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/bsnmcamp/campMsg");
-			msg="Ä·ÇÎÀåÀÌ¸§À» ÀÔ·ÂÇØÁÖ¼¼¿ä.";
+			msg="ìº í•‘ìž¥ì´ë¦„ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”.";
 			mav.addObject("msg", msg);
 			return mav;
 		}
 		if(addr.equals("")) {
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/bsnmcamp/campMsg");
-			msg="Ä·ÇÎÀåÁÖ¼ÒÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.";
+			msg="ìº í•‘ìž¥ì£¼ì†Œì„ ìž…ë ¥í•´ì£¼ì„¸ìš”.";
 			mav.addObject("msg", msg);
 			return mav;
 		}
 		if(camp_telno.equals("")) {
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/bsnmcamp/campMsg");
-			msg="Ä·ÇÎÀåÀüÈ­¹øÈ£À» ÀÔ·ÂÇØÁÖ¼¼¿ä.";
+			msg="ìº í•‘ìž¥ì „í™”ë²ˆí˜¸ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”.";
 			mav.addObject("msg", msg);
 			return mav;
 		}
 		if(bizrno.equals("")) {
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/bsnmcamp/campMsg");
-			msg="»ç¾÷ÀÚ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.";
+			msg="ì‚¬ì—…ìžë²ˆí˜¸ë¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš”.";
 			mav.addObject("msg", msg);
 			return mav;
 		}
 		if(checkin=="" || checkin.equals("")) {
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/bsnmcamp/campMsg");
-			msg="Ã¼Å©ÀÎÀ» ¼³Á¤ÇØÁÖ¼¼¿ä.";
+			msg="ì²´í¬ì¸ì„ ì„¤ì •í•´ì£¼ì„¸ìš”.";
 			mav.addObject("msg", msg);
 			return mav;
 		}
 		if(checkout=="" || checkout.equals("")) {
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/bsnmcamp/campMsg");
-			msg="Ã¼Å©¾Æ¿ôÀ» ¼³Á¤ÇØÁÖ¼¼¿ä.";
+			msg="ì²´í¬ì•„ì›ƒì„ ì„¤ì •í•´ì£¼ì„¸ìš”.";
 			mav.addObject("msg", msg);
 			return mav;
 		}
 		if(camp_type=="" || camp_type.equals("")) {
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/bsnmcamp/campMsg");
-			msg="Ä·ÇÁÁ¾·ù¸¦ Ã¼Å©ÇØÁÖ¼¼¿ä.";
+			msg="ìº í”„ì¢…ë¥˜ë¥¼ ì²´í¬í•´ì£¼ì„¸ìš”.";
 			mav.addObject("msg", msg);
 			return mav;
 		}
 		if(camp_surround=="" || camp_surround.equals("")) {
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/bsnmcamp/campMsg");
-			msg="ÀÚ¿¬È¯°æÀ» Ã¼Å©ÇØÁÖ¼¼¿ä.";
+			msg="ìžì—°í™˜ê²½ì„ ì²´í¬í•´ì£¼ì„¸ìš”.";
 			mav.addObject("msg", msg);
 			return mav;
 		}
 		if(camp_theme=="" || camp_theme.equals("")) {
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/bsnmcamp/campMsg");
-			msg="Ä·ÇÎÅ×¸¶¸¦ Ã¼Å©ÇØÁÖ¼¼¿ä.";
+			msg="ìº í•‘í…Œë§ˆë¥¼ ì²´í¬í•´ì£¼ì„¸ìš”.";
 			mav.addObject("msg", msg);
 			return mav;
 		}
 		if(camp_ground=="" || camp_ground.equals("")) {
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/bsnmcamp/campMsg");
-			msg="¹Ù´ÚÁ¾·ù¸¦ Ã¼Å©ÇØÁÖ¼¼¿ä.";
+			msg="ë°”ë‹¥ì¢…ë¥˜ë¥¼ ì²´í¬í•´ì£¼ì„¸ìš”.";
 			mav.addObject("msg", msg);
 			return mav;
 		}
 		if(sffc=="" || sffc.equals("")) {
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/bsnmcamp/campMsg");
-			msg="¾ÈÀü½Ã¼³À» Ã¼Å©ÇØÁÖ¼¼¿ä.";
+			msg="ì•ˆì „ì‹œì„¤ì„ ì²´í¬í•´ì£¼ì„¸ìš”.";
 			mav.addObject("msg", msg);
 			return mav;
 		}
 		if(cvntl=="" || cvntl.equals("")) {
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/bsnmcamp/campMsg");
-			msg="ÆíÀÇ½Ã¼³À» Ã¼Å©ÇØÁÖ¼¼¿ä.";
+			msg="íŽ¸ì˜ì‹œì„¤ì„ ì²´í¬í•´ì£¼ì„¸ìš”.";
 			mav.addObject("msg", msg);
 			return mav;
 		}
@@ -160,17 +174,21 @@ public class BsnmCampController {
 		CampDto.setCamp_theme(camp_theme.replaceAll(" ","+").substring(0,camp_theme.length()-1));
 		CampDto.setCamp_ground(camp_ground.replaceAll(" ","+").substring(0,camp_ground.length()-1));
 		CampDto.setSffc(sffc.replaceAll(" ","+").substring(0,sffc.length()-1));
-		CampDto.setCvntl(cvntl.replaceAll(" ","+").substring(0,cvntl.length()-1));
 		
+		CampDto.setCvntl(cvntl.replaceAll(" ","+").substring(0,cvntl.length()-1));
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
+		CampDto.setId(user_id);
+		System.out.println(user_id);
 		
 		
 		
 		int result = CampDao.addRegistCampBsnm(CampDto);
 		if(result>0) {
-			msg="µî·Ï¼º°ø";
+			msg="ë“±ë¡ì„±ê³µ";
 			
 		}else {
-			msg="µî·Ï½ÇÆÐ";
+			msg="ë“±ë¡ì‹¤íŒ¨";
 			
 		}
 		ModelAndView mav = new ModelAndView();
@@ -191,84 +209,84 @@ public class BsnmCampController {
 		if(camp_nm.equals("")) {
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/bsnmcamp/campMsg");
-			msg="Ä·ÇÎÀåÀÌ¸§À» ÀÔ·ÂÇØÁÖ¼¼¿ä.";
+			msg="ìº í•‘ìž¥ì´ë¦„ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”.";
 			mav.addObject("msg", msg);
 			return mav;
 		}
 		if(addr.equals("")) {
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/bsnmcamp/campMsg");
-			msg="Ä·ÇÎÀåÁÖ¼ÒÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.";
+			msg="ìº í•‘ìž¥ì£¼ì†Œì„ ìž…ë ¥í•´ì£¼ì„¸ìš”.";
 			mav.addObject("msg", msg);
 			return mav;
 		}
 		if(camp_telno.equals("")) {
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/bsnmcamp/campMsg");
-			msg="Ä·ÇÎÀåÀüÈ­¹øÈ£À» ÀÔ·ÂÇØÁÖ¼¼¿ä.";
+			msg="ìº í•‘ìž¥ì „í™”ë²ˆí˜¸ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”.";
 			mav.addObject("msg", msg);
 			return mav;
 		}
 		if(bizrno.equals("")) {
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/bsnmcamp/campMsg");
-			msg="»ç¾÷ÀÚ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.";
+			msg="ì‚¬ì—…ìžë²ˆí˜¸ë¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš”.";
 			mav.addObject("msg", msg);
 			return mav;
 		}
 		if(checkin=="" || checkin.equals("")) {
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/bsnmcamp/campMsg");
-			msg="Ã¼Å©ÀÎÀ» ¼³Á¤ÇØÁÖ¼¼¿ä.";
+			msg="ì²´í¬ì¸ì„ ì„¤ì •í•´ì£¼ì„¸ìš”.";
 			mav.addObject("msg", msg);
 			return mav;
 		}
 		if(checkout=="" || checkout.equals("")) {
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/bsnmcamp/campMsg");
-			msg="Ã¼Å©¾Æ¿ôÀ» ¼³Á¤ÇØÁÖ¼¼¿ä.";
+			msg="ì²´í¬ì•„ì›ƒì„ ì„¤ì •í•´ì£¼ì„¸ìš”.";
 			mav.addObject("msg", msg);
 			return mav;
 		}
 		if(camp_type=="" || camp_type.equals("")) {
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/bsnmcamp/campMsg");
-			msg="Ä·ÇÁÁ¾·ù¸¦ Ã¼Å©ÇØÁÖ¼¼¿ä.";
+			msg="ìº í”„ì¢…ë¥˜ë¥¼ ì²´í¬í•´ì£¼ì„¸ìš”.";
 			mav.addObject("msg", msg);
 			return mav;
 		}
 		if(camp_surround=="" || camp_surround.equals("")) {
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/bsnmcamp/campMsg");
-			msg="ÀÚ¿¬È¯°æÀ» Ã¼Å©ÇØÁÖ¼¼¿ä.";
+			msg="ìžì—°í™˜ê²½ì„ ì²´í¬í•´ì£¼ì„¸ìš”.";
 			mav.addObject("msg", msg);
 			return mav;
 		}
 		if(camp_theme=="" || camp_theme.equals("")) {
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/bsnmcamp/campMsg");
-			msg="Ä·ÇÎÅ×¸¶¸¦ Ã¼Å©ÇØÁÖ¼¼¿ä.";
+			msg="ìº í•‘í…Œë§ˆë¥¼ ì²´í¬í•´ì£¼ì„¸ìš”.";
 			mav.addObject("msg", msg);
 			return mav;
 		}
 		if(camp_ground=="" || camp_ground.equals("")) {
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/bsnmcamp/campMsg");
-			msg="¹Ù´ÚÁ¾·ù¸¦ Ã¼Å©ÇØÁÖ¼¼¿ä.";
+			msg="ë°”ë‹¥ì¢…ë¥˜ë¥¼ ì²´í¬í•´ì£¼ì„¸ìš”.";
 			mav.addObject("msg", msg);
 			return mav;
 		}
 		if(sffc=="" || sffc.equals("")) {
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/bsnmcamp/campMsg");
-			msg="¾ÈÀü½Ã¼³À» Ã¼Å©ÇØÁÖ¼¼¿ä.";
+			msg="ì•ˆì „ì‹œì„¤ì„ ì²´í¬í•´ì£¼ì„¸ìš”.";
 			mav.addObject("msg", msg);
 			return mav;
 		}
 		if(cvntl=="" || cvntl.equals("")) {
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/bsnmcamp/campMsg");
-			msg="ÆíÀÇ½Ã¼³À» Ã¼Å©ÇØÁÖ¼¼¿ä.";
+			msg="íŽ¸ì˜ì‹œì„¤ì„ ì²´í¬í•´ì£¼ì„¸ìš”.";
 			mav.addObject("msg", msg);
 			return mav;
 		}
@@ -284,7 +302,7 @@ public class BsnmCampController {
 	
 														
 		int result = CampDao.updateInsertBsnm(CampDto);
-		msg=result>0?"¼º°ø":"½ÇÆÐ";
+		msg=result>0?"ì„±ê³µ":"ì‹¤íŒ¨";
 		gourl="listCampBsnm.pi";
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("bsnm/bsnmcamp/campMsg");
@@ -300,7 +318,7 @@ public class BsnmCampController {
 		String msg="";
 		
 		int result = CampDao.deletecampBsnm(camp_no);
-		msg=result>0?"¼º°ø":"½ÇÆÐ";
+		msg=result>0?"ì„±ê³µ":"ì‹¤íŒ¨";
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("bsnm/bsnmcamp/campMsg");
 		mav.addObject("msg",msg);
@@ -309,11 +327,16 @@ public class BsnmCampController {
 	}
 	
 	@RequestMapping("detailcampinfobsnm.pi")
-	public ModelAndView detailcampinfo() {
-		String id="lws5760";
+	public ModelAndView detailcampinfo(HttpServletRequest request) {
+	
 		
+		HttpSession session = request.getSession();
+
+		String user_id = (String) session.getAttribute("user_id");
+		String user_ncnm = (String) session.getAttribute("user_ncnm");
+		String user_nm = (String) session.getAttribute("user_nm");
 		
-		List<CampDTO> list = CampDao.campupdateinfo(id);
+		List<CampDTO> list = CampDao.campupdateinfo(user_id);
 		String cvntl[] = list.get(0).getCvntl().split("\\+");
 		String camp_type[] = list.get(0).getCamp_type().split("\\+");
 		String sffc[] = list.get(0).getSffc().split("\\+");

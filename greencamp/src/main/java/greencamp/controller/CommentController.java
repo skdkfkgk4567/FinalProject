@@ -1,5 +1,10 @@
 package greencamp.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +49,38 @@ public class CommentController {
 		mav.addObject("gopage", gopage);
 		mav.addObject("msg", msg);
 		mav.setViewName("goods/goodsMsg");
+		return mav;
+	}
+	
+	@RequestMapping("mypagereplylist.pi")
+	public ModelAndView mypagereplylist(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+
+		String user_id = (String) session.getAttribute("user_id");
+		String user_ncnm = (String) session.getAttribute("user_ncnm");
+		String user_nm = (String) session.getAttribute("user_nm");
+		
+		List list = commentService.getcommentlist(user_ncnm);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("notice/mypagereplylist");
+		mav.addObject("list", list);
+		return mav;
+		
+	}
+	
+	
+
+	
+	@RequestMapping("deletecomment.pi")
+	public ModelAndView deletecomment(CommentDTO dto) {
+		String msg = "";
+		int result=commentService.delComment(dto);
+		msg = result>0?"삭제성공":"삭제실패";
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("notice/noticmsg");
+		mav.addObject("msg", msg);
 		return mav;
 	}
 }

@@ -2,22 +2,38 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="final.camp">
-  <insert id="checksendid" parameterType="greencamp.message.model.MessageDTO">
-  insert into tb_mssage values(#{rcver_id},'lws5760',#{cn},sysdate,seq_msg_no.nextval)
-  </insert>
-  
-  <select id="getListReceptionMsgSQL" parameterType="String" resultType="greencamp.message.model.MessageDTO">
-  select * from tb_mssage where rcver_id=#{id} order by senddate desc
-  </select>
-  
-   <select id="getListsendMsgSQL" parameterType="String" resultType="greencamp.message.model.MessageDTO">
-  select * from tb_mssage where sender_id=#{id} order by senddate desc
-  </select>
- 
- <delete id="deletemsg" parameterType="int">
- delete from tb_mssage where msg_no=#{msg_no}
- </delete>
- 
- 
-  </mapper>
+<mapper namespace="final.camp">
+	<insert id="checksendid"
+		parameterType="greencamp.message.model.MessageDTO">
+		insert into tb_mssage
+		values(#{rcver_id},#{sender_id},#{cn},sysdate,seq_msg_no.nextval)
+	</insert>
+
+	<select id="getListReceptionMsgSQL" parameterType="String"
+		resultType="greencamp.message.model.MessageVO">
+		select rownum,x.* from(select * from tb_mssage where rcver_id=#{rcver_id}
+		order by senddate desc)x
+	</select>
+
+	<select id="getListsendMsgSQL" parameterType="String"
+		resultType="greencamp.message.model.MessageVO">
+		select rownum,x.* from (select * from tb_mssage where sender_id=#{user_id}
+		order by senddate desc)x
+	</select>
+
+	<delete id="deletemsg" parameterType="int">
+		delete from tb_mssage where msg_no=#{msg_no}
+	</delete>
+
+	<select id="getmypageListsendMsgSQL" parameterType="String"
+		resultType="greencamp.message.model.MessageVO">
+		select rownum,x.* from (select * from tb_mssage where sender_id=#{user_id}
+		order by senddate desc)x
+	</select>
+	<insert id="addmsg"
+		parameterType="greencamp.message.model.MessageDTO">
+		insert into tb_mssage
+		values(#{rcver_id},#{sender_id},#{cn},sysdate,seq_msg_no.nextval)
+	</insert>
+
+</mapper>

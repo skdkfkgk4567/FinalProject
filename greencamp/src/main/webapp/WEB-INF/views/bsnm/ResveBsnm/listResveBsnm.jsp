@@ -11,6 +11,12 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="assets/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="assets/js/common.js"></script>
+<style type="text/css">
+.footer
+{
+	margin-top: 658px !important;
+}
+</style>
 <script>
    var today = new Date();     
    var date = new Date();

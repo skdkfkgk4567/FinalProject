@@ -18,7 +18,7 @@
 						<li><a href='listReceptionMsg.pi'><span>수신함</span></a></li>
 						<li><a href='listSendMsg.pi'><span>발신함</span></a></li>
 						<li><a href='sendMsg.pi'><span>쪽지쓰기</span></a></li>
-						<li><a href='#'><span>회원탈퇴</span></a></li>
+						<li><a href='bsnmmypageoutmember.pi'><span>회원탈퇴</span></a></li>
 					</ul></li>
 			</ul>
 		</div>

@@ -19,25 +19,35 @@ public class CommentServiceImple implements CommentService {
 		int count=commentDao.addGoodsComment(dto);
 		return count;
 	}
-	
+
+	@Override
 	public List listComment(CommentDTO cdto) {
 		List clist=commentDao.listComment(cdto);
 		return clist;
 	}
-	
+
+	@Override
 	public int delGoodsComment(CommentDTO cdto) {
 		int count=commentDao.delGoodsComment(cdto);
 		return count;
 	}
-	
+
+	@Override
 	public int delComment(CommentDTO dto) {
 		int count=commentDao.delComment(dto);
 		return count;
 	}
-	
+
+	@Override
 	public int countComment(CommentDTO cdto) {
 		int count=commentDao.countComment(cdto);
 		return count;
 	}
 
+	@Override
+	public List<CommentDTO> getcommentlist(String ncnm){
+		List list = commentDao.getcommentlist(ncnm);
+		return list;
+	}
+	
 }

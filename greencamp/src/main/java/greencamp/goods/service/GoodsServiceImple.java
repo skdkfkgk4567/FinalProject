@@ -61,11 +61,9 @@ public class GoodsServiceImple implements GoodsService {
 		List list=goodsDao.goodsInfoTypeIndex(dto);
 		return list;
 	}
-	
-	
-	
-	
-	
-	
-	
+	@Override
+	public int goodssttus(GoodsDTO dto) {
+		int count=goodsDao.goodssttus(dto);
+		return count;
+	}
 }

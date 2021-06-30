@@ -1,0 +1,99 @@
+@charset "UTF-8";
+/*--------------------header css--------------------*/
+.main_box {
+    width:100%;
+    height:70px;
+    display:flex;
+    align-items:center;
+	justify-content:space-between;
+	background-color:rgb(148, 187, 252);
+}
+.logo {
+	margin-left:10px;
+}
+.login {
+   	margin-right:20px;
+}
+/*--------------------header css--------------------*/
+
+/*--------------------ㅡsidbar css--------------------*/
+.wrapper .sidebar{
+	width:10%;
+	height:899px;
+	float:left;
+	background-color:#e7f1ff;
+}
+.accordion-button:focus {
+	box-shadow:none;
+}
+.accordion-button{
+	text-align:right;
+	font-size:15px;
+	background-color:#e7f1ff;
+}
+/*--------------------ㅡsidebar css--------------------*/
+
+/*--------------------ㅡmain css--------------------*/
+.more-info{
+	padding-top:1%;
+	padding-bottom:1%;
+	text-align:center;
+}
+.main-content{
+	width:90%;
+	height:899px;
+	float:right;
+	background-color:white;
+}
+/*--------------------ㅡmain css--------------------*/
+
+/*--------------------ㅡall css--------------------*/
+ul{
+	list-style:none;
+}
+a{
+	text-decoration:none;
+}
+.table th, td{
+	text-align:center;
+}
+*{
+	font-family : '기랑 해랑', 필기체;
+}
+/*--------------------ㅡall css--------------------*/
+
+/*--------------------write css--------------------*/
+#btn_write{display:none;}
+.write{margin:auto;padding:50px;font-family:'noto sans kr';width:50%;height:50%;
+overflow:auto;top:10%;left:25%;background:white;position:fixed;z-index:999;visibility:hidden;}
+.write table{margin:0px auto;margin-top:50px;margin-bottom:20px;}
+.writetable th{text-align:center;}
+.writetable tr{padding:10px;}
+.write li{list-style:none;}
+.writebackground{position: fixed;top:0;left:0;width:100%;height:100%;
+background:rgba(0,0,0,.3);transition:all.35s;opacity:0;visibility:hidden;z-index:998;}
+body input[id="btn_write"]:checked+label+div{visibility:visible;}
+body input[id="btn_write"]:checked~.writebackground{opacity:1;visibility:visible;}
+/*--------------------write css--------------------*/
+
+/*--------------------ㅡmain css--------------------*/
+.title-bbs{
+	height:5%;
+	display:flex;
+    align-items:center;
+    border-bottom:0.5px solid black;
+}
+.content-bbs{
+	height:95%;
+	background-color:#f4f4f4;;
+	padding:2rem 2rem;
+}
+.bbs-table{
+	height:100%;
+	background-color:white;
+	border-radius:10px;
+}
+.h1-title{
+	margin-bottom:20px;
+}
+/*--------------------ㅡmain css--------------------*/

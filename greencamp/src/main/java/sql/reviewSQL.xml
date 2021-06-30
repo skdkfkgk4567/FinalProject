@@ -5,7 +5,7 @@
   <mapper namespace="final.camp">
   
   <select id="getListReviewBsnmSQL" parameterType="String" resultType="greencamp.review.model.ReviewDTO">
-  select * from tb_bbs where id=#{id} order by bbs_no desc
+  select like_no from tb_like where like_ncnm=#{ncnm}
   </select>
   
   <update id="likesupSQL" parameterType="int">
@@ -21,7 +21,7 @@
   </select>
   
   <select id="getlikebbsnumberSQL" parameterType="String" resultType="greencamp.like.model.LikeDTO">
-	select like_no from tb_like where like_id=#{id}
+	select like_no from tb_like where like_ncnm=#{id}
 	</select>
   
   </mapper>

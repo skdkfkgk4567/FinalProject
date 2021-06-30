@@ -21,17 +21,32 @@ public class CampInfoController {
 	
 	@Autowired
 	private CommentService commentService;
-
+	
 	@RequestMapping("/listCampInfo.pi")
-	public ModelAndView listCampInfo(CampInfoDTO dto,@RequestParam(value = "ctgry",defaultValue = "캠핑팁")String ctgry) {
-		
-		dto.setCtgry(ctgry);
-		
-		List list=campinfoService.listCampInfo(dto);
-		List infolist=campinfoService.campInfoTypeIndex(dto);
+	public ModelAndView listCampInfo(CampInfoDTO dto,@RequestParam(value = "type",defaultValue = "1")int type) {
 		ModelAndView mav=new ModelAndView();
-		mav.addObject("list", list);
-		mav.addObject("infolist", infolist);
+		
+		if(type==1) {
+			dto.setCtgry("캠핑팁");
+			List list=campinfoService.listCampInfo(dto);
+			List infolist=campinfoService.campInfoTypeIndex(dto);
+			mav.addObject("list", list);
+			mav.addObject("infolist", infolist);
+		}else if(type==2) {
+			dto.setCtgry("캠핑음식");
+			List list=campinfoService.listCampInfo(dto);
+			List infolist=campinfoService.campInfoTypeIndex(dto);
+			mav.addObject("list", list);
+			mav.addObject("infolist", infolist);
+		}else if(type==3) {
+			dto.setCtgry("텐트설치방법");
+			List list=campinfoService.listCampInfo(dto);
+			List infolist=campinfoService.campInfoTypeIndex(dto);
+			mav.addObject("list", list);
+			mav.addObject("infolist", infolist);
+		}
+		
+		
 		mav.setViewName("campinfo/listCampInfo");
 		return mav;
 	}
@@ -41,6 +56,7 @@ public class CampInfoController {
 		
 		cdto.setCtgry_no(info_no);
 		cdto.setCtgry(ctgry);
+		dto.setInfo_no(info_no);
 		
 		List list=campinfoService.campinfoajax(dto);
 		List clist=commentService.listComment(cdto);
@@ -50,7 +66,7 @@ public class CampInfoController {
 		mav.addObject("list", list);
 		mav.addObject("clist", clist);
 		//mav.addObject("ct_comment", ct_comment);
-		mav.setViewName("campinfo/campinfo");
+		mav.setViewName("campinfo/campInfo");
 		return mav;
 	}
 	

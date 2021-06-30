@@ -5,17 +5,44 @@
 <mapper namespace="greencamp.campinfo">
 
 	<!-- 캠핑정보 리스트 출력 -->
-	<select id="listCampInfo" resultType="Map" parameterType="greencamp.campinfo.model.CampInfoDTO">
-		select * from tb_info where ctgry='캠핑팁' order by info_no desc
+	<select id="listCampInfo" resultType="greencamp.campinfo.model.CampInfoDTO" parameterType="greencamp.campinfo.model.CampInfoDTO">
+		select * from tb_info where ctgry=#{ctgry} order by info_no desc
 	</select>
-	
+
 	<!-- 캠핑정보 클릭 상세정보 -->
 	<select id="campInfoajax" parameterType="greencamp.campinfo.model.CampInfoDTO" resultType="greencamp.campinfo.model.CampInfoDTO">
 		select * from tb_info where info_no=#{info_no}
 	</select>
-	
+
 	<!-- 캠핑정보 상세정보 -->
 	<select id="campinfoindex" parameterType="greencamp.campinfo.model.CampInfoDTO" resultType="greencamp.campinfo.model.CampInfoDTO">
 		select * from tb_info where info_no=(select max(info_no) from tb_info where ctgry=#{ctgry})
+	</select>
+	<!-- 캠핑정보 게시글 목록 -->
+	<select id="listCampinfoPost" parameterType="Map"
+		resultType="greencamp.campinfo.model.CampInfoDTO">
+		select * from
+		(select rownum as rnum, a.* from
+		(select * from tb_info
+		where ctgry='캠핑팁' or ctgry='캠핑음식' or ctgry='텐트설치방법' order by info_no
+		desc)a)b
+		where rnum <![CDATA[>]]>=#{start}
+		and rnum <![CDATA[<]]>=#{end}
+	</select>
+	<!-- 캠핑정보 게시글 등록 -->
+	<insert id="writeCampinfoPost"
+		parameterType="greencamp.campinfo.model.CampInfoDTO">
+		insert into tb_info values(info_no.nextval, #{sj},
+		#{cn}, 0, #{crgry}, sysdate, '관리자', #{videosrc})
+	</insert>
+	<!-- 캠핑정보 게시글 삭제 -->
+	<delete id="deleteCampinfoPost" parameterType="int">
+		delete from
+		tb_info where info_no=#{info_no}
+	</delete>
+	<!-- 캠핑정보 게시글 총 갯수 -->
+	<select id="campinfoPostTotalCnt" resultType="int">
+		select count(*)
+		from tb_info where ctgry='캠핑팁' or ctgry='캠핑음식' or ctgry='텐트설치방법'
 	</select>
 </mapper>

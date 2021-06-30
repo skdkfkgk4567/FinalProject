@@ -15,107 +15,107 @@
 <style>
 .container2
 {
-	padding-top: 10%;
-	padding-left: 10%;
+	padding-top: 10% !important;
+	padding-left: 10% !important;
 }
 .chart {
-	float: left;
-	width: 33.33%;
-	height: 230px;
-	text-align: center;
+	float: left !important;
+	width: 33.33% !important;
+	height: 230px !important;
+	text-align: center !important;
 }
 
 .chart span.title {
-	position: relative;
-	display: block;
-	width: 100%;
-	text-align: center;
-	top: 110px;
+	position: relative !important;
+	display: block !important;
+	width: 100% !important;
+	text-align: center !important;
+	top: 110px !important;
 }
 
 .label {
-	text-align: center;
-	color: #333;
-	font-weight: 100;
-	font-size: 1.2em;
-	margin-bottom: 0.3em;
+	text-align: center !important;
+	color: #333 !important;
+	font-weight: 100 !important;
+	font-size: 1.2em !important;
+	margin-bottom: 0.3em !important;
 }
 
 .b-skills {
-	border-top: 1px solid #f9f9f9;
-	padding-top: 46px;
-	text-align: center;
+	border-top: 1px solid #f9f9f9 !important;
+	padding-top: 46px !important;
+	text-align: center !important;
 }
 
 .b-skills:last-child {
-	margin-bottom: -30px;
+	margin-bottom: -30px !important;
 }
 
 .b-skills h2 {
-	margin-bottom: 50px;
-	font-weight: 900;
-	text-transform: uppercase;
+	margin-bottom: 50px !important;
+	font-weight: 900 !important;
+	text-transform: uppercase !important;
 }
 
 .skill-item {
-	position: relative;
-	max-width: 180px;
-	width: 100%;
-	margin-bottom: 30px;
-	color: #555;
+	position: relative !important;
+	max-width: 180px !important;
+	width: 100% !important;
+	margin-bottom: 30px !important;
+	color: #555 !important;
 }
 
 .chart-container {
-	position: relative;
-	width: 100%;
-	height: 0;
-	padding-top: 100%;
-	margin-bottom: 27px;
+	position: relative !important;
+	width: 100% !important;
+	height: 0 !important;
+	padding-top: 100% !important;
+	margin-bottom: 27px !important;
 }
 
 .skill-item .chart, .skill-item .chart canvas {
-	position: absolute;
-	top: 0;
-	left: 0;
+	position: absolute !important;
+	top: 0 !important;
+	left: 0 !important;
 	width: 100% !important;
 	height: 100% !important;
 }
 
 .skill-item .chart:before {
-	content: "";
-	width: 0;
-	height: 100%;
+	content: "" !important;
+	width: 0 !important;
+	height: 100% !important;
 }
 
 .skill-item .chart:before, .skill-item .percent {
-	display: inline-block;
-	vertical-align: middle;
+	display: inline-block !important;
+	vertical-align: middle !important;
 }
 
 .skill-item .percent {
-	position: relative;
-	line-height: 1;
-	font-size: 40px;
-	font-weight: 900;
-	z-index: 2;
+	position: relative !important;
+	line-height: 1 !important;
+	font-size: 40px !important;
+	font-weight: 900 !important;
+	z-index: 2 !important;
 }
 
 .skill-item  .percent:after {
-	content: attr(data-after);
-	font-size: 20px;
+	content: attr(data-after) !important;
+	font-size: 20px !important;
 }
 
 p {
-	font-weight: 900;
-	text-align: center;
-	color:white;
+	font-weight: 900 !important;
+	text-align: center !important;
+	color:white !important;
 }
 
 .allchart {
-	left: 5%;
-	padding-top: 5%;
-	width: 60vw;
-	height: 30vh;
+	left: 5% !important;
+	padding-top: 5% !important;
+	width: 60vw !important;
+	height: 30vh !important;
 }
 .mainwrap
 {

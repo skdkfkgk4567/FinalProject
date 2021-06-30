@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,24 +35,25 @@ function showResult(){   //응답 역할의 함수
 <div class="goodscontent">
 	<div class="goodstype" align="center"><!-- 버튼이 들어가는 자리 -->
 		<ul class="goodsemenu">
-			<li><a href="goods.pi?type=1"><img src="assets/img/list.png" alt="전체" width="40px" height="40px"></a></li>
-			<li><a href="goods.pi?type=2"><img src="assets/img/구매흰.png" alt="삽니당" width="40px" height="40px"></a></li>
-			<li><a href="goods.pi?type=3"><img src="assets/img/판매 색.png" alt="팝니당" width="40px" height="40px"></a></li>
+			<li><a href="goods.pi?type=1"><img src="assets/img/전체.png" alt="전체" width="40px" height="40px"></a></li>
+			<li><a href="goods.pi?type=2"><img src="assets/img/구매.png" alt="삽니당" width="40px" height="40px"></a></li>
+			<li><a href="goods.pi?type=3"><img src="assets/img/판매.png" alt="팝니당" width="40px" height="40px"></a></li>
 		</ul>
 	</div>
 	
 	
 	<div class="goodslist"><!-- 중고거래 리스트가 들어가는 자리 -->
+	
+	
+	
 		<div class="goodswrite">
-				<span class="sort">등록순</span>
-				<span class="sort">조회순</span>
-				<span class="sort">댓글순</span>
 			<input type="checkbox" id="btn_goodsadd">
-			<label for="btn_goodsadd">
+			<label for="btn_goodsadd" style="margin: 15px;">
 				글쓰기
 			</label>
-				<div class="goodsadd">
+			<div class="goodsadd">
 				<form name="goodsWrite" action="goodsWrite.pi" method="post">
+				<input type="hidden" name="ncnm" value="comk">
 					<div>
 						<h2>중고마켓 글쓰기</h2>
 					</div>
@@ -61,16 +63,15 @@ function showResult(){   //응답 역할의 함수
 							<tr>
 								<th colspan="2">
 									<select class="form-select form-select-lg mb-3" name="delngtp" aria-label=".form-select-lg example">
-									  <option selected>구분</option>
-									  <option value="삽니다">구매</option>
-									  <option value="팝니다">판매</option>
+										<option value="삽니다" selected>구매</option>
+										<option value="팝니다">판매</option>
 									</select>
 								</th>
 							</tr>
 							<tr>
 								<th colspan="2">
 									<div class="form-floating">
-									  <input type="text" class="form-control" name="sj" id="floatingPassword" placeholder="제목">
+									  <input type="text" class="form-control" name="sj" id="floatingPassword" placeholder="제목" required>
 									  <label for="floatingPassword">제목</label>
 									</div>
 								</th>
@@ -78,33 +79,32 @@ function showResult(){   //응답 역할의 함수
 							<tr>
 								<th  colspan="2">
 									<select class="form-select form-select-lg mb-3" name="how" aria-label=".form-select-lg example">
-									  <option selected>거래방법</option>
-									  <option value="직거래">직거래</option>
-									  <option value="택배거래">택배거래</option>
+										<option value="직거래" selected>직거래</option>
+										<option value="택배거래">택배거래</option>
 									</select>
 								</th>
 							</tr>
 							<tr>
 								<th colspan="2">
 									<div class="form-floating">
-									  <input type="text" class="form-control" name="pc" id="floatingPassword" placeholder="금액">
-									  <label for="floatingPassword">금액</label>
+										<input type="text" class="form-control" name="pc" id="floatingPassword" placeholder="금액" required>
+										<label for="floatingPassword">금액</label>
 									</div>
 								</th>
 							</tr>
 							<tr>
 								<th colspan="2">
 									<div class="form-floating">
-									  <input type="text" class="form-control" name="addr" id="floatingPassword" placeholder="거래위치">
-									  <label for="floatingPassword">거래위치</label>
+										<input type="text" class="form-control" name="addr" id="floatingPassword" placeholder="거래위치" required>
+										<label for="floatingPassword">거래위치</label>
 									</div>
 								</th>
 							</tr>
 							<tr>
 								<th colspan="2">
 									<div class="form-floating">
-									  <input type="text" class="form-control" name="telno" id="floatingPassword" placeholder="연락처">
-									  <label for="floatingPassword">연락처</label>
+										<input type="text" class="form-control" name="telno" id="floatingPassword" placeholder="연락처" required>
+										<label for="floatingPassword">연락처</label>
 									</div>
 								</th>
 							</tr>
@@ -118,40 +118,42 @@ function showResult(){   //응답 역할의 함수
 							</tr>
 							<tr>
 								<td colspan="2" align="center">
-									<textarea rows="10" cols="70" name="cn"></textarea>
+									<textarea rows="10" cols="70" name="cn" wrap="hard" required></textarea>
 								</td>
 							</tr>
 						</table>
 					</div>
 					<div align="center">
-						<input type="submit" class="btn btn-info" value="등록하기" required="required">
+						<input type="submit" class="btn btn-info" value="등록하기">
 						<input type="reset" class="btn btn-secondary" value="취소하기">
 					</div>
 				</form>
-				</div>
-			<label for="btn_goodsadd" class="goodsaddbackground"></label><!-- 글쓰기 배경 흐림 -->
+			</div>
+		<label for="btn_goodsadd" class="goodsaddbackground"></label><!-- 글쓰기 배경 흐림 -->
 		</div>
+		
+		<!-- 로그인 했는지 검사 -->
+		
 		<div class="goodscard" id="goodscard">
 			<div class="row row-cols-1 row-cols-md-2 g-4">
 				<c:forEach var="gdto" items="${list}">
 					<div class="col" onclick="show(${gdto.delng_no},'${gdto.delngtp}')">
 						<div class="card h-90">
-						<c:url var="contentUrl" value="goods.pi">
-							<c:param name="delng_no">${gdto.delng_no}</c:param>
-						</c:url>
+						<!-- 이미지가 있는지 확인 -->
 							<img src="assets/img/${gdto.img}" class="card-img-top" alt="..." style="max-width: 250px;">
+						
 							<div class="card-body">
 								<h5 class="card-title">${gdto.sj}</h5>
-								<p class="card-text">${gdto.cn}</p>
+								<p class="card-text" style="text-align: left;">${gdto.cn}</p>
+								<p class="card-text" style="text-align: left;">가격 : ${gdto.pc}</p>
 							</div>
 							<div class="card-footer">
-								<small class="text-muted">${gdto.pc}</small>
+								<small class="text-muted"><fmt:formatDate pattern="yy-MM-dd" value="${gdto.writngde}"/></small>
 							</div>
 						</div>
 					</div>
 				</c:forEach>
 			</div>
-			<div class="paging"><p align="center">${pageStr}</p></div><!-- 페이징 -->
 		</div>
 	</div>
 	
@@ -172,23 +174,32 @@ function showResult(){   //응답 역할의 함수
 									${infodto.ncnm}
 								</label>
 								<div class="msg">
-									<form name="addmsgfm" action="addmsg.pi" method="post">
-										<input type="hidden" name="rcver_id" value="comk">
-										<input type="hidden" name="sender_id" value="${infodto.ncnm}">
+									<form name="addmsgfm" action="goodsmsg.pi" method="post">
 										<div>
 											<h2 align="center">메세지 보내기</h2>
 										</div>
 										<hr>
 										<div>
 											<table class="addmsgtable addmsgtable-sm">
+											
 												<tr>
-													<th>보내는 이 : 닉네임</th>
+													<th>
+														<div class="form-floating">
+														  <input type="text" class="form-control" name="rcver_id" id="floatingPassword" placeholder="보내는 이" value="comk" readonly required>
+														  <label for="floatingPassword">보내는 이</label>
+														</div>
+													</th>
 												</tr>
 												<tr>
-													<th>받는 이 : ${infodto.ncnm}</th>
+													<th>
+														<div class="form-floating">
+														  <input type="text" class="form-control" name="sender_id" id="floatingPassword" placeholder="받는 이" value="${infodto.ncnm}" readonly required>
+														  <label for="floatingPassword">받는 이</label>
+														</div>
+													</th>
 												</tr>
 												<tr>
-													<td colspan="2" align="center"><textarea rows="10" cols="70" name="cn"></textarea></td>
+													<td colspan="2" align="center"><textarea rows="10" cols="70" name="cn" wrap="hard" required></textarea></td>
 												</tr>
 											</table>
 										</div>
@@ -201,13 +212,15 @@ function showResult(){   //응답 역할의 함수
 								<label for="btn_addmsg" class="addmsgbackground"></label>
 							</div>
 						</li>
-						<li>등록일</li>
-						<li>댓글</li>
-						<li>조회수  ${infodto.rdcnt}</li>
+						<li>작성일 : <fmt:formatDate pattern="yy-MM-dd" value="${infodto.writngde}"/></li>
 					</ul>
 					<div class="goodsinfo_update_btn" align="right">
-						<span><a href="goodsdel.pi?delng_no=${infodto.delng_no}&delngtp=${infodto.delngtp}">삭제</a> | 
-						<a href="Report.pi?ctgry=${infodto.delngtp}&ctgry_no=${infodto.delng_no}">신고</a> | </span> 
+						
+						<span>
+						<a href="Report.pi?ctgry=${infodto.delngtp}&ctgry_no=${infodto.delng_no}">신고</a>&nbsp;&nbsp;
+						<a href="goodsdel.pi?delng_no=${infodto.delng_no}&delngtp=${infodto.delngtp}">삭제</a> &nbsp;&nbsp;
+						<a href="goodssttus.pi?delng_no=${infodto.delng_no}">거래완료</a>&nbsp;&nbsp;
+						</span>
 						<input type="checkbox" id="btn_goodsupdate">
 						<label for="btn_goodsupdate">
 						 수정
@@ -222,79 +235,79 @@ function showResult(){   //응답 역할의 함수
 									<div>
 										<table class="goodsupdatetable goodsupdatetable-sm">
 											<tr>
-												<th colspan="2">
+												<th>
 													<div class="form-floating">
-														<input type="text" class="form-control" name="sj" id="floatingPassword" placeholder="제목" value="${infodto.sj}" readonly>
+														<input type="text" class="form-control" name="sj" id="floatingPassword" placeholder="제목" value="${infodto.sj}" readonly required>
 														<label for="floatingPassword">제목</label>
 													</div>
 												</th>
 											</tr>
 											<tr>
-												<th  colspan="2">
+												<th>
 													<select class="form-select form-select-lg mb-3" name="how" aria-label=".form-select-lg example">
-														<option selected value="${infodto.how}">거래방법</option>
-														<option value="직거래">직거래</option>
+														<option value="직거래" selected>직거래</option>
 														<option value="택배거래">택배거래</option>
 													</select>
 												</th>
 											</tr>
 											<tr>
-												<th colspan="2">
+												<th>
 													<div class="form-floating">
-														<input type="text" class="form-control" name="pc" id="floatingPassword" placeholder="금액" value="${infodto.pc}">
+														<input type="text" class="form-control" name="pc" id="floatingPassword" placeholder="금액" value="${infodto.pc}" required>
 														<label for="floatingPassword">금액</label>
 													</div>
 												</th>
 											</tr>
 											<tr>
-												<th colspan="2">
+												<th>
 													<div class="form-floating">
-														<input type="text" class="form-control" name="addr" id="floatingPassword" placeholder="거래위치" value="${infodto.addr}">
+														<input type="text" class="form-control" name="addr" id="floatingPassword" placeholder="거래위치" value="${infodto.addr}" required>
 														<label for="floatingPassword">거래위치</label>
 													</div>
 												</th>
 											</tr>
 											<tr>
-												<th colspan="2">
+												<th>
 													<div class="form-floating">
-														<input type="text" class="form-control" name="telno" id="floatingPassword" placeholder="연락처" value="${infodto.telno}">
+														<input type="text" class="form-control" name="telno" id="floatingPassword" placeholder="연락처" value="${infodto.telno}" required>
 														<label for="floatingPassword">연락처</label>
 													</div>
 												</th>
 											</tr>
 											<tr>
-												<th colspan="2">
-													<label class="input-file-button" for="input-file">
-														사진 등록
-													</label>
+												<th>
+													<label class="input-file-button" for="input-file">사진 등록</label>
 													<input type="file" id="input-file" name="img" style="display:none" value="${infodto.img}">
 												</th>
 											</tr>
 											<tr>
-												<td colspan="2" align="center"><textarea rows="10" cols="70" name="cn">${infodto.cn}</textarea></td>
+												<td align="center"><textarea rows="10" cols="70" name="cn" wrap="hard" required>${infodto.cn}</textarea></td>
 											</tr>
 										</table>
 									</div>
 									<div align="center">
-										<input type="submit" class="btn btn-info" value="수정하기" required="required">
+										<input type="submit" class="btn btn-info" value="수정하기">
 										<input type="reset" class="btn btn-secondary" value="취소하기">
 									</div>
 								</form>
 							</div>
-							<label for="btn_goodsupdate" class="goodsupdatebackground"></label>
-							<!-- 글쓰기 배경 흐림 -->
+							<label for="btn_goodsupdate" class="goodsupdatebackground"></label><!-- 글쓰기 배경 흐림 -->
 						</div>
 					</div>
 					<hr>
 				</div>
+				<c:if test="${'판매완료'eq infodto.sttus}">
+				<div><img src="assets/img/판매완료.jpg" alt="전체" width="80px" height="80px" align="right" style="margin-right: 30px;"></div>
+				</c:if>
+				<img src="assets/img/${infodto.img}" class="card-img-top" alt="..." style="max-width: 250px;">
 				<div class="goodsinfo_content">${infodto.cn}</div>
 					<div class="goodsinfo_comment">
 						<div>댓글쓰기</div>
 						<form name="goods_comment_fm" action="goods_comment.pi?ctgry=${infodto.delngtp}&ctgry_no=${infodto.delng_no}" method="post">
 							<div align="center">
-								<textarea id="goods_comment" rows="5" cols="100" name="cn" 
+								<textarea id="goods_comment" rows="5" cols="100" wrap="hard" name="cn" 
 								style="background-color: #ede7f6; width: 100%; display:inline;"></textarea>
-								<input type="submit" class="subcomment" value="등록" style="margin-left: -20px;">
+								<input type="submit" class="subcomment" value="등록">
 							</div>
 						</form>
 						<c:forEach var="cdto" items="${clist}">
@@ -302,7 +315,7 @@ function showResult(){   //응답 역할의 함수
   							<div class="card-body text-primary">
 							    <h6 class="card-subtitle mb-2 text-muted">${cdto.ncnm}</h6>
 							    <p class="card-text">&nbsp;&nbsp;${cdto.cn}</p>
-							    <a href="delComment.pi?cm_no=${cdto.cm_no}" class="card-link">삭제</a>
+							    <a href="goodsdelComment.pi?cm_no=${cdto.cm_no}" class="card-link">삭제</a>
 							    <a href="Report.pi?ctgry=댓글&ctgry_no=${cdto.cm_no}" class="card-link">신고</a>
 							</div>
 						</div>
@@ -311,6 +324,6 @@ function showResult(){   //응답 역할의 함수
 		</c:forEach>
 	</div>
 </div>
-<div class="footer">footer 들어갈 자리</div>
+<div class="footer"><jsp:include page="../footer.jsp"></jsp:include></div>
 </body>
 </html>

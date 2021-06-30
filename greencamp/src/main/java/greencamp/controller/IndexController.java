@@ -22,4 +22,12 @@ public class IndexController
 		mav.setViewName("index2");
 		return mav;
 	}
+	
+	@RequestMapping("/mngrIndex.pi")
+	public ModelAndView mngrIndex()
+	{
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("mngrIndex");
+		return mav;
+	}
 }

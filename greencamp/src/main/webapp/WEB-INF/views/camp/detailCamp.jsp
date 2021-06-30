@@ -35,9 +35,10 @@ function wDescEngToKor(w_id) {
 	}
 	}
 	return "none";
-	}
-
+}
 </script>
+
+
 <link rel="stylesheet" href="assets/css/swiper.css">
 <link rel="stylesheet" type="text/css" href="assets/css/detail.css" />
 <link
@@ -62,6 +63,7 @@ function wDescEngToKor(w_id) {
 	rel="stylesheet">
 </head>
 <body>
+
 	<jsp:include page="../header.jsp"></jsp:include>
 	<div id="listSection">
 		<div class="searchbox">
@@ -91,8 +93,17 @@ function wDescEngToKor(w_id) {
 									<span class="b fblue2"> ${list.camp_nm } </span>
 								</div>
 								<div class="search_result">
-									<input type="button" value="찜하기"> <input type="button"
-										value="추천"> <input type="button" value="신고">
+								<c:choose>
+									<c:when test="${boolLike == 1 }">
+									<input type="button" id="likeButton" value="찜하기" onclick="likeButton()" style="color: red">
+									</c:when>
+									<c:when test="${boolLike == 0 }">
+									<input type="button" id="likeButton" value="찜하기" onclick="likeButton()" style="color: white">
+									</c:when>
+								</c:choose>
+									
+									<input type="button" value="추천"> <input type="button"
+										value="신고">
 								</div>
 								<div class="search_result">
 									<span class="b fblue2"> ${list.addr } </span>
@@ -164,31 +175,28 @@ function wDescEngToKor(w_id) {
 							</c:forEach>
 						</div>
 						<div class="p-2 blockContent1">주변 캠핑장</div>
-						<div class="b fblue2 flex-row otherCamp" id="otherCamp">
-							
-						</div>
+						<div class="b fblue2 flex-row otherCamp" id="otherCamp"></div>
 						<div class="search_result">
 							<div class="main2">
-								<input type="radio" id="tab-1" name="show" checked />
-								<span class="tophead">리뷰</span>
-								<div class="tab2">
-								</div>
+								<input type="radio" id="tab-1" name="show" checked /> <span
+									class="tophead">리뷰</span>
+								<div class="tab2"></div>
 								<div class="content2">
 									<div class="content2-dis">
 										<div class="goodsinfo_comment">
 											<div>리뷰쓰기</div>
-												<div align="center">
-													<textarea id="cn" rows="5" cols="100" name="cn"
-														style="background-color: #ede7f6; width: 100%;"></textarea>
-												</div>
-												<div>
-													<input type="button" onclick="writeReview()" value="등록">
-												</div>
-												<input type="hidden" id="ncnm" name="ncnm" value="${sessionScope.user_ncnm }">
-												<input type="hidden" id="camp_no" name="camp_no" value="${camp_no}">
-											<div class="reviewWrap" id="reviewWrap" onload="getComment(${camp_no})">
-												
+											<div align="center">
+												<textarea id="cn" rows="5" cols="100" name="cn"
+													style="background-color: #ede7f6; width: 100%;"></textarea>
 											</div>
+											<div>
+												<input type="button" onclick="writeReview()" value="등록">
+											</div>
+											<input type="hidden" id="ncnm" name="ncnm"
+												value="${sessionScope.user_ncnm }"> <input
+												type="hidden" id="camp_no" name="camp_no" value="${camp_no}">
+											<div class="reviewWrap" id="reviewWrap"
+												onload="getComment(${camp_no})"></div>
 										</div>
 									</div>
 								</div>
@@ -224,6 +232,7 @@ function wDescEngToKor(w_id) {
 			</div>
 		</div>
 	</div>
+	
 	<script type="text/javascript" src="assets/js/swiper.js"></script>
 	<script type="text/javascript" src="assets/js/httpRequest.js"></script>
 	<script type="text/javascript" src="assets/js/detailCamp.js"></script>
@@ -569,6 +578,18 @@ function deleteReview()
 	sendXHR('deleteReviewCamp.pi?camp_no=${camp_no}&review_no='+review_no, null, commentList,'GET');
 	sendXHR('getCampRewiew.pi?camp_no='+${camp_no}, null, commentList,'GET');
 }
+
+function likeStatus()
+{
+	if(XHR.readyState == 4)
+	{
+		if(XHR.status == 200)
+		{
+			var data = XHR.responseText;
+			document.getElementById("likeButton").style = "color:"+data;
+		}
+	}
+}
 function commentList()
 {
 	if(XHR.readyState == 4)
@@ -581,6 +602,28 @@ function commentList()
 	}
 }
 </script>
-<jsp:include page="../footer.jsp"></jsp:include>
+<c:choose>
+	<c:when test="${empty sessionScope.user_id }">
+		<script>
+			function likeButton()
+			{
+				window.alert("로그인 후 사용가능합니다.");
+				location.href="login.pi";
+				
+			}
+		</script>
+	</c:when>
+	<c:when test="${!empty sessionScope.user_id }">
+		<script>
+			function likeButton()
+			{
+				sendXHR('likeCamp.pi?id=${sessionScope.user_id}&camp_nm=${camp_nm}&camp_no=${camp_no}', null, likeStatus,'GET');
+				document.getElementById("likeButton").style="${color}"
+				
+			}
+		</script>
+	</c:when>
+</c:choose>
+	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

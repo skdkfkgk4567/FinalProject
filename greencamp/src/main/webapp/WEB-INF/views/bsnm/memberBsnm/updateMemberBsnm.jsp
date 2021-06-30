@@ -13,6 +13,10 @@
 <script type="text/javascript" src="assets/js/common.js"></script>
 <script src="assets/js/httpRequest.js"></script>
 <style>
+.footer
+{
+	margin-top: 658px;
+}
 .registtitle{
 text-align:center;
 

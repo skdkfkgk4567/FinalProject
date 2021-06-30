@@ -22,8 +22,8 @@ public LikeDAOImple(SqlSessionTemplate sqlMap) {
 	}
 	
 	public List<LikeDTO> getlikebbsnumber(String id) {
-		
-		return null;
+		List list = sqlMap.selectList("getlikebbsnumberSQL", id);
+		return list;
 	}
 	
 }

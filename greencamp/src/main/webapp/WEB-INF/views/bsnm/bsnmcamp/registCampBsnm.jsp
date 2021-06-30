@@ -13,6 +13,10 @@
 <script type="text/javascript" src="assets/js/common.js"></script>
 <script src="assets/js/httpRequest.js"></script>
 <style>
+.footer
+{
+	margin-top: 658px;
+}
 .registtitle{
 text-align:center;
 margin-top:100px;
@@ -259,7 +263,7 @@ text-align:center;
      var  bizrno= document.getElementById("bizrno").value;
      var  checkin= document.getElementById("checkin").value;
      var  checkout= document.getElementById("checkout").value;
-     
+    
      /*캠핑종류*/
      
      var size = document.getElementsByName("camp_type").length;

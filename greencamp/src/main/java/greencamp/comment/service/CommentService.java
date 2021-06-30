@@ -12,5 +12,5 @@ public interface CommentService {
 	public int delGoodsComment(CommentDTO cdto);//게시글 삭제 시 댓글도 삭제
 	public int delComment(CommentDTO dto);//댓글 삭제
 	public int countComment(CommentDTO cdto);//댓글 수
-	
+	public List<CommentDTO> getcommentlist(String ncnm);//댓글리스트
 }

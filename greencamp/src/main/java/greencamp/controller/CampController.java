@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,21 +14,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import greencamp.camp.model.*;
+import greencamp.resve.model.ResveDAO;
+import greencamp.resve.model.ResveDTO;
 
 @Controller
 public class CampController {
 	@Autowired
 	private CampDAO campDAO;
-	private SiteVO siteVO;
+	private ResveDAO resveDAO;
 
 	@RequestMapping("/searchTheme.pi")
 	public ModelAndView searchTheme(HttpServletRequest req,
 			@RequestParam(value = "facilities", required = false, defaultValue = "") String fac,
 			@RequestParam(value = "camp_nm", required = false, defaultValue = "all") String camp_nm,
-			@RequestParam(value = "nature", required = false, defaultValue = "") String nat,
-			SiteVO siteVO) {
-			camp_nm = "테마검색";
-			siteVO.setCamp_nm(camp_nm);
+			@RequestParam(value = "nature", required = false, defaultValue = "") String nat, SiteVO siteVO) {
+		camp_nm = "테마검색";
+		siteVO.setCamp_nm(camp_nm);
 		int listCnt = 0;
 		String cp_s = req.getParameter("cp");
 		if (cp_s == null || cp_s.equals("")) {
@@ -39,8 +41,8 @@ public class CampController {
 		int pageSize = 10;
 		siteVO.setCp(cp);
 		siteVO.setLs(pageSize);
-		String pageFac = fac; 
-		String pageNat = nat; 
+		String pageFac = fac;
+		String pageNat = nat;
 		ModelAndView mav = new ModelAndView();
 		String facilities[];
 		String nature[];
@@ -72,11 +74,11 @@ public class CampController {
 		List<SiteVO> themeList;
 		siteVO.setQuery(query);
 		listCnt = campDAO.searchThemeCount(siteVO);
-		
+
 		themeList = campDAO.searchTheme(siteVO);
-		pageStr = greencamp.page.PageModule.makeThemePage("searchTheme.pi", listCnt, pagingSize, pageSize, cp, pageNat,pageFac);
-		if(themeList.size()<1)
-		{
+		pageStr = greencamp.page.PageModule.makeThemePage("searchTheme.pi", listCnt, pagingSize, pageSize, cp, pageNat,
+				pageFac);
+		if (themeList.size() < 1) {
 			String msg = "검색결과가 없습니다.";
 			String url = "index.pi";
 			mav.addObject("msg", msg);
@@ -105,7 +107,6 @@ public class CampController {
 		if (cp_s == null || cp_s.equals("")) {
 			cp_s = "1";
 		}
-
 		int cp = Integer.parseInt(cp_s);
 		int pagingSize = 10;
 		int pageSize = 10;
@@ -115,7 +116,6 @@ public class CampController {
 		ModelAndView mav = new ModelAndView();
 		List<SiteVO> list = null;
 		String pageStr = null;
-
 		if (camp_nm.equals("all")) {
 			list = campDAO.getAllCampList(siteVO);
 			listCnt = campDAO.getAllCampListCnt();
@@ -128,13 +128,12 @@ public class CampController {
 		if (camp_nm.equals("all")) {
 			camp_nm = "전체검색";
 		}
-		if(list.size()<1)
-		{
+		if (list.size() < 1) {
 			String msg = "검색결과가 없습니다.\\n검색어를 확인해주세요.";
 			String url = "index.pi";
 			mav.addObject("msg", msg);
 			mav.addObject("url", url);
-			mav.setViewName("searchMsg");
+			mav.setViewName("camp/searchMsg");
 			return mav;
 		}
 		mav.addObject("camp_nm", camp_nm);
@@ -193,10 +192,25 @@ public class CampController {
 	}
 
 	@RequestMapping("/detailCamp.pi")
-	public ModelAndView detailCamp(int camp_no) {
+	public ModelAndView detailCamp(int camp_no, SiteVO siteVO, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("user_id");
+		if (id == null || id.equals("")) {
+			id = "1";
+		}
+		String camp_name = campDAO.getCampNm(camp_no);
+		siteVO.setCamp_nm(camp_name);
+		siteVO.setId(id);
 		List<SiteVO> siteList = campDAO.getCampDetail(camp_no);
-
+		int boolLike = campDAO.getLikeCamp(siteVO);
+		String color = "";
+		if (boolLike < 1) {
+			color = "white";
+		} else {
+			color = "red";
+		}
+		mav.addObject("color", color);
 		List<SiteVO> sitepc = campDAO.getCampSitePc(camp_no);
 		mav.addObject("lat", siteList.get(0).getLat());
 		mav.addObject("lon", siteList.get(0).getLongti());
@@ -204,6 +218,8 @@ public class CampController {
 		mav.addObject("sitepc", sitepc);
 		mav.addObject("list", siteList);
 		mav.addObject("camp_no", camp_no);
+		mav.addObject("boolLike", boolLike);
+		mav.addObject("id", id);
 		mav.setViewName("camp/detailCamp");
 		return mav;
 	}
@@ -273,36 +289,84 @@ public class CampController {
 		mav.setViewName("camp/completeOrderCamp");
 		return mav;
 	}
-	
+
 	@RequestMapping("writeCampRewiew.pi")
-	public ModelAndView writeCampRewiew(SiteVO siteVO)
-	{
+	public ModelAndView writeCampRewiew(SiteVO siteVO) {
 		ModelAndView mav = new ModelAndView();
-		
+
 		int result = campDAO.writeReviewCamp(siteVO);
 		mav.setViewName("camp/reviewMsg");
 		return mav;
 	}
-	
+
 	@RequestMapping("deleteReviewCamp.pi")
-	public ModelAndView deleteReviewCamp(SiteVO siteVO)
-	{
+	public ModelAndView deleteReviewCamp(SiteVO siteVO) {
 		ModelAndView mav = new ModelAndView();
 		int result = campDAO.deleteReviewCamp(siteVO);
-		String msg = result>0?"삭제성공":"삭제실패";
+		String msg = result > 0 ? "삭제성공" : "삭제실패";
 		mav.addObject("msg", msg);
 		mav.setViewName("camp/reviewMsg");
 		return mav;
 	}
-	
+
 	@RequestMapping("getCampRewiew.pi")
-	public ModelAndView getCampRewiew(int camp_no)
-	{
+	public ModelAndView getCampRewiew(int camp_no) {
 		ModelAndView mav = new ModelAndView();
 		List<SiteVO> result = campDAO.getReviewCamp(camp_no);
 		mav.addObject("camp_no", camp_no);
 		mav.addObject("reviewList", result);
 		mav.setViewName("camp/reviewList");
 		return mav;
+	}
+
+	@RequestMapping("likeCamp.pi")
+	public ModelAndView addLikeCamp(SiteVO siteVO, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("user_id");
+		if (id == null || id.equals("")) {
+			String msg = "로그인 후 사용가능합니다.";
+			String url = "login.pi";
+			mav.addObject("msg", msg);
+			mav.addObject("url", url);
+			mav.setViewName("camp/campMsg");
+			return mav;
+		}
+		int boolLike = campDAO.getLikeCamp(siteVO);
+		String color = "";
+		if (boolLike < 1) {
+			int result = campDAO.addLikeCamp(siteVO);
+			color = "white";
+
+		} else {
+			int result = campDAO.deleteLikeCamp(siteVO);
+			color = "red";
+		}
+		mav.addObject("color", color);
+		System.out.println(color);
+		mav.setViewName("camp/likeResult");
+		return mav;
+	}
+
+	@RequestMapping("mypageresvecamplist.pi")
+	public ModelAndView resvecamplist(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+
+		String user_id = (String) session.getAttribute("user_id");
+		List<ResveDTO> list = resveDAO.getlistresve(user_id);
+		if (list.size() == 0) {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("camp/mypageresvelist");
+			mav.addObject("list", list);
+
+			return mav;
+
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("camp/mypageresvelist");
+		mav.addObject("list", list);
+
+		return mav;
+
 	}
 }
