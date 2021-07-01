@@ -286,7 +286,7 @@ function showResult(){   //응답 역할의 함수
 											<tr>
 												<th>
 													<label class="input-file-button" for="input-file">사진 등록</label>
-													<input type="file" id="input-file" name="img" style="display:none" value="${infodto.img}">
+													<input type="file" id="input-file" name="img" style="display:none">
 												</th>
 											</tr>
 											<tr>

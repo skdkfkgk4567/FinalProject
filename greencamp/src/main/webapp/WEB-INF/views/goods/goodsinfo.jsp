@@ -135,7 +135,7 @@
 									<tr>
 										<th><label class="input-file-button" for="input-file">사진
 												등록</label> <input type="file" id="input-file" name="img"
-											style="display: none" value="${infodto.img}"></th>
+											style="display: none"></th>
 									</tr>
 									<tr>
 										<td align="center"><textarea rows="10" cols="70"
