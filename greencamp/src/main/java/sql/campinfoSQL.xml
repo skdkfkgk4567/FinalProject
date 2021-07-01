@@ -33,7 +33,7 @@
 	<insert id="writeCampinfoPost"
 		parameterType="greencamp.campinfo.model.CampInfoDTO">
 		insert into tb_info values(info_no.nextval, #{sj},
-		#{cn}, 0, #{crgry}, sysdate, '관리자', #{videosrc})
+		#{cn}, 0, #{ctgry}, sysdate, '관리자', #{videosrc})
 	</insert>
 	<!-- 캠핑정보 게시글 삭제 -->
 	<delete id="deleteCampinfoPost" parameterType="int">
