@@ -267,7 +267,7 @@ public class CampController {
 		String bgnde = tttt.format(c1.getTime());
 		String values = "";
 		String date2 = "TO_DATE(''2014-01-01'', ''YYYY-MM-DD'')";
-		values += "select " + siteVO.getCamp_no() + "," + siteVO.getNmpr() + ",\'"+id+"\',\'" + "TO_DATE(''2014-01-01'', ''YYYY-MM-DD'')" + "\',"
+		values += "select " + siteVO.getCamp_no() + "," + siteVO.getNmpr() + ",\'"+id+"\',\'" + "TO_DATE(''"+bgnde+"'', ''YYYY-MM-DD'')" + "\',"
 				+ siteVO.getTotalde() + ",\'" + siteVO.getSitenm() + "\'," + siteVO.getPc() + ",\'" + "결제완료"
 				+ "\',\'" + siteVO.getRm() + "\' "+", sysdate "+"from dual ";
 		c1.add(Calendar.DATE, 1);
@@ -275,7 +275,7 @@ public class CampController {
 			values += "union all ";
 			tttt = new SimpleDateFormat("yyyy-MM-dd");
 			bgnde = tttt.format(c1.getTime());
-			values += "select " + siteVO.getCamp_no() + "," + siteVO.getNmpr() + ",\'"+id+"\',\'" + "TO_DATE(''2014-01-01'', ''YYYY-MM-DD'')" + "\',"
+			values += "select " + siteVO.getCamp_no() + "," + siteVO.getNmpr() + ",\'"+id+"\',\'" + "TO_DATE(''"+bgnde+"'', ''YYYY-MM-DD'')" + "\',"
 					+ siteVO.getTotalde() + ",\'" + siteVO.getSitenm() + "\'," + siteVO.getPc() + ",\'"
 					+ "결제완료" + "\',\'" + siteVO.getRm() + "\' "+", sysdate "+"from dual ";
 			c1.add(Calendar.DATE, 1);
