@@ -23,7 +23,7 @@
 			tb_bbs_no.nextval,
 			#{sj},#{cn},
 			0,#{ctgry},
-			sysdate,'comk',
+			sysdate,#{ncnm},
 			#{videosrc},0)
 	</insert>
 	<!-- 수정하기 -->
@@ -85,4 +85,8 @@
 		tb_bbs where ctgry='공지사항' or ctgry='이용안내' or ctgry='자주묻는질문' or
 		ctgry='이벤트' or ctgry='광고'
 	</select>
+	<select id="getListbbsSQL" parameterType="String" resultType="greencamp.bbs.model.BbsDTO">
+  select * from tb_bbs where ncnm=#{ncnm}
+  
+  </select>
 </mapper>

@@ -33,8 +33,9 @@ public class BsnmReviewController {
 
 		String user_id = (String) session.getAttribute("user_id");
 		String user_ncnm = (String) session.getAttribute("user_ncnm");
-		String user_nm = (String) session.getAttribute("user_nm");
-		List<ReviewDTO> list = ReviewDao.getListReviewBsnmService(user_ncnm);
+		
+		int camp_no = ReviewDao.findcampnobsnm(user_id);
+		List<ReviewDTO> list = ReviewDao.getListReviewBsnmService(camp_no);
 		List<LikeDTO> listnum = ReviewDao.getlikebbsnumber(user_ncnm);
 		for(int i=0; i<listnum.size();i++) {
 			int like_no=listnum.get(i).getLike_no();

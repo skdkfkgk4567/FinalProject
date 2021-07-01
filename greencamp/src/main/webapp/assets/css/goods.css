@@ -105,8 +105,15 @@
 }
 /*--------------------------글쓰기 css시작------------------------------*/
 #btn_goodsadd {display: none;}
-.goodsadd {margin: auto;padding: 50px;font-family: 'noto sans kr';width: 50%;height: 96%;
-overflow: auto;top: 1%;left:25%;background: white;position: fixed;z-index: 999;visibility: hidden;}
+.goodsadd {margin: auto;padding: 50px;font-family: 'noto sans kr';width: 40%;height: 70%;
+overflow: auto;top: 15%;left:30%;background: white;position: fixed;z-index: 999;visibility: hidden;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+}
 .goodsadd::-webkit-scrollbar {
 	position: absolute;
     right: 0px;
@@ -137,8 +144,14 @@ body input[id="btn_goodsadd"]:checked ~ .goodsaddbackground{opacity:1;visibility
 /*--------------------------글쓰기 css끝------------------------------*/
 /*--------------------------글수정 css시작------------------------------*/
 #btn_goodsupdate {display: none;}
-.goodsupdate {margin: auto;padding: 50px;font-family: 'noto sans kr';width: 50%;height: 96%;
-overflow: auto;top: 1%;left:25%;background: white;position: fixed;z-index: 999;visibility: hidden;}
+.goodsupdate {margin: auto;padding: 50px;font-family: 'noto sans kr';width: 50%;height: 80%;
+overflow: auto;top: 10%;left:25%;background: white;position: fixed;z-index: 999;visibility: hidden;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)}
 .goodsupdate::-webkit-scrollbar {
 	position: absolute;
     right: 0px;
@@ -163,8 +176,14 @@ body input[id="btn_goodsupdate"]:checked ~ .goodsupdatebackground{opacity:1;visi
 /*--------------------------글수정 css끝------------------------------*/
 /*--------------------------메세지 css시작------------------------------*/
 #btn_addmsg {display: none;}
-.msg {margin: auto;padding: 50px;font-family: 'noto sans kr';width: 40%;height: 60%;
-overflow: auto;top: 20%;left:30%;background: white;position: fixed;z-index: 999;visibility: hidden;}
+.msg {margin: auto;padding: 50px;font-family: 'noto sans kr';width: 30%;height: 50%;
+overflow: auto;top: 25%;left:35%;background: white;position: fixed;z-index: 999;visibility: hidden;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)}
 .msg table{margin:0px auto;margin-top: 20px;margin-bottom: 20px;}
 .msg th{text-align: center;}
 th div{

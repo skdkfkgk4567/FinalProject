@@ -80,6 +80,7 @@ public class MemberDAOImple implements MemberDAO {
 		return arr;
 	}
 
+
 	@Override
 	/*사업자 목록*/
 	public List<MemberDTO> listBuisnessman(int cp, int ls) {

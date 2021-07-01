@@ -13,7 +13,10 @@
 			<ul class="goodsinfoul">
 				<li>
 					<div>
-						<input type="checkbox" id="btn_addmsg"> <label
+					<c:if test="${null ne sessionScope.user_ncnm}">
+						<input type="checkbox" id="btn_addmsg">
+					</c:if>
+						<label
 							for="btn_addmsg"> ${infodto.ncnm} </label>
 						<div class="msg">
 							<form name="addmsgfm" action="bbsmsg.pi" method="post">
@@ -27,7 +30,7 @@
 											<th>
 												<div class="form-floating">
 													<input type="text" class="form-control" name="rcver_id"
-														id="floatingPassword" placeholder="보내는 이" value="comk"
+														id="floatingPassword" placeholder="보내는 이" value="${sessionScope.user_ncnm}"
 														readonly required> <label for="floatingPassword">보내는
 														이</label>
 												</div>
@@ -76,14 +79,26 @@
 	<div class="goodsinfo_comment">
 		<div>댓글쓰기</div>
 		<form name="goods_comment_fm"
-			action="notice_comment.pi?ctgry=${infodto.ctgry}&ctgry_no=${infodto.bbs_no}"
+			action="notice_comment.pi?ctgry=${infodto.ctgry}&ctgry_no=${infodto.bbs_no}&ncnm=${sessionScope.user_ncnm}"
 			method="post">
-			<div align="center">
-				<textarea id="goods_comment" rows="5" cols="100" name="cn" wrap="hard"
-					style="background-color: #ede7f6; width: 100%; display: inline;"
-					required></textarea>
-				<input type="submit" class="subcomment" value="등록">
-			</div>
+			<c:choose>
+				<c:when test="${null eq sessionScope.user_ncnm}">
+					<div align="center">
+						<textarea id="goods_comment" rows="5" cols="100" wrap="hard"
+							name="cn"
+							style="background-color: #ede7f6; width: 100%; display: inline;"></textarea>
+						<input type="submit" class="subcomment" value="등록" disabled>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div align="center">
+						<textarea id="goods_comment" rows="5" cols="100" wrap="hard"
+							name="cn" required
+							style="background-color: #ede7f6; width: 100%; display: inline;"></textarea>
+						<input type="submit" class="subcomment" value="등록">
+					</div>
+				</c:otherwise>
+			</c:choose>
 		</form>
 		<c:forEach var="cdto" items="${clist}">
 			<div class="card border-info"
@@ -91,7 +106,9 @@
 				<div class="card-body text-primary">
 					<h6 class="card-subtitle mb-2 text-muted">${cdto.ncnm}</h6>
 					<p class="card-text">&nbsp;&nbsp;${cdto.cn}</p>
+					<c:if test="${cdto.ncnm eq sessionScope.user_ncnm}">
 					<a href="noticedelComment.pi?cm_no=${cdto.cm_no}" class="card-link">삭제</a>
+					</c:if>
 					<a href="noticeReport.pi?ctgry=댓글&ctgry_no=${cdto.cm_no}" class="card-link">신고</a>
 				</div>
 			</div>

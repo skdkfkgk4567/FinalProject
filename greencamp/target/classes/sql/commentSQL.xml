@@ -7,15 +7,16 @@
 	<insert id="addGoodsComment"
 		parameterType="greencamp.comment.model.CommentDTO">
 		insert into tb_cm values(
-		tb_cm_no.nextval,
-		#{ctgry},
-		'comk',
-		#{cn},
-		0,
-		0,
-		0,
-		#{ctgry_no}
-		)
+			tb_cm_no.nextval,
+			#{ctgry},
+			#{ncnm},
+			#{cn},
+			0,
+			0,
+			0,
+			#{ctgry_no},
+			sysdate
+			)
 	</insert>
 	<!-- 댓글 리스트 -->
 	<select id="listComment"

@@ -14,6 +14,7 @@ import greencamp.member.model.MemberDAO;
 import greencamp.member.model.MemberDTO;
 import greencamp.resve.model.ResveDAO;
 import greencamp.resve.model.ResveDTO;
+import greencamp.resve.model.ResveVO;
 
 @Controller
 public class MemberController {
@@ -107,7 +108,7 @@ public class MemberController {
 		String msg="";
 		String url="";
 		HttpSession session = request.getSession();
-
+		ModelAndView mav = new ModelAndView();
 		int result = MemberDao.login(MemberDto);
 		msg=result>0?"로그인성공":"로그인실패";
 		if(result>0) {
@@ -130,13 +131,21 @@ public class MemberController {
 				url="mngrIndex.pi";
 			}
 		}
+		else
+		{
+			url = "login.pi";
+			mav.setViewName("member/memberMsg");
+			mav.addObject("msg", msg);
+			mav.addObject("url",url );
+			return mav;
+		}
 		
 		
 		String user_id = (String) session.getAttribute("user_id");
 		String user_ncnm = (String) session.getAttribute("user_ncnm");
 		String user_nm = (String) session.getAttribute("user_nm");
 		
-		ModelAndView mav = new ModelAndView();
+		
 		mav.setViewName("member/memberMsg");
 		mav.addObject("msg", msg);
 		mav.addObject("url",url );
@@ -158,11 +167,34 @@ public class MemberController {
 
 		String user_id = (String) session.getAttribute("user_id");
 		List<MemberDTO> list = MemberDao.getListMember(user_id);
+		List<ResveVO> list1 = ResveDao.getlistresve(user_id);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("member/mypage");
 		mav.addObject("list", list);
+		mav.addObject("list1", list1);
 		return mav;
 		
+	}
+	@RequestMapping("mypageresvecamplist.pi")
+	public ModelAndView resvecamplist(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+
+		String user_id = (String) session.getAttribute("user_id");
+		List<ResveVO> list = ResveDao.getlistresve(user_id);
+		if (list.size() == 0) {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("camp/mypageresvelist");
+			mav.addObject("list", list);
+
+			return mav;
+
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("camp/mypageresvelist");
+		mav.addObject("list", list);
+
+		return mav;
+
 	}
 	
 	@RequestMapping("mypageshowmemberinfo.pi")
@@ -171,7 +203,7 @@ public class MemberController {
 
 		String user_id = (String) session.getAttribute("user_id");
 		List<MemberDTO> list = MemberDao.getListMember(user_id);
-		List<ResveDTO> list1 = ResveDao.getlistresve(user_id);
+		List<ResveVO> list1 = ResveDao.getlistresve(user_id);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("member/mypage");
@@ -181,13 +213,14 @@ public class MemberController {
 		return mav;
 		
 	}	
+	
 	@RequestMapping("mypagememberinfoupdate.pi")
 	public ModelAndView mypagememberinfoupdate(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 
 		String user_id = (String) session.getAttribute("user_id");
 		List<MemberDTO> list = MemberDao.getListMember(user_id);
-		List<ResveDTO> list1 = ResveDao.getlistresve(user_id);
+		List<ResveVO> list1 = ResveDao.getlistresve(user_id);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("member/mypagememberinfoupdate");
@@ -243,6 +276,7 @@ public class MemberController {
 	      session.invalidate();
 		return mav;
 	}
+	
 
 
 }

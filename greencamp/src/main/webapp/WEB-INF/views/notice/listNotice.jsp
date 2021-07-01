@@ -38,12 +38,14 @@ function showResult(){   //응답 역할의 함수
 			<li><a href="bbs.pi?type=1"><img src="assets/img/공지사항.png" alt="공지사항" width="40px" height="40px"></a></li>
 			<li><a href="bbs.pi?type=2"><img src="assets/img/이용안내.png" alt="이용안내" width="40px" height="40px"></a></li>
 			<li><a href="bbs.pi?type=3"><img src="assets/img/QnA.png" alt="자주묻는질문" width="40px" height="40px"></a></li>
-			<li><a href="event.pi"><img src="assets/img/이벤트.png" alt="이벤트" width="40px" height="40px"></a></li>
 		</ul>
 	</div>
 	
 	
 	<div class="goodslist"><!-- 중고거래 리스트가 들어가는 자리 -->
+		<c:if test="${empty list}">
+			<h3 align="center">작성된 게시글이 없습니다 게시글을 등록해주세요</h3>
+		</c:if>
 		<div class="goodscard" id="goodscard">
 			<div class="row row-cols-1 row-cols-md-2 g-4">
 				<c:forEach var="bdto" items="${list}">
@@ -64,7 +66,9 @@ function showResult(){   //응답 역할의 함수
 	</div>
 	
 	<div class="goodsinfo" id="goodsajax"><!-- 게시글 내용이 들어가는 구역 -->
-		
+		<c:if test="${empty infolist}">
+			<h2 align="center">작성된 게시글이 없습니다 게시글을 등록해주세요</h2>
+		</c:if>
 		<c:forEach var="infodto" items="${infolist}">
 			<div class="goodsinfoview">
 				<div>
@@ -75,7 +79,9 @@ function showResult(){   //응답 역할의 함수
 					<ul class="goodsinfoul">
 						<li>
 							<div>
+							<c:if test="${null ne sessionScope.user_ncnm}">
 								<input type="checkbox" id="btn_addmsg">
+							</c:if>
 								<label for="btn_addmsg">
 									${infodto.ncnm}
 								</label>
@@ -90,7 +96,7 @@ function showResult(){   //응답 역할의 함수
 												<tr>
 													<th>
 														<div class="form-floating">
-														  <input type="text" class="form-control" name="rcver_id" id="floatingPassword" placeholder="보내는 이" value="comk" readonly required>
+														  <input type="text" class="form-control" name="rcver_id" id="floatingPassword" placeholder="보내는 이" value="${sessionScope.user_ncnm}" readonly required>
 														  <label for="floatingPassword">보내는 이</label>
 														</div>
 													</th>
@@ -134,19 +140,32 @@ function showResult(){   //응답 역할의 함수
 			<div class="goodsinfo_content">${infodto.cn}</div>
 				<div class="goodsinfo_comment">
 					<div>댓글쓰기</div>
-					<form name="goods_comment_fm" action="notice_comment.pi?ctgry=${infodto.ctgry}&ctgry_no=${infodto.bbs_no}" method="post">
-						<div align="center">
-							<textarea id="goods_comment" rows="5" cols="100" name="cn" wrap="hard"
-							style="background-color: #ede7f6; width: 100%; display:inline;" required></textarea>
-							<input type="submit" class="subcomment" value="등록">
-						</div>
+					<form name="goods_comment_fm" action="notice_comment.pi?ctgry=${infodto.ctgry}&ctgry_no=${infodto.bbs_no}&ncnm=${scssionScope.user_ncnm}" method="post">
+						<c:choose>
+								<c:when test="${null eq sessionScope.user_ncnm}">
+								<div align="center">
+									<textarea id="goods_comment" rows="5" cols="100" wrap="hard" name="cn" 
+									style="background-color: #ede7f6; width: 100%; display:inline;"></textarea>
+									<input type="submit" class="subcomment" value="등록" disabled>
+								</div>
+								</c:when>
+								<c:otherwise>
+								<div align="center">
+									<textarea id="goods_comment" rows="5" cols="100" wrap="hard" required name="cn" 
+									style="background-color: #ede7f6; width: 100%; display:inline;"></textarea>
+									<input type="submit" class="subcomment" value="등록">
+								</div>
+								</c:otherwise>
+							</c:choose>
 					</form>
 					<c:forEach var="cdto" items="${clist}">
 					<div class="card border-info" style="width: 100%; background-color: #AFFFEE">
   						<div class="card-body text-primary">
 						    <h6 class="card-subtitle mb-2 text-muted">${cdto.ncnm}</h6>
 						    <p class="card-text">&nbsp;&nbsp;${cdto.cn}</p>
+						    <c:if test="${cdto.ncnm eq sessionScope.user_ncnm}">
 						    <a href="noticedelComment.pi?cm_no=${cdto.cm_no}" class="card-link">삭제</a>
+						    </c:if>
 						    <a href="noticeReport.pi?ctgry=댓글&ctgry_no=${cdto.cm_no}" class="card-link">신고</a>
 						</div>
 					</div>

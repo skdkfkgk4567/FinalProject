@@ -2,9 +2,17 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="final.camp">
-  <select id="getListresveSQL" parameterType="String" resultType="greencamp.resve.model.ResveDTO">
-  select * from tb_resve where id=#{id}
-  
-  </select>
-  </mapper>
+<mapper namespace="final.camp">
+	<select id="getListresveSQL" parameterType="String" resultType="greencamp.resve.model.ResveVO">
+		SELECT DISTINCT (SELECT camp_nm FROM tb_camp WHERE camp_no =
+		(SELECT DISTINCT camp_no FROM tb_resve WHERE resve_date =
+		(SELECT Max(resve_date) FROM tb_resve WHERE id = #{id}))) AS camp_nm, camp_no, nmpr, id, totalde, sitenm, pc, sttus, rm,
+		(SELECT (
+		(SELECT DISTINCT First_value(bgnde) over( PARTITION BY id ORDER BY ROWNUM ASC ) AS startdate FROM tb_resve WHERE id = #{id} AND resve_date =
+		(SELECT Max(resve_date) FROM tb_resve)) || '~' ||
+		(SELECT DISTINCT Last_value(bgnde) over( PARTITION BY id ORDER BY ROWNUM ROWS BETWEEN unbounded preceding AND unbounded following ) AS enddate FROM tb_resve
+		WHERE id = #{id} AND resve_date =
+		(SELECT Max(resve_date) FROM tb_resve)) ) FROM dual) AS resvede FROM tb_resve tr WHERE resve_date =
+		(SELECT Max(resve_date) FROM tb_resve) and id =#{id}
+	</select>
+</mapper>

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import greencamp.camp.model.*;
 import greencamp.resve.model.ResveDAO;
 import greencamp.resve.model.ResveDTO;
+import greencamp.resve.model.ResveVO;
 
 @Controller
 public class CampController {
@@ -245,8 +246,10 @@ public class CampController {
 	}
 
 	@RequestMapping("/completeOrderCamp.pi")
-	public ModelAndView completeOrderCamp(SiteVO siteVO) throws ParseException {
+	public ModelAndView completeOrderCamp(SiteVO siteVO, HttpServletRequest request) throws ParseException {
 		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("user_id");
 		String startDe = siteVO.getBgnde();
 		String endDe = siteVO.getEndde();
 		startDe = startDe.replaceAll("-", "");
@@ -263,17 +266,17 @@ public class CampController {
 		SimpleDateFormat tttt = new SimpleDateFormat("yyyy-MM-dd");
 		String bgnde = tttt.format(c1.getTime());
 		String values = "";
-		values += "select " + siteVO.getCamp_no() + "," + siteVO.getNmpr() + ",\'admin\',\'" + bgnde + "\',"
-				+ siteVO.getTotalde() + ",\'" + siteVO.getSitenm() + "\'," + siteVO.getPc() + ",\'" + siteVO.getSttus()
-				+ "\',\'" + siteVO.getRm() + "\' from dual ";
+		values += "select " + siteVO.getCamp_no() + "," + siteVO.getNmpr() + ",\'"+id+"\',\'" + bgnde + "\',"
+				+ siteVO.getTotalde() + ",\'" + siteVO.getSitenm() + "\'," + siteVO.getPc() + ",\'" + "결제완료"
+				+ "\',\'" + siteVO.getRm() + "\' "+", sysdate "+"from dual ";
 		c1.add(Calendar.DATE, 1);
 		while (c1.compareTo(c2) != 1) {
 			values += "union all ";
 			tttt = new SimpleDateFormat("yyyy-MM-dd");
 			bgnde = tttt.format(c1.getTime());
-			values += "select " + siteVO.getCamp_no() + "," + siteVO.getNmpr() + ",\'admin\',\'" + bgnde + "\',"
+			values += "select " + siteVO.getCamp_no() + "," + siteVO.getNmpr() + ",\'"+id+"\',\'" + bgnde + "\',"
 					+ siteVO.getTotalde() + ",\'" + siteVO.getSitenm() + "\'," + siteVO.getPc() + ",\'"
-					+ siteVO.getSttus() + "\',\'" + siteVO.getRm() + "\' from dual ";
+					+ "결제완료" + "\',\'" + siteVO.getRm() + "\' "+", sysdate "+"from dual ";
 			c1.add(Calendar.DATE, 1);
 		}
 		siteVO.setValues(values);
@@ -348,25 +351,5 @@ public class CampController {
 		return mav;
 	}
 
-	@RequestMapping("mypageresvecamplist.pi")
-	public ModelAndView resvecamplist(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-
-		String user_id = (String) session.getAttribute("user_id");
-		List<ResveDTO> list = resveDAO.getlistresve(user_id);
-		if (list.size() == 0) {
-			ModelAndView mav = new ModelAndView();
-			mav.setViewName("camp/mypageresvelist");
-			mav.addObject("list", list);
-
-			return mav;
-
-		}
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("camp/mypageresvelist");
-		mav.addObject("list", list);
-
-		return mav;
-
-	}
+	
 }

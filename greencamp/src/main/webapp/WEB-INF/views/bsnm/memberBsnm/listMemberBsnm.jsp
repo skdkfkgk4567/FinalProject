@@ -72,7 +72,7 @@ font-size:30px;
 	<label class="registtitle">캠지기정보</label>
 
 <div class="maincontentlistmember" id="maincontentlistscroll">
-<c:forEach var="dto" items="${list}">
+<c:forEach var="dto" items="${list2}">
 	<label>이름</label> <label>${dto.nm}</label><br>
 	<label>이메일</label> <label>${dto.email}</label><br>
 	<label>별명</label> <label>${dto.ncnm}</label><br>
@@ -81,31 +81,38 @@ font-size:30px;
 </c:forEach>
 	<hr>
 	
-	<table class="bsnmcamplist container table-responsive-xl" border="1">
+<table class="bsnmcamplist container table-responsive-xl" border="1">
     <thead>
-        <tr>
-            <th>NO.</th>
+        <tr class="fixedth">
+            <th width=250>NO.</th>
             <th>캠핑장이름</th>
-            <th>운영상태</th>
+            <th width=250>기능</th>
             
         </tr>
     </thead>
     <tbody>
+    <c:if test="${empty list}">
+		<tr>
+			<td colspan="4">해당 목록이없습니다
+			</td>
+		</tr>
+	</c:if>
+    <c:forEach var="dto" items="${list}">
+    
+    <input type="hidden" id="camp_no" value="${dto.camp_no}">
+    <c:url value="detailcampinfobsnm.pi" var="url">
+    <c:param name="camp_no" value="${dto.camp_no}"></c:param>
+    </c:url>
         <tr>
-            <td>1</td>
-            <td>그린캠핑장</td>
+            <td>${dto.camp_no}</td>
+            
+            <td><a href="${url}">${dto.camp_nm}</a></td>
             <td>
-          운영중
+            <input class="buttons" type="button" value="삭제" onclick="show()">
+            <input class="buttons" type="button" value="수정" onclick="goupdate()">
             </td>
         </tr>
-         <tr>
-            <td>2</td>
-            <td>블루캠핑장</td>
-            <td>
-            휴업
-            </td>
-        </tr>
-        <!-- and so on... -->
+    </c:forEach>
     </tbody>
 </table>
 

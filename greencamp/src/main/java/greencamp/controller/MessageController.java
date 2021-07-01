@@ -67,10 +67,8 @@ public class MessageController {
 	public ModelAndView writesendmsg(MessageDTO MessageDto,String rcver_id,String cn,HttpServletRequest request) {
 		String msg="";
 		HttpSession session = request.getSession();
-
-	
-		
-		MessageDto.setSender_id(rcver_id);
+		 String user_id = (String) session.getAttribute("user_id");
+		MessageDto.setSender_id(user_id);
 		if(cn==null || cn.equals("")) {
 			msg="빈 칸을 확인해주세요";
 			ModelAndView mav = new ModelAndView();
@@ -78,7 +76,6 @@ public class MessageController {
 			mav.addObject("msg", msg);
 			return mav;
 		}
-		
 		int findusercheckresult = MemberDao.findusercheck(rcver_id);
 		if(findusercheckresult!=0) {
 			

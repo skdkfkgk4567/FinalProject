@@ -14,8 +14,8 @@ public class ReviewDAOImple implements ReviewDAO {
 		super();
 		this.sqlMap = sqlMap;
 	}
-public List<ReviewDTO> getListReviewBsnmService(String id) {
-	List<ReviewDTO> list = sqlMap.selectList("getListReviewBsnmSQL", id);
+public List<ReviewDTO> getListReviewBsnmService(int camp_no) {
+	List<ReviewDTO> list = sqlMap.selectList("getListReviewBsnmSQL", camp_no);
 	return list;
 }
 
@@ -36,5 +36,10 @@ public int showlikesnumber(int bbs_no) {
 public List<LikeDTO> getlikebbsnumber(String id) {
 	List<LikeDTO> list = sqlMap.selectList("getlikebbsnumberSQL", id);
 	return list;
+}
+@Override
+public int findcampnobsnm(String id) {
+	int camp_no = sqlMap.selectOne("findcampnobsnm", id);
+	return camp_no;
 }
 }

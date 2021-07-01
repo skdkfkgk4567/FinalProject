@@ -86,7 +86,7 @@
 									<input type="hidden" id="p_2601" name="pcount" value="1">
 									<div class="leftphoto">
 										<div class="photo ">
-											<img alt="" src="https://vga9354.synology.me:9898/img/1.jpg"
+											<img alt="" src="https://vga9354.synology.me:9898/camp/${camp.camp_no }.jpg"
 												width="160px" height="90px"
 												onclick="panTo(${camp.lat},${camp.longti})">
 										</div>

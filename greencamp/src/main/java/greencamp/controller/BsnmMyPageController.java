@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import greencamp.camp.model.CampDAO;
 import greencamp.member.model.MemberDAO;
 import greencamp.member.model.MemberDTO;
 
@@ -19,6 +20,8 @@ public class BsnmMyPageController {
 	
 	@Autowired
 	private MemberDAO MemberDao;
+	@Autowired
+	private CampDAO CampDao;
 	
 	@RequestMapping("listMemberBsnm.pi")
 	public ModelAndView getListMemberBsnm(HttpServletRequest request) {
@@ -28,11 +31,12 @@ public class BsnmMyPageController {
 		String user_id = (String) session.getAttribute("user_id");
 		String user_ncnm = (String) session.getAttribute("user_ncnm");
 		String user_nm = (String) session.getAttribute("user_nm");
-	
-		List list = MemberDao.getListMember(user_id);
+		List list = CampDao.bsnmcampList(user_id);
+		List list2 = MemberDao.getListMember(user_id);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("bsnm/memberBsnm/listMemberBsnm");
 		mav.addObject("list",list);
+		mav.addObject("list2",list2);
 		return mav;
 	}
 	@RequestMapping("updateMemberBsnm.pi")
@@ -45,9 +49,11 @@ public class BsnmMyPageController {
 		String user_nm = (String) session.getAttribute("user_nm");
 		
 		List list = MemberDao.getListMember(user_id);
+		List list2 = CampDao.bsnmcampList(user_id);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("bsnm/memberBsnm/updateMemberBsnm");
 		mav.addObject("list",list);
+		mav.addObject("list2",list2);
 		return mav;
 	}
 	

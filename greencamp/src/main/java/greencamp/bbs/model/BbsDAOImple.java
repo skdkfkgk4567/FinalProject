@@ -34,6 +34,7 @@ public class BbsDAOImple implements BbsDAO {
 
 	@Override
 	public int registBbs(BbsDTO dto) {
+		
 		int count=sqlMap.insert("registBbs", dto);
 		return count;
 	}

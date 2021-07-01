@@ -5,7 +5,7 @@
 <mapper namespace="greencamp.goods">
 	<!-- 중고거래 리스트 -->
 	<select id="listGoods" parameterType="Map" resultType="greencamp.goods.model.GoodsDTO">
-		select * from tb_delng order by delng_no desc
+		select DELNG_NO,SJ,replace(cn, chr(13)||chr(10), '<![CDATA[<]]>br<![CDATA[>]]>' ),RDCNT,ADDR,DELNGTP,IMG,STTUS,WRITNGDE,PC,HOW,TELNO,NUMBERSHOW,NCNM from TB_DELNG
 	</select>
 	<!-- 중고거래 구매타입 리스트 -->
 	<select id="listGoodstypeBuy" parameterType="Map" resultType="greencamp.goods.model.GoodsDTO">
@@ -29,7 +29,7 @@
 			'거래중',SYSDATE,
 			#{pc},#{how},
 			#{telno},0,
-			'comk') 
+			#{ncnm}) 
 	</insert>
 	<!-- 수정하기 -->
 	<update id="upGoods" parameterType="greencamp.goods.model.GoodsDTO">

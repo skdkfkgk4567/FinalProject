@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="wrapper">
-<%@include file="../sidebar.jsp"%>
+<%@include file="../mngrSidebar.jsp"%>
 	<div class="main-content">
 		<div class="title-bbs"><a>전체 사용자 수 : ${total_bm} / 전체 사업자 수 : ${total_mb}</a></div>
 		<div class="content-bbs">

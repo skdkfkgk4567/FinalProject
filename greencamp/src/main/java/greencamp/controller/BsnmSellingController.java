@@ -22,7 +22,9 @@ public class BsnmSellingController {
 		HttpSession session = request.getSession();
 
 		String user_id = (String) session.getAttribute("user_id");
+		System.out.println("쎼쎼쎼쎼 : "+user_id);
 		List<SellingDTO> list= SellingDao.getListSellingBsnmService(user_id);
+		System.out.println(list.size());
 		if(list.size()==0) {
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("bsnm/SellingBsnm/listSellingBsnm");

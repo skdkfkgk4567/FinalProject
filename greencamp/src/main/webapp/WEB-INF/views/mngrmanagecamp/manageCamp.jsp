@@ -150,11 +150,11 @@ body input[id="btn_goodsadd"]:checked ~.goodsaddbackground {
 </head>
 <body>
 	<div class="wrapper">
-		<%@include file="../sidebar.jsp"%>
+		<%@include file="../mngrSidebar.jsp"%>
 		<div class="main-content">
 			<div class="content-bbs">
 				<div class="bbs-table">
-					<h1 class="h1-title">캠핑톡 댓글</h1>
+					<h1 class="h1-title">캠핑장 관리</h1>
 					<table class="table table-hover">
 						<thead class="table-secondary">
 							<tr>

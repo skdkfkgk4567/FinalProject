@@ -30,9 +30,9 @@ public class BsnmCampController {
 		String user_id = (String) session.getAttribute("user_id");
 		String user_ncnm = (String) session.getAttribute("user_ncnm");
 		String user_nm = (String) session.getAttribute("user_nm");
-		
 		System.out.println(user_id);
 		List list = CampDao.bsnmcampList(user_id);
+		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("bsnm/bsnmcamp/listCampBsnm");
@@ -79,7 +79,7 @@ public class BsnmCampController {
 	public ModelAndView registCampBsnm(HttpServletRequest request,CampDTO CampDto,String camp_nm,
 			String addr,String camp_telno,String bizrno,
 			String camp_type,String camp_surround,String camp_theme,
-			String camp_ground,String sffc,String cvntl,String checkin,String checkout) {
+			String camp_ground,String sffc,String cvntl,String checkin,String checkout, String lat, String longti) {
 		
 		String msg="";
 		if(camp_nm.equals("")) {
@@ -179,8 +179,6 @@ public class BsnmCampController {
 		HttpSession session = request.getSession();
 		String user_id = (String) session.getAttribute("user_id");
 		CampDto.setId(user_id);
-		System.out.println(user_id);
-		
 		
 		
 		int result = CampDao.addRegistCampBsnm(CampDto);

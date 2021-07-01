@@ -528,6 +528,7 @@ xhr.onreadystatechange = function ()
         {
             for(var i = 0; i < firstImageUrl.length; i++)
             {
+            	
             	if('${camp_nm }'==facltNm[i].firstChild.nodeValue)
             	{
             		i++;
@@ -550,6 +551,10 @@ xhr.onreadystatechange = function ()
             		pushData += "<div>"+tel[i].firstChild.nodeValue+"</div>"
 	            }
             	 pushData += "</div>";
+            	 if(i==3)
+             	{
+             		return;
+             	}
             }
             document.getElementById("otherCamp").innerHTML = pushData;
         }

@@ -43,6 +43,9 @@ function showResult(){   //응답 역할의 함수
 	
 	
 	<div class="goodslist"><!-- 중고거래 리스트가 들어가는 자리 -->
+	
+		<c:if test="${null ne sessionScope.user_ncnm}">
+	
 		<div class="goodswrite">
 			<input type="checkbox" id="btn_goodsadd">
 			<label for="btn_goodsadd" style="margin: 15px;">
@@ -50,6 +53,7 @@ function showResult(){   //응답 역할의 함수
 			</label>
 				<div class="goodsadd">
 				<form name="goodsWrite" action="camptalkWrite.pi" method="post">
+				<input type="hidden" name="ncnm" value="${sessionScope.user_ncnm }">
 					<div>
 						<h2>캠핑톡 글쓰기</h2>
 					</div>
@@ -96,6 +100,10 @@ function showResult(){   //응답 역할의 함수
 				</div>
 			<label for="btn_goodsadd" class="goodsaddbackground"></label><!-- 글쓰기 배경 흐림 -->
 		</div>
+		</c:if>
+		<c:if test="${empty list}">
+			<h3 align="center">작성된 게시글이 없습니다 게시글을 등록해주세요</h3>
+		</c:if>
 		<div class="goodscard" id="goodscard">
 			<div class="row row-cols-1 row-cols-md-2 g-4">
 				<c:forEach var="bdto" items="${list}">
@@ -119,7 +127,9 @@ function showResult(){   //응답 역할의 함수
 	</div>
 	
 	<div class="goodsinfo" id="camptalkajax"><!-- 게시글 내용이 들어가는 구역 -->
-		
+		<c:if test="${empty infolist}">
+			<h2 align="center">작성된 게시글이 없습니다 게시글을 등록해주세요</h2>
+		</c:if>
 		<c:forEach var="infodto" items="${infolist}">
 			<div class="goodsinfoview">
 				<div>
@@ -130,7 +140,9 @@ function showResult(){   //응답 역할의 함수
 					<ul class="goodsinfoul">
 						<li>
 							<div>
+							<c:if test="${null ne sessionScope.user_ncnm}">
 								<input type="checkbox" id="btn_addmsg">
+							</c:if>
 								<label for="btn_addmsg">
 									${infodto.ncnm}
 								</label>
@@ -145,7 +157,7 @@ function showResult(){   //응답 역할의 함수
 												<tr>
 													<th>
 														<div class="form-floating">
-														  <input type="text" class="form-control" name="rcver_id" id="floatingPassword" placeholder="보내는 이" value="comk" readonly required>
+														  <input type="text" class="form-control" name="rcver_id" id="floatingPassword" placeholder="보내는 이" value="${sessionScope.user_ncnm}" readonly required>
 														  <label for="floatingPassword">보내는 이</label>
 														</div>
 													</th>
@@ -177,8 +189,11 @@ function showResult(){   //응답 역할의 함수
 					<div class="goodsinfo_update_btn" align="right">
 						<span>
 						<a href="camptalkReport.pi?ctgry=${infodto.ctgry}&ctgry_no=${infodto.bbs_no}">신고</a>&nbsp;&nbsp;
+						<c:if test="${infodto.ncnm eq sessionScope.user_ncnm}">
 						<a href="camptalkdel.pi?delng_no=${infodto.bbs_no}&delngtp=${infodto.ctgry}">삭제</a>&nbsp;&nbsp;
+						</c:if>
 						</span> 
+						<c:if test="${infodto.ncnm eq sessionScope.user_ncnm}">
 						<input type="checkbox" id="btn_goodsupdate">
 						<label for="btn_goodsupdate">
 						 수정
@@ -221,6 +236,7 @@ function showResult(){   //응답 역할의 함수
 							</div>
 							<label for="btn_goodsupdate" class="goodsupdatebackground"></label>
 							<!-- 글쓰기 배경 흐림 -->
+							</c:if>
 						</div>
 					</div>
 					<hr>
@@ -231,19 +247,32 @@ function showResult(){   //응답 역할의 함수
 				<div class="goodsinfo_content">${infodto.cn}</div>
 					<div class="goodsinfo_comment">
 						<div>댓글쓰기</div>
-						<form name="goods_comment_fm" action="camptalk_comment.pi?ctgry=${infodto.ctgry}&ctgry_no=${infodto.bbs_no}" method="post">
-							<div align="center">
-								<textarea id="goods_comment" rows="5" cols="100" name="cn" wrap="hard"
-								style="background-color: #ede7f6; width: 100%; display:inline;" required></textarea>
-								<input type="submit" class="subcomment" value="등록">
-							</div>
+						<form name="goods_comment_fm" action="camptalk_comment.pi?ctgry=${infodto.ctgry}&ctgry_no=${infodto.bbs_no}&ncnm=${scssionScope.user_ncnm}" method="post">
+							<c:choose>
+								<c:when test="${null eq sessionScope.user_ncnm}">
+								<div align="center">
+									<textarea id="goods_comment" rows="5" cols="100" wrap="hard" name="cn" 
+									style="background-color: #ede7f6; width: 100%; display:inline;"></textarea>
+									<input type="submit" class="subcomment" value="등록" disabled>
+								</div>
+								</c:when>
+								<c:otherwise>
+								<div align="center">
+									<textarea id="goods_comment" rows="5" cols="100" wrap="hard" required name="cn" 
+									style="background-color: #ede7f6; width: 100%; display:inline;"></textarea>
+									<input type="submit" class="subcomment" value="등록">
+								</div>
+								</c:otherwise>
+							</c:choose>
 						</form>
 						<c:forEach var="cdto" items="${clist}">
 						<div class="card border-info" style="width: 100%; background-color: #AFFFEE">
   							<div class="card-body text-primary">
 							    <h6 class="card-subtitle mb-2 text-muted">${cdto.ncnm}</h6>
 							    <p class="card-text">&nbsp;&nbsp;${cdto.cn}</p>
+							    <c:if test="${cdto.ncnm eq sessionScope.user_ncnm}">
 							    <a href="camptalkdelComment.pi?cm_no=${cdto.cm_no}" class="card-link">삭제</a>
+							    </c:if>
 							    <a href="camptalkReport.pi?ctgry=댓글&ctgry_no=${cdto.cm_no}" class="card-link">신고</a>
 							</div>
 						</div>
@@ -252,6 +281,6 @@ function showResult(){   //응답 역할의 함수
 		</c:forEach>
 	</div>
 </div>
-<div class="footer">footer 들어갈 자리</div>
+<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

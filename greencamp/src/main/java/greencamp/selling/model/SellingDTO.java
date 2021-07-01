@@ -3,7 +3,7 @@ package greencamp.selling.model;
 import java.sql.Date;
 
 public class SellingDTO {
-private int cmap_no;
+private int camp_no;
 private int nmpr;
 private String id;
 private Date bgnde;
@@ -15,10 +15,10 @@ private String rm;
 public SellingDTO() {
 	super();
 }
-public SellingDTO(int cmap_no, int nmpr, String id, Date bgnde, int totalde, String sitenm, int pc, String sttus,
+public SellingDTO(int camp_no, int nmpr, String id, Date bgnde, int totalde, String sitenm, int pc, String sttus,
 		String rm) {
 	super();
-	this.cmap_no = cmap_no;
+	this.camp_no = camp_no;
 	this.nmpr = nmpr;
 	this.id = id;
 	this.bgnde = bgnde;
@@ -28,11 +28,11 @@ public SellingDTO(int cmap_no, int nmpr, String id, Date bgnde, int totalde, Str
 	this.sttus = sttus;
 	this.rm = rm;
 }
-public int getCmap_no() {
-	return cmap_no;
+public int getCamp_no() {
+	return camp_no;
 }
-public void setCmap_no(int cmap_no) {
-	this.cmap_no = cmap_no;
+public void setCamp_no(int camp_no) {
+	this.camp_no = camp_no;
 }
 public int getNmpr() {
 	return nmpr;

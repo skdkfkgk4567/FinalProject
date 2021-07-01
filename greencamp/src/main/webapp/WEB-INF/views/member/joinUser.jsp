@@ -80,13 +80,13 @@ body {
 					</div>
 					
 					<div class="mb-3">
-						<label for="password">비밀번호</label> <input type="text"
+						<label for="password">비밀번호</label> <input type="password"
 							class="form-control" id="password" name="password" placeholder="" value=""
 							required>
 						<div class="invalid-feedback">비밀번호를 입력해주세요.</div>
 					</div>
 					<div class="mb-3">
-						<label for="password2">비밀번호 확인</label> <input type="text"
+						<label for="password2">비밀번호 확인</label> <input type="password"
 							class="form-control" id="password2" name="password2" placeholder="" value=""
 							required>
 						<div class="invalid-feedback">비밀번호를 입력해주세요.</div>

@@ -268,13 +268,6 @@ label {
 					&nbsp;&nbsp;<input type="text" name="pc" value="${param.pc*param.sukbakDe }" readonly="readonly">원<br>
 				</div>
 			</div>
-			<div class="coupon">
-				<h4>쿠폰</h4>
-				<select class="couponSelect">
-					<option selected="selected">:: ::</option>
-					<option>오픈 기념 10% 할인 쿠폰 (최소 2박)</option>
-				</select>
-			</div>
 			<div class="useInfo">${camp_dc }</div>
 			<div class="buttonGroup">
 				<input type="button" id="button" value="취소">

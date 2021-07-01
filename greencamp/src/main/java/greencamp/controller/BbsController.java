@@ -100,8 +100,13 @@ public class BbsController {
 	}
 	
 	@RequestMapping(value = "/camptalkWrite.pi",method = RequestMethod.POST)
-	public ModelAndView registCampTalk(BbsDTO dto) {
-		
+	public ModelAndView registCampTalk(BbsDTO dto, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+
+		String user_id = (String) session.getAttribute("user_id");
+		String user_ncnm = (String) session.getAttribute("user_ncnm");
+		String user_nm = (String) session.getAttribute("user_nm");
+		dto.setNcnm(user_ncnm);
 		int result=bbsService.registBbs(dto);
 		String msg=result>0?"게시글등록성공!":"게시글등록실패";
 		String gopage="camptalk.pi";

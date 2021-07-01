@@ -42,6 +42,9 @@ function showResult(){   //응답 역할의 함수
 	
 	
 	<div class="goodslist"><!-- 중고거래 리스트가 들어가는 자리 -->
+		<c:if test="${empty list}">
+			<h3 align="center">작성된 게시글이 없습니다 게시글을 등록해주세요</h3>
+		</c:if>
 		<div class="goodscard" id="goodscard">
 			<div class="row row-cols-1 row-cols-md-2 g-4">
 				<c:forEach var="bdto" items="${list}">
@@ -65,7 +68,9 @@ function showResult(){   //응답 역할의 함수
 	</div>
 	
 	<div class="goodsinfo" id="goodsajax"><!-- 게시글 내용이 들어가는 구역 -->
-		
+		<c:if test="${empty infolist}">
+			<h2 align="center">작성된 게시글이 없습니다 게시글을 등록해주세요</h2>
+		</c:if>
 		<c:forEach var="infodto" items="${infolist}">
 			<div class="goodsinfoview">
 				<div>
@@ -94,7 +99,7 @@ function showResult(){   //응답 역할의 함수
 			<div class="goodsinfo_content">${infodto.cn}</div>
 				<div class="goodsinfo_comment">
 					<div>댓글쓰기</div>
-					<form name="goods_comment_fm" action="notice_comment.pi?ctgry=${infodto.ctgry}&ctgry_no=${infodto.evnt_no}" method="post">
+					<form name="goods_comment_fm" action="evnt_comment.pi?ctgry=${infodto.ctgry}&ctgry_no=${infodto.evnt_no}" method="post">
 						<div align="center">
 							<textarea id="goods_comment" rows="5" cols="100" name="cn" wrap="hard"
 							style="background-color: #ede7f6; width: 100%; display:inline;" required></textarea>
@@ -106,8 +111,8 @@ function showResult(){   //응답 역할의 함수
   						<div class="card-body text-primary">
 						    <h6 class="card-subtitle mb-2 text-muted">${cdto.ncnm}</h6>
 						    <p class="card-text">&nbsp;&nbsp;${cdto.cn}</p>
-						    <a href="noticedelComment.pi?cm_no=${cdto.cm_no}" class="card-link">삭제</a>
-						    <a href="noticeReport.pi?ctgry=댓글&ctgry_no=${cdto.cm_no}" class="card-link">신고</a>
+						    <a href="evntdelComment.pi?cm_no=${cdto.cm_no}" class="card-link">삭제</a>
+						    <a href="evntReport.pi?ctgry=댓글&ctgry_no=${cdto.cm_no}" class="card-link">신고</a>
 						</div>
 					</div>
 					</c:forEach>

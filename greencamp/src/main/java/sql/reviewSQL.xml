@@ -4,8 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="final.camp">
   
-  <select id="getListReviewBsnmSQL" parameterType="String" resultType="greencamp.review.model.ReviewDTO">
-  select like_no from tb_like where like_ncnm=#{ncnm}
+  <select id="getListReviewBsnmSQL" parameterType="int" resultType="greencamp.review.model.ReviewDTO">
+  select * from tb_review where camp_no=#{camp_no}
   </select>
   
   <update id="likesupSQL" parameterType="int">
@@ -22,6 +22,9 @@
   
   <select id="getlikebbsnumberSQL" parameterType="String" resultType="greencamp.like.model.LikeDTO">
 	select like_no from tb_like where like_ncnm=#{id}
+	</select>
+	<select id="findcampnobsnm" parameterType="String" resultType="int">
+	select camp_no from tb_camp where id=#{id}
 	</select>
   
   </mapper>

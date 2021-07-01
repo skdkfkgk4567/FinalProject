@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,17 +50,18 @@ body {
 		<div class="container d-flex">
 			<div class="contact-info mr-auto"></div>
 			<div class="social-links">
-				<a href="index.pi" class="home">HOME</a> <a href="bbs.pi?type=1" class="notice">공지사항</a>
+				<a href="index.pi" class="home">HOME</a> <a href="bbs.pi?type=1"
+					class="notice">공지사항</a>
 				<c:set var="user_ncnm" value="${sessionScope.user_ncnm}"></c:set>
 				<c:choose>
 					<c:when test="${empty user_ncnm}">
-				<a href="joinSelect.pi" class="joinMember">회원가입</a> 
-				<a href="login.pi" class="login">로그인</a>
+						<a href="joinSelect.pi" class="joinMember">회원가입</a>
+						<a href="login.pi" class="login">로그인</a>
 					</c:when>
 					<c:otherwise>
-					<a>${user_ncnm }님 환영합니다.</a>
-					<a href="logout.pi">로그아웃</a>
-					
+						<a>${user_ncnm }님 환영합니다.</a>
+						<a href="logout.pi">로그아웃</a>
+
 					</c:otherwise>
 				</c:choose>
 				<a href="bbs.pi?type=1" class="contact">고객센터</a>
@@ -71,7 +72,14 @@ body {
 		<div class="container d-flex align-items-center">
 
 			<h1 class="logo mr-auto">
-				<a href="index.pi">그린캠프</a>
+			<c:choose>
+						<c:when test="${sessionScope.grade eq 3 }">
+							<a href="index.pi">그린캠프</a>
+						</c:when>
+						<c:when test="${sessionScope.grade eq 2}">
+							<a href="index2.pi">그린캠프</a>
+						</c:when>
+					</c:choose>
 			</h1>
 
 			<nav class="nav-menu d-none d-lg-block" style="width: 800px">
@@ -81,9 +89,17 @@ body {
 						href="javascript:;" class="btn">테마검색</a></li>
 					<li><a href="searchCamp.pi?k=all">전체검색</a></li>
 					<li><a href="goods.pi">중고거래</a></li>
-          					<li><a href="listCampInfo.pi?ctgry=캠핑팁">캠핑정보</a></li>
-          					<li><a href="camptalk.pi?ctgry=가입인사">캠핑톡</a></li>
-          					<li><a href="event.pi?type=1">이벤트 및 광고</a></li>
+					<li><a href="listCampInfo.pi?ctgry=캠핑팁">캠핑정보</a></li>
+					<li><a href="camptalk.pi?ctgry=가입인사">캠핑톡</a></li>
+					<li><a href="event.pi?type=1">이벤트 및 광고</a></li>
+					<c:choose>
+						<c:when test="${sessionScope.grade eq 3 }">
+							<li><a href="mypage.pi">마이페이지</a></li>
+						</c:when>
+						<c:when test="${sessionScope.grade eq 2}">
+							
+						</c:when>
+					</c:choose>
 				</ul>
 			</nav>
 		</div>
@@ -102,21 +118,24 @@ body {
 				</h3>
 				<div class="nature iconbox">
 					<div class="facbox">
-						<a href="javascript:;" class="alist naturelist " title="[강변]"> <img
+						<a href="javascript:;" class="alist naturelist " title="[강변]">
+							<img
 							src="https://www.5gcamp.com/modules/camping/theme/_pc/default/image/nature/19.svg"
 							class="svg" width="40" height="40" alt="강변">
 							<p>강변</p>
 						</a>
 					</div>
 					<div class="facbox">
-						<a href="javascript:;" class="alist naturelist " title="[계곡]"> <img
+						<a href="javascript:;" class="alist naturelist " title="[계곡]">
+							<img
 							src="https://www.5gcamp.com/modules/camping/theme/_pc/default/image/nature/16.svg"
 							class="svg" width="40" height="40" alt="계곡">
 							<p>계곡</p>
 						</a>
 					</div>
 					<div class="facbox">
-						<a href="javascript:;" class="alist naturelist " title="[농촌]"> <img
+						<a href="javascript:;" class="alist naturelist " title="[농촌]">
+							<img
 							src="https://www.5gcamp.com/modules/camping/theme/_pc/default/image/nature/25.svg"
 							class="svg" width="40" height="40" alt="농촌">
 							<p>농촌</p>
@@ -124,21 +143,24 @@ body {
 					</div>
 					<br>
 					<div class="facbox">
-						<a href="javascript:;" class="alist naturelist " title="[바다]"> <img
+						<a href="javascript:;" class="alist naturelist " title="[바다]">
+							<img
 							src="https://www.5gcamp.com/modules/camping/theme/_pc/default/image/nature/15.svg"
 							class="svg" width="40" height="40" alt="바다">
 							<p>바다</p>
 						</a>
 					</div>
 					<div class="facbox">
-						<a href="javascript:;" class="alist naturelist " title="[산]"> <img
+						<a href="javascript:;" class="alist naturelist " title="[산]">
+							<img
 							src="https://www.5gcamp.com/modules/camping/theme/_pc/default/image/nature/21.svg"
 							class="svg" width="40" height="40" alt="산">
 							<p>산</p>
 						</a>
 					</div>
 					<div class="facbox">
-						<a href="javascript:;" class="alist naturelist " title="[호수]"> <img
+						<a href="javascript:;" class="alist naturelist " title="[호수]">
+							<img
 							src="https://www.5gcamp.com/modules/camping/theme/_pc/default/image/nature/28.svg"
 							class="svg" width="40" height="40" alt="호수">
 							<p>호수</p>
@@ -160,8 +182,8 @@ body {
 						</a>
 					</div>
 					<div class="facbox ccat2">
-						<a href="javascript:;" class="alist facilitieslist " title="[동계캠핑]">
-							<img
+						<a href="javascript:;" class="alist facilitieslist "
+							title="[동계캠핑]"> <img
 							src="https://www.5gcamp.com/modules/camping/theme/_pc/default/image/facilities/281.svg"
 							class="svg" width="40" height="40" alt="동계캠핑">
 							<p>동계캠핑</p>
@@ -185,32 +207,32 @@ body {
 					</div>
 					<br>
 					<div class="facbox ccat2">
-						<a href="javascript:;" class="alist facilitieslist " title="[반려동물동반]">
-							<img
+						<a href="javascript:;" class="alist facilitieslist "
+							title="[반려동물동반]"> <img
 							src="https://www.5gcamp.com/modules/camping/theme/_pc/default/image/facilities/223.svg"
 							class="svg" width="40" height="40" alt="반려동물동반">
 							<p>반려동물동반</p>
 						</a>
 					</div>
 					<div class="facbox ccat2">
-						<a href="javascript:;" class="alist facilitieslist " title="[샤워시설]">
-							<img
+						<a href="javascript:;" class="alist facilitieslist "
+							title="[샤워시설]"> <img
 							src="https://www.5gcamp.com/modules/camping/theme/_pc/default/image/facilities/278.svg"
 							class="svg" width="40" height="40" alt="샤워시설">
 							<p>샤워시설</p>
 						</a>
 					</div>
 					<div class="facbox ccat2">
-						<a href="javascript:;" class="alist facilitieslist " title="[수세식화장실]">
-							<img
+						<a href="javascript:;" class="alist facilitieslist "
+							title="[수세식화장실]"> <img
 							src="https://www.5gcamp.com/modules/camping/theme/_pc/default/image/facilities/225.svg"
 							class="svg" width="40" height="40" alt="수세식 화장실">
 							<p>수세식화장실</p>
 						</a>
 					</div>
 					<div class="facbox ccat2">
-						<a href="javascript:;" class="alist facilitieslist " title="[온라인예약]">
-							<img
+						<a href="javascript:;" class="alist facilitieslist "
+							title="[온라인예약]"> <img
 							src="https://www.5gcamp.com/modules/camping/theme/_pc/default/image/facilities/226.svg"
 							class="svg" width="40" height="40" alt="온라인예약">
 							<p>온라인예약</p>
@@ -218,24 +240,24 @@ body {
 					</div>
 					<br>
 					<div class="facbox ccat2">
-						<a href="javascript:;" class="alist facilitieslist " title="[온수제공]">
-							<img
+						<a href="javascript:;" class="alist facilitieslist "
+							title="[온수제공]"> <img
 							src="https://www.5gcamp.com/modules/camping/theme/_pc/default/image/facilities/282.svg"
 							class="svg" width="40" height="40" alt="온수제공">
 							<p>온수제공</p>
 						</a>
 					</div>
 					<div class="facbox ccat2">
-						<a href="javascript:;" class="alist facilitieslist " title="[와이파이]">
-							<img
+						<a href="javascript:;" class="alist facilitieslist "
+							title="[와이파이]"> <img
 							src="https://www.5gcamp.com/modules/camping/theme/_pc/default/image/facilities/260.svg"
 							class="svg" width="40" height="40" alt="와이파이">
 							<p>와이파이</p>
 						</a>
 					</div>
 					<div class="facbox ccat2">
-						<a href="javascript:;" class="alist facilitieslist " title="[장작판매]">
-							<img
+						<a href="javascript:;" class="alist facilitieslist "
+							title="[장작판매]"> <img
 							src="https://www.5gcamp.com/modules/camping/theme/_pc/default/image/facilities/274.svg"
 							class="svg" width="40" height="40" alt="장작판매">
 							<p>장작판매</p>

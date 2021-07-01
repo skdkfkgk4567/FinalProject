@@ -85,44 +85,42 @@ text-align:center;
 </c:forEach>
 	<hr>
 	<h4 class="h4">최근 예약한 캠핑장</h4>
-	<table class="bsnmcamplist container table-responsive-xl" border="1">
+<table class="bsnmcamplist container table-responsive-xl" border="1">
     <thead>
-         <tr class="fixedth">
+        <tr class="fixedth">
             
             <th>캠핑장이름</th>
             <th>인원</th>
-            
             <th>일수</th>
             <th>캠프사이트</th>
-            
-            
-            
+            <th>금액</th>
+            <th>결제상태</th>
+            <th>비고</th>
+            <th>예약기간</th>
             
         </tr>
     </thead>
     <tbody>
     <c:if test="${empty list1}">
 		<tr>
-			<td colspan="4">해당 목록이없습니다</td>
+			<td colspan="8">해당 목록이없습니다</td>
 		</tr>
 	</c:if>
-      <c:forEach var="dto" items="${list1}">
+    <c:forEach var="list1" items="${list1}">
     
-    <input type="hidden" id="camp_no" value="${dto.camp_no}">
+    <input type="hidden" id="camp_no" value="${list1.camp_no}">
         <tr>
-        
-            <td>${camp_nm}</td>
-            <td>${dto.nmpr}</td>
-            <td>${dto.bgnde}</td>
-            
-            <td>${dto.sitenm}</td>
-            
-            
+            <td>${list1.camp_nm}</td>
+            <td>${list1.nmpr}</td>
+            <td>${list1.totalde}</td>
+            <td>${list1.sitenm}</td>
+            <td>${list1.pc}</td>
+            <td>${list1.sttus}</td>
+            <td>${list1.rm}</td>
+            <td>${list1.resvede}</td>
            
         </tr>
     </c:forEach>
-  
-        <!-- and so on... -->
     </tbody>
 </table>
 

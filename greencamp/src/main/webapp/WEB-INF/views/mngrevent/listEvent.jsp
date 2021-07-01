@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="wrapper">
-<%@include file="../sidebar.jsp"%>
+<%@include file="../mngrSidebar.jsp"%>
 	<div class="main-content">
 		<div class="title-bbs"><a>전체 이벤트 신청수 : ${total}</a></div>
 		<div class="content-bbs">
