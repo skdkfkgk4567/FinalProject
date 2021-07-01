@@ -162,8 +162,8 @@
 				align="right" style="margin-right: 30px;">
 		</div>
 	</c:if>
-	<c:if test="${!empty gdto.img}">
-		<img src="assets/img/${gdto.img}" class="card-img-top" alt="..."
+	<c:if test="${!empty infodto.img}">
+		<img src="assets/img/${infodto.img}" class="card-img-top" alt="..."
 			style="max-width: 250px;">
 	</c:if>
 	<div class="goodsinfo_content">${infodto.cn}</div>
