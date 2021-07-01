@@ -14,10 +14,10 @@
 <div class="wrapper">
 <%@include file="../mngrSidebar.jsp"%>
 	<div class="main-content">
-		<div class="title-bbs"><a>전체 사용자 수 : ${total_bm} / 전체 사업자 수 : ${total_mb}</a></div>
+		<div class="title-bbs"><a>전체 사업자 수 : ${total_bm} / 전체 사용자 수 : ${total_mb}</a></div>
 		<div class="content-bbs">
 			<div class="bbs-table">
-				<h1 class="h1-title">사용자 정보</h1>
+				<h1 class="h1-title">사업자 정보</h1>
 					<table class="table table-hover">
 						<thead class="table-secondary">
 							<tr>
@@ -50,7 +50,7 @@
 					<div class="pdt20 pagenation">
 						<div id="CampPaging" class="pagebox01">${pageStr }</div>
 					</div>
-					<h1 class="h1-title">사업자 정보</h1>
+					<h1 class="h1-title">사용자 정보</h1>
 					<table class="table table-hover">
 						<thead class="table-secondary">
 							<tr>
