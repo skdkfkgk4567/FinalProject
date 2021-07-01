@@ -174,6 +174,5 @@ function showResult(){   //응답 역할의 함수
 		</c:forEach>
 	</div>
 </div>
-<div class="footer">footer 들어갈 자리</div>
 </body>
 </html>

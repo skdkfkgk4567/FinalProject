@@ -182,7 +182,7 @@ public class CampController {
 	}
 
 	@RequestMapping("/resveCamp.pi")
-	public ModelAndView resveCamp(int camp_no, SiteVO siteVO) {
+	public ModelAndView resveCamp(int camp_no, SiteVO siteVO,HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		String camp_name = campDAO.getCampNm(camp_no);
 
@@ -250,6 +250,7 @@ public class CampController {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("user_id");
+		System.out.println(id);
 		String startDe = siteVO.getBgnde();
 		String endDe = siteVO.getEndde();
 		startDe = startDe.replaceAll("-", "");
