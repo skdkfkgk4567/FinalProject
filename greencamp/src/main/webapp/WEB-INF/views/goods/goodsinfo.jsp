@@ -13,7 +13,7 @@
 			<ul class="goodsinfoul">
 				<li>
 					<div>
-						<c:if test="${null ne sessionScope.user_ncnm}">
+						<c:if test="${!empty sessionScope.user_ncnm}">
 							<input type="checkbox" id="btn_addmsg">
 						</c:if>
 						<label for="btn_addmsg"> ${infodto.ncnm} </label>
@@ -162,8 +162,10 @@
 				align="right" style="margin-right: 30px;">
 		</div>
 	</c:if>
-	<img src="assets/img/${infodto.img}" class="card-img-top" alt="..."
-		style="max-width: 250px;">
+	<c:if test="${!empty gdto.img}">
+		<img src="assets/img/${gdto.img}" class="card-img-top" alt="..."
+			style="max-width: 250px;">
+	</c:if>
 	<div class="goodsinfo_content">${infodto.cn}</div>
 	<div class="goodsinfo_comment">
 		<div>댓글쓰기</div>

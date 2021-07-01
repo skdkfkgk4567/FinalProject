@@ -44,7 +44,7 @@ function showResult(){   //응답 역할의 함수
 	
 	<div class="goodslist"><!-- 중고거래 리스트가 들어가는 자리 -->
 	
-		<c:if test="${null ne sessionScope.user_ncnm}">
+		<c:if test="${!empty sessionScope.user_ncnm}">
 	
 		<div class="goodswrite">
 			<input type="checkbox" id="btn_goodsadd">
@@ -142,7 +142,7 @@ function showResult(){   //응답 역할의 함수
 					<div class="col" onclick="show(${gdto.delng_no},'${gdto.delngtp}')">
 						<div class="card h-90">
 						<!-- 이미지가 있는지 확인 -->
-						<c:if test="${null eq gdto.img}">
+						<c:if test="${!empty gdto.img}">
 							<img src="assets/img/${gdto.img}" class="card-img-top" alt="..." style="max-width: 250px;">
 						</c:if>
 							<div class="card-body">
